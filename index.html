@@ -3,390 +3,726 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vox Essay Mosaic — First Edition</title>
+  <title>Vox Essay Mosaic</title>
 
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Mono:wght@400;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Space+Grotesk:wght@300;400;500;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 
   <style>
-    /* ========================================
-       CUSTOM PROPERTIES
-    ======================================== */
     :root {
-      --color-bg: #0C0C0C;
-      --color-surface: #141414;
-      --color-text: #FAFAF9;
-      --color-text-muted: #8A8A88;
-      --color-accent: #FF4D00;
-      --color-accent-hover: #FF6B2C;
-      --color-border: #2A2A2A;
-
-      --font-display: 'Syne', sans-serif;
-      --font-serif: 'Instrument Serif', serif;
-      --font-mono: 'Space Mono', monospace;
-
-      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+      --black: #0a0a0a;
+      --white: #fefefe;
+      --cream: #f8f5f0;
+      --coral: #ff6b4a;
+      --gold: #d4a853;
+      --sage: #a8b5a0;
+      --lavender: #c4b8d9;
+      --sky: #89b4c8;
     }
 
-    /* ========================================
-       RESET & BASE
-    ======================================== */
-    *, *::before, *::after {
-      box-sizing: border-box;
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
 
     html {
       scroll-behavior: smooth;
-      font-size: 16px;
     }
 
     body {
-      min-height: 100vh;
-      background-color: var(--color-bg);
-      color: var(--color-text);
-      font-family: var(--font-mono);
-      font-size: 0.875rem;
-      line-height: 1.6;
+      background: var(--cream);
+      color: var(--black);
+      font-family: 'Space Grotesk', sans-serif;
       overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
+      cursor: crosshair;
     }
 
     ::selection {
-      background: var(--color-accent);
-      color: var(--color-bg);
+      background: var(--coral);
+      color: var(--white);
     }
 
     /* ========================================
-       LAYOUT
+       CURSOR TRAIL
     ======================================== */
-    .page {
-      min-height: 100vh;
-      display: grid;
-      grid-template-rows: auto 1fr auto;
+    .cursor-dot {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      background: var(--coral);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      mix-blend-mode: difference;
+      transition: transform 0.1s ease;
     }
 
     /* ========================================
-       HEADER
+       FLOATING WORDS - SCATTERED POETRY
     ======================================== */
-    header {
-      padding: 1.5rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid var(--color-border);
-      opacity: 0;
-      animation: fadeIn 1s var(--ease-out-expo) forwards;
-      animation-delay: 0.2s;
+    .floating-words {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
     }
 
-    .wordmark {
-      font-family: var(--font-display);
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
+    .float-word {
+      position: absolute;
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      opacity: 0.08;
+      user-select: none;
+      transition: opacity 0.5s ease, transform 0.5s ease;
     }
 
-    .header-right {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
+    .float-word:nth-child(1) { top: 8%; left: 5%; font-size: 4rem; color: var(--coral); transform: rotate(-12deg); }
+    .float-word:nth-child(2) { top: 15%; right: 8%; font-size: 2.5rem; color: var(--sage); transform: rotate(8deg); }
+    .float-word:nth-child(3) { top: 45%; left: 2%; font-size: 3rem; color: var(--lavender); transform: rotate(-5deg); }
+    .float-word:nth-child(4) { top: 70%; right: 5%; font-size: 3.5rem; color: var(--sky); transform: rotate(15deg); }
+    .float-word:nth-child(5) { bottom: 10%; left: 10%; font-size: 2rem; color: var(--gold); transform: rotate(-8deg); }
+    .float-word:nth-child(6) { top: 30%; right: 15%; font-size: 2.8rem; color: var(--coral); transform: rotate(3deg); }
+
+    /* ========================================
+       ORGANIC SHAPES
+    ======================================== */
+    .shape {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+      animation: breathe 8s ease-in-out infinite;
     }
 
-    .edition-tag {
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--color-text-muted);
+    .shape-1 {
+      width: 500px;
+      height: 500px;
+      background: var(--coral);
+      opacity: 0.15;
+      top: -10%;
+      right: -10%;
+      animation-delay: 0s;
     }
 
-    .edition-tag span {
-      color: var(--color-accent);
+    .shape-2 {
+      width: 400px;
+      height: 400px;
+      background: var(--lavender);
+      opacity: 0.12;
+      bottom: 10%;
+      left: -5%;
+      animation-delay: 2s;
+    }
+
+    .shape-3 {
+      width: 300px;
+      height: 300px;
+      background: var(--sage);
+      opacity: 0.1;
+      top: 40%;
+      right: 20%;
+      animation-delay: 4s;
+    }
+
+    @keyframes breathe {
+      0%, 100% { transform: scale(1) rotate(0deg); }
+      50% { transform: scale(1.1) rotate(5deg); }
     }
 
     /* ========================================
        MAIN CONTENT
     ======================================== */
-    main {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
+    .page {
       position: relative;
+      z-index: 2;
     }
 
-    @media (max-width: 900px) {
-      main {
-        grid-template-columns: 1fr;
+    /* ========================================
+       TOP NAV / CTA
+    ======================================== */
+    .top-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(10, 10, 10, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      opacity: 0;
+      animation: fadeIn 1s ease forwards 0.3s;
+    }
+
+    @media (max-width: 768px) {
+      .top-nav {
+        padding: 1rem 1.5rem;
       }
     }
 
-    /* Left Column - Hero */
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+
+    .nav-cta {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .nav-status {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    @media (max-width: 600px) {
+      .nav-status {
+        display: none;
+      }
+    }
+
+    .nav-status .pulse-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--coral);
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .cta-button {
+      padding: 0.75rem 1.5rem;
+      background: var(--coral);
+      border: none;
+      color: var(--white);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 12px rgba(255, 107, 74, 0.3);
+    }
+
+    .cta-button:hover {
+      background: #ff8266;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 20px rgba(255, 107, 74, 0.4);
+    }
+
+    .cta-button:active {
+      transform: translateY(0);
+    }
+
+    /* ========================================
+       HERO - MASSIVE TYPOGRAPHY
+    ======================================== */
     .hero {
-      padding: 4rem 3rem;
+      min-height: 75vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
+      padding: 6rem 2rem 3rem;
       position: relative;
-      border-right: 1px solid var(--color-border);
     }
 
-    @media (max-width: 900px) {
-      .hero {
-        border-right: none;
-        border-bottom: 1px solid var(--color-border);
-        padding: 3rem 2rem;
-      }
+    .hero-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
     }
 
-    .issue-number {
-      font-family: var(--font-display);
-      font-size: clamp(8rem, 20vw, 14rem);
-      font-weight: 800;
-      line-height: 0.85;
-      color: var(--color-surface);
+    .edition-float {
       position: absolute;
-      top: 1rem;
-      left: -0.5rem;
-      z-index: 0;
-      user-select: none;
-      opacity: 0;
-      animation: slideInLeft 1.2s var(--ease-out-expo) forwards;
-      animation-delay: 0.4s;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 1;
-    }
-
-    .overline {
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 0.25em;
+      top: 2rem;
+      right: 3rem;
+      writing-mode: vertical-rl;
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: var(--color-accent);
-      margin-bottom: 1.5rem;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
+      color: var(--coral);
       opacity: 0;
-      animation: fadeIn 1s var(--ease-out-expo) forwards;
-      animation-delay: 0.6s;
+      animation: slideIn 1s ease forwards 0.5s;
     }
 
-    .overline::before {
-      content: '';
-      width: 2rem;
-      height: 2px;
-      background: var(--color-accent);
+    .title-container {
+      position: relative;
+    }
+
+    .title-line {
+      overflow: hidden;
+      padding-bottom: 0.1em;
     }
 
     .title {
-      font-family: var(--font-serif);
-      font-size: clamp(3.5rem, 8vw, 6rem);
+      font-family: 'Playfair Display', serif;
       font-weight: 400;
-      line-height: 0.95;
-      letter-spacing: -0.03em;
-      margin-bottom: 0.25rem;
-      opacity: 0;
-      animation: fadeInUp 1s var(--ease-out-expo) forwards;
-      animation-delay: 0.7s;
+      line-height: 0.85;
+      letter-spacing: -0.04em;
     }
 
-    .title-accent {
-      font-family: var(--font-serif);
-      font-size: clamp(3rem, 7vw, 5rem);
+    .title-1 {
+      font-size: clamp(6rem, 20vw, 18rem);
+      color: var(--black);
+      transform: translateY(100%);
+      animation: revealUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.2s;
+    }
+
+    .title-2 {
+      font-size: clamp(5rem, 18vw, 16rem);
       font-style: italic;
-      font-weight: 400;
-      line-height: 1;
-      color: var(--color-text-muted);
-      margin-bottom: 2.5rem;
-      opacity: 0;
-      animation: fadeInUp 1s var(--ease-out-expo) forwards;
-      animation-delay: 0.85s;
+      background: linear-gradient(135deg, var(--coral) 0%, var(--gold) 50%, var(--coral) 100%);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-left: 8%;
+      transform: translateY(100%);
+      animation: revealUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.4s,
+                 gradientShift 5s ease infinite 1.5s;
     }
 
-    .subtitle {
-      font-family: var(--font-serif);
-      font-size: 1.35rem;
-      font-style: italic;
-      line-height: 1.5;
-      color: var(--color-text);
-      max-width: 400px;
-      opacity: 0;
-      animation: fadeInUp 1s var(--ease-out-expo) forwards;
-      animation-delay: 1s;
+    @keyframes revealUp {
+      to { transform: translateY(0); }
     }
 
-    .subtitle strong {
-      font-style: normal;
-      color: var(--color-accent);
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
     }
 
-    /* Right Column - Details + Form */
-    .details {
-      padding: 4rem 3rem;
+    .tagline-container {
       display: flex;
-      flex-direction: column;
-      justify-content: center;
-      background: var(--color-surface);
+      justify-content: flex-end;
+      margin-top: 2.5rem;
+      padding-right: 5%;
+    }
+
+    .tagline {
+      max-width: 450px;
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(1.1rem, 2vw, 1.4rem);
+      font-style: italic;
+      line-height: 1.7;
+      color: #555;
+      opacity: 0;
+      animation: fadeIn 1s ease forwards 0.8s;
+    }
+
+    .tagline strong {
+      font-style: normal;
+      color: var(--black);
       position: relative;
     }
 
-    @media (max-width: 900px) {
-      .details {
-        padding: 3rem 2rem;
-      }
+    .tagline strong::after {
+      content: '';
+      position: absolute;
+      bottom: 2px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--coral);
+      transform: scaleX(0);
+      transform-origin: right;
+      animation: underline 0.8s ease forwards 1.5s;
     }
 
-    .details-content {
-      max-width: 420px;
+    @keyframes underline {
+      to { transform: scaleX(1); transform-origin: left; }
     }
 
-    .section-label {
-      font-size: 0.6rem;
-      font-weight: 700;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--color-text-muted);
-      margin-bottom: 1.5rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid var(--color-border);
-      opacity: 0;
-      animation: fadeIn 1s var(--ease-out-expo) forwards;
-      animation-delay: 1.1s;
-    }
-
-    .description {
-      font-size: 0.9rem;
-      line-height: 1.85;
-      color: var(--color-text-muted);
-      margin-bottom: 2.5rem;
-      opacity: 0;
-      animation: fadeInUp 1s var(--ease-out-expo) forwards;
-      animation-delay: 1.2s;
-    }
-
-    .description strong {
-      color: var(--color-text);
-      font-weight: 400;
-    }
-
-    .features {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.25rem;
-      margin-bottom: 3rem;
-      opacity: 0;
-      animation: fadeInUp 1s var(--ease-out-expo) forwards;
-      animation-delay: 1.35s;
-    }
-
-    .feature {
-      padding: 1.25rem;
-      background: var(--color-bg);
-      border: 1px solid var(--color-border);
-      transition: border-color 0.3s ease;
-    }
-
-    .feature:hover {
-      border-color: var(--color-accent);
-    }
-
-    .feature-number {
-      font-family: var(--font-display);
-      font-size: 1.75rem;
-      font-weight: 800;
-      color: var(--color-accent);
-      line-height: 1;
-      margin-bottom: 0.5rem;
-    }
-
-    .feature-label {
-      font-size: 0.65rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--color-text-muted);
-    }
-
-    /* Email Form */
-    .form-section {
-      opacity: 0;
-      animation: fadeInUp 1s var(--ease-out-expo) forwards;
-      animation-delay: 1.5s;
-    }
-
-    .form-label {
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--color-text);
-      margin-bottom: 1rem;
-      display: block;
-    }
-
-    .email-form {
+    .scroll-indicator {
+      position: absolute;
+      bottom: 3rem;
+      left: 50%;
+      transform: translateX(-50%);
       display: flex;
-      gap: 0;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0;
+      animation: fadeIn 1s ease forwards 1.2s;
     }
 
-    .email-form input[type="email"] {
-      flex: 1;
-      padding: 1.1rem 1.25rem;
-      background: var(--color-bg);
-      border: 1px solid var(--color-border);
-      border-right: none;
-      color: var(--color-text);
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      outline: none;
-      transition: border-color 0.3s ease, background 0.3s ease;
+    .scroll-line {
+      width: 1px;
+      height: 60px;
+      background: linear-gradient(to bottom, var(--black), transparent);
+      animation: scrollPulse 2s ease infinite;
     }
 
-    .email-form input[type="email"]:focus {
-      border-color: var(--color-accent);
-      background: rgba(255, 77, 0, 0.05);
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 1; transform: scaleY(1); }
+      50% { opacity: 0.5; transform: scaleY(0.8); }
     }
 
-    .email-form input[type="email"]::placeholder {
-      color: var(--color-text-muted);
-    }
-
-    .email-form button {
-      padding: 1.1rem 2rem;
-      background: var(--color-accent);
-      border: 1px solid var(--color-accent);
-      color: var(--color-bg);
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: all 0.3s ease;
+    /* ========================================
+       MOSAIC SECTION - AUTHORS AS TILES
+    ======================================== */
+    .mosaic-section {
+      padding: 8rem 2rem;
+      background: var(--black);
       position: relative;
       overflow: hidden;
     }
 
-    .email-form button::before {
+    .mosaic-header {
+      text-align: center;
+      margin-bottom: 5rem;
+    }
+
+    .mosaic-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--coral);
+      margin-bottom: 1.5rem;
+    }
+
+    .mosaic-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 400;
+      color: var(--white);
+      line-height: 1.1;
+    }
+
+    .mosaic-title em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .mosaic-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1px;
+      background: rgba(255,255,255,0.1);
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .mosaic-tile {
+      background: var(--black);
+      padding: 3rem 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+    }
+
+    .mosaic-tile::before {
       content: '';
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: var(--color-accent-hover);
-      transform: translateX(-100%);
-      transition: transform 0.3s ease;
+      background: linear-gradient(135deg, var(--coral), var(--gold));
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .mosaic-tile:hover::before {
+      opacity: 0.15;
+    }
+
+    .mosaic-tile:hover {
+      transform: scale(1.02);
+      z-index: 10;
+    }
+
+    .tile-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 4rem;
+      color: rgba(255,255,255,0.05);
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+      line-height: 1;
+      transition: all 0.5s ease;
+    }
+
+    .mosaic-tile:hover .tile-number {
+      color: rgba(255,255,255,0.15);
+      transform: translateY(-10px);
+    }
+
+    .tile-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .tile-author {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.5rem;
+      font-style: italic;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+    }
+
+    .tile-essay {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.05em;
+    }
+
+    .tile-theme {
+      display: inline-block;
+      margin-top: 1.5rem;
+      padding: 0.3rem 0.8rem;
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.6);
+      transition: all 0.3s ease;
+    }
+
+    .mosaic-tile:hover .tile-theme {
+      border-color: var(--coral);
+      color: var(--coral);
+    }
+
+    /* ========================================
+       QUOTE - FULL BLEED ARTISTIC
+    ======================================== */
+    .quote-section {
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6rem 2rem;
+      background: var(--cream);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .quote-bg-text {
+      position: absolute;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(15rem, 40vw, 50rem);
+      font-weight: 700;
+      color: var(--black);
+      opacity: 0.02;
+      user-select: none;
+      white-space: nowrap;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .quote-content {
+      max-width: 800px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .quote-mark {
+      font-family: 'Playfair Display', serif;
+      font-size: 12rem;
+      line-height: 0.5;
+      color: var(--coral);
+      opacity: 0.3;
+      margin-bottom: -2rem;
+    }
+
+    .quote-text {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.75rem, 4vw, 3rem);
+      font-weight: 400;
+      line-height: 1.4;
+      color: var(--black);
+      margin-bottom: 3rem;
+    }
+
+    .quote-author {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+
+    .quote-author-line {
+      width: 60px;
+      height: 1px;
+      background: var(--coral);
+    }
+
+    .quote-author-name {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.1rem;
+      font-style: italic;
+      color: #666;
+    }
+
+    /* ========================================
+       SIGNUP - EDITORIAL SPLIT
+    ======================================== */
+    .signup-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 100vh;
+    }
+
+    @media (max-width: 900px) {
+      .signup-section {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .signup-left {
+      background: var(--black);
+      padding: 6rem 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .signup-left::before {
+      content: 'JOIN';
+      position: absolute;
+      font-family: 'Playfair Display', serif;
+      font-size: 25rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.02);
+      bottom: -5rem;
+      left: -2rem;
+      line-height: 1;
+    }
+
+    .signup-left-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .signup-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 400;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+
+    .signup-title em {
+      font-style: italic;
+      color: var(--coral);
+    }
+
+    .signup-text {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.15rem;
+      font-style: italic;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.7;
+      max-width: 400px;
+    }
+
+    .signup-right {
+      background: var(--white);
+      padding: 6rem 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .form-container {
+      max-width: 400px;
+    }
+
+    .form-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 2rem;
+      display: block;
+    }
+
+    .email-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .email-form input[type="email"] {
+      width: 100%;
+      padding: 1.5rem 0;
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid #ddd;
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.5rem;
+      font-style: italic;
+      color: var(--black);
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+
+    .email-form input[type="email"]:focus {
+      border-color: var(--coral);
+    }
+
+    .email-form input[type="email"]::placeholder {
+      color: #bbb;
+    }
+
+    .email-form button {
+      align-self: flex-start;
+      margin-top: 1.5rem;
+      padding: 1.25rem 3rem;
+      background: var(--black);
+      border: none;
+      color: var(--white);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .email-form button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: var(--coral);
+      transition: left 0.4s ease;
     }
 
     .email-form button:hover::before {
-      transform: translateX(0);
+      left: 0;
     }
 
     .email-form button span {
@@ -394,124 +730,73 @@
       z-index: 1;
     }
 
-    .form-note {
-      margin-top: 1rem;
+    .form-stats {
+      display: flex;
+      gap: 3rem;
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid #eee;
+    }
+
+    .stat-item {
+      text-align: left;
+    }
+
+    .stat-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      color: var(--black);
+      line-height: 1;
+    }
+
+    .stat-label {
       font-size: 0.7rem;
-      color: var(--color-text-muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #999;
+      margin-top: 0.5rem;
     }
 
     /* ========================================
-       FOOTER
+       FOOTER - MINIMAL
     ======================================== */
     footer {
-      padding: 1.5rem 2rem;
-      border-top: 1px solid var(--color-border);
+      padding: 4rem 3rem;
+      background: var(--black);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      opacity: 0;
-      animation: fadeIn 1s var(--ease-out-expo) forwards;
-      animation-delay: 1.7s;
-    }
-
-    @media (max-width: 600px) {
-      footer {
-        flex-direction: column;
-        gap: 1rem;
-        text-align: center;
-      }
-    }
-
-    .footer-left {
-      font-size: 0.7rem;
-      color: var(--color-text-muted);
-    }
-
-    .footer-right {
-      display: flex;
+      flex-wrap: wrap;
       gap: 2rem;
     }
 
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      color: var(--white);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 3rem;
+    }
+
     .footer-link {
-      font-size: 0.65rem;
-      letter-spacing: 0.1em;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: var(--color-text-muted);
+      color: rgba(255,255,255,0.5);
       text-decoration: none;
       transition: color 0.3s ease;
     }
 
     .footer-link:hover {
-      color: var(--color-accent);
+      color: var(--coral);
     }
 
-    /* ========================================
-       DECORATIVE ELEMENTS
-    ======================================== */
-    .grid-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      pointer-events: none;
-      z-index: 0;
-      background-image:
-        linear-gradient(to right, var(--color-border) 1px, transparent 1px),
-        linear-gradient(to bottom, var(--color-border) 1px, transparent 1px);
-      background-size: 80px 80px;
-      opacity: 0.15;
-    }
-
-    .accent-line {
-      position: absolute;
-      background: var(--color-accent);
-    }
-
-    .accent-line-1 {
-      width: 3px;
-      height: 120px;
-      top: 2rem;
-      right: 2rem;
-      opacity: 0;
-      animation: scaleInY 1s var(--ease-out-expo) forwards;
-      animation-delay: 1.8s;
-    }
-
-    .accent-line-2 {
-      width: 80px;
-      height: 3px;
-      bottom: 2rem;
-      left: 2rem;
-      opacity: 0;
-      animation: scaleInX 1s var(--ease-out-expo) forwards;
-      animation-delay: 2s;
-    }
-
-    /* Corner marks */
-    .corner-mark {
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      border: 1px solid var(--color-border);
-      opacity: 0;
-      animation: fadeIn 1s var(--ease-out-expo) forwards;
-    }
-
-    .corner-mark-tl {
-      top: 1rem;
-      left: 1rem;
-      border-right: none;
-      border-bottom: none;
-      animation-delay: 2.2s;
-    }
-
-    .corner-mark-br {
-      bottom: 1rem;
-      right: 1rem;
-      border-left: none;
-      border-top: none;
-      animation-delay: 2.3s;
+    .footer-copy {
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.3);
     }
 
     /* ========================================
@@ -522,65 +807,9 @@
       to { opacity: 1; }
     }
 
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes slideInLeft {
-      from {
-        opacity: 0;
-        transform: translateX(-50px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-
-    @keyframes scaleInY {
-      from {
-        opacity: 0;
-        transform: scaleY(0);
-        transform-origin: top;
-      }
-      to {
-        opacity: 1;
-        transform: scaleY(1);
-      }
-    }
-
-    @keyframes scaleInX {
-      from {
-        opacity: 0;
-        transform: scaleX(0);
-        transform-origin: left;
-      }
-      to {
-        opacity: 1;
-        transform: scaleX(1);
-      }
-    }
-
-    /* ========================================
-       HOVER EFFECTS
-    ======================================== */
-    .title, .title-accent {
-      transition: color 0.3s ease;
-    }
-
-    .hero:hover .title {
-      color: var(--color-accent);
-    }
-
-    .hero:hover .title-accent {
-      color: var(--color-text);
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(20px); }
+      to { opacity: 1; transform: translateX(0); }
     }
 
     /* Success state */
@@ -590,161 +819,316 @@
 
     .email-form.success button {
       background: #22C55E;
-      border-color: #22C55E;
+    }
+
+    .email-form.success button::before {
+      display: none;
+    }
+
+    /* ========================================
+       RESPONSIVE
+    ======================================== */
+    @media (max-width: 768px) {
+      .edition-float {
+        position: static;
+        writing-mode: horizontal-tb;
+        margin-bottom: 2rem;
+      }
+
+      .tagline-container {
+        justify-content: flex-start;
+        padding-right: 0;
+      }
+
+      .signup-left, .signup-right {
+        padding: 4rem 2rem;
+      }
+
+      .form-stats {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .footer {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .footer-links {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
     }
   </style>
 </head>
 <body>
 
-  <div class="grid-overlay"></div>
+  <!-- Cursor dot -->
+  <div class="cursor-dot" id="cursor"></div>
+
+  <!-- Floating background words -->
+  <div class="floating-words">
+    <span class="float-word">becoming</span>
+    <span class="float-word">courage</span>
+    <span class="float-word">migration</span>
+    <span class="float-word">transform</span>
+    <span class="float-word">voices</span>
+    <span class="float-word">stories</span>
+  </div>
+
+  <!-- Organic shapes -->
+  <div class="shape shape-1"></div>
+  <div class="shape shape-2"></div>
+  <div class="shape shape-3"></div>
 
   <div class="page">
 
-    <!-- Header -->
-    <header>
-      <div class="wordmark">Vox Essay Mosaic</div>
-      <div class="header-right">
-        <div class="edition-tag"><span>01</span> / First Edition</div>
+    <!-- Top Nav with CTA -->
+    <nav class="top-nav">
+      <div class="nav-logo">Vox Mosaic</div>
+      <div class="nav-cta">
+        <div class="nav-status">
+          <span class="pulse-dot"></span>
+          First Edition 2025
+        </div>
+        <a href="#signup" class="cta-button">Get Early Access</a>
       </div>
-    </header>
+    </nav>
 
-    <!-- Main Content -->
-    <main>
-
-      <!-- Hero Section -->
-      <section class="hero">
-        <div class="issue-number">01</div>
-
-        <div class="hero-content">
-          <p class="overline">First Edition — 2025</p>
-          <h1 class="title">Vox Essay</h1>
-          <p class="title-accent">Mosaic</p>
-          <p class="subtitle">
-            Twenty voices converge. Stories of <strong>becoming</strong> —
-            immigration, reinvention, and the courage to transform.
-          </p>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="title-container">
+          <div class="title-line">
+            <h1 class="title title-1">Vox</h1>
+          </div>
+          <div class="title-line">
+            <h1 class="title title-2">Mosaic</h1>
+          </div>
         </div>
 
-        <div class="accent-line accent-line-1"></div>
-        <div class="corner-mark corner-mark-tl"></div>
+        <div class="tagline-container">
+          <p class="tagline">
+            Twenty voices. One mosaic. Essays on the moments that
+            <strong>break us open</strong> and remake us whole.
+          </p>
+        </div>
+      </div>
+
       </section>
 
-      <!-- Details Section -->
-      <section class="details">
-        <div class="details-content">
+    <!-- Mosaic Grid -->
+    <section class="mosaic-section">
+      <div class="mosaic-header">
+        <p class="mosaic-label">The Voices</p>
+        <h2 class="mosaic-title">Twenty stories.<br><em>One becoming.</em></h2>
+      </div>
 
-          <p class="section-label">About This Edition</p>
-
-          <p class="description">
-            A curated anthology of <strong>personal essays</strong> from established
-            authors, poets, and essayists. Each piece explores the heart-centered
-            moments that break us open and remake us — divorce, migration, loss,
-            radical reinvention, and the quiet revolutions of everyday life.
-          </p>
-
-          <div class="features">
-            <div class="feature">
-              <div class="feature-number">20</div>
-              <div class="feature-label">Essays</div>
-            </div>
-            <div class="feature">
-              <div class="feature-number">20</div>
-              <div class="feature-label">Voices</div>
-            </div>
-            <div class="feature">
-              <div class="feature-number">2</div>
-              <div class="feature-label">Formats</div>
-            </div>
-            <div class="feature">
-              <div class="feature-number">1</div>
-              <div class="feature-label">Theme</div>
-            </div>
+      <div class="mosaic-grid">
+        <div class="mosaic-tile">
+          <span class="tile-number">01</span>
+          <div class="tile-content">
+            <h3 class="tile-author">Elena Ruiz</h3>
+            <p class="tile-essay">"The Weight of Suitcases"</p>
+            <span class="tile-theme">Immigration</span>
           </div>
-
-          <div class="form-section">
-            <label class="form-label">Get notified at launch</label>
-            <form class="email-form" id="emailForm">
-              <input
-                type="email"
-                placeholder="your@email.com"
-                required
-                aria-label="Email address"
-              >
-              <button type="submit"><span>Notify Me</span></button>
-            </form>
-            <p class="form-note">Digital + print editions. No spam, unsubscribe anytime.</p>
-          </div>
-
         </div>
 
-        <div class="accent-line accent-line-2"></div>
-        <div class="corner-mark corner-mark-br"></div>
-      </section>
+        <div class="mosaic-tile">
+          <span class="tile-number">02</span>
+          <div class="tile-content">
+            <h3 class="tile-author">Marcus Chen</h3>
+            <p class="tile-essay">"What the Mirror Forgot"</p>
+            <span class="tile-theme">Identity</span>
+          </div>
+        </div>
 
-    </main>
+        <div class="mosaic-tile">
+          <span class="tile-number">03</span>
+          <div class="tile-content">
+            <h3 class="tile-author">Amara Okafor</h3>
+            <p class="tile-essay">"The Language of Leaving"</p>
+            <span class="tile-theme">Divorce</span>
+          </div>
+        </div>
+
+        <div class="mosaic-tile">
+          <span class="tile-number">04</span>
+          <div class="tile-content">
+            <h3 class="tile-author">David Mireles</h3>
+            <p class="tile-essay">"Burning the Map"</p>
+            <span class="tile-theme">Reinvention</span>
+          </div>
+        </div>
+
+        <div class="mosaic-tile">
+          <span class="tile-number">05</span>
+          <div class="tile-content">
+            <h3 class="tile-author">Priya Sharma</h3>
+            <p class="tile-essay">"Between Two Mothers"</p>
+            <span class="tile-theme">Family</span>
+          </div>
+        </div>
+
+        <div class="mosaic-tile">
+          <span class="tile-number">06</span>
+          <div class="tile-content">
+            <h3 class="tile-author">+ 15 more</h3>
+            <p class="tile-essay">voices yet to be revealed</p>
+            <span class="tile-theme">Coming Soon</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quote -->
+    <section class="quote-section">
+      <div class="quote-bg-text">STORY</div>
+      <div class="quote-content">
+        <div class="quote-mark">"</div>
+        <p class="quote-text">
+          I left everything I knew at thirty-two. Not because I was brave,
+          but because staying had become more terrifying than the unknown.
+        </p>
+        <div class="quote-author">
+          <div class="quote-author-line"></div>
+          <span class="quote-author-name">Elena Ruiz, from "The Weight of Suitcases"</span>
+          <div class="quote-author-line"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Signup -->
+    <section class="signup-section" id="signup">
+      <div class="signup-left">
+        <div class="signup-left-content">
+          <h2 class="signup-title">
+            Be among<br>the <em>first</em>
+          </h2>
+          <p class="signup-text">
+            Early access. Behind-the-scenes. Exclusive previews
+            before anyone else sees them.
+          </p>
+        </div>
+      </div>
+
+      <div class="signup-right">
+        <div class="form-container">
+          <label class="form-label">Join the List</label>
+
+          <form class="email-form" id="emailForm">
+            <input
+              type="email"
+              placeholder="your@email.com"
+              required
+              aria-label="Email address"
+            >
+            <button type="submit"><span>Count Me In</span></button>
+          </form>
+
+          <div class="form-stats">
+            <div class="stat-item">
+              <div class="stat-number">20</div>
+              <div class="stat-label">Essays</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">2</div>
+              <div class="stat-label">Formats</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">1</div>
+              <div class="stat-label">Theme</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- Footer -->
     <footer>
-      <div class="footer-left">
-        &copy; 2025 Vox Essay Mosaic. All rights reserved.
-      </div>
-      <div class="footer-right">
+      <div class="footer-logo">Vox Essay Mosaic</div>
+      <nav class="footer-links">
         <a href="#" class="footer-link">About</a>
         <a href="#" class="footer-link">Submit</a>
         <a href="#" class="footer-link">Contact</a>
-      </div>
+      </nav>
+      <div class="footer-copy">&copy; 2025</div>
     </footer>
 
   </div>
 
   <script>
-    // Email form handling
-    const form = document.getElementById('emailForm');
+    // Custom cursor
+    const cursor = document.getElementById('cursor');
+    let mouseX = 0, mouseY = 0;
+    let cursorX = 0, cursorY = 0;
 
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+
+    function animateCursor() {
+      cursorX += (mouseX - cursorX) * 0.15;
+      cursorY += (mouseY - cursorY) * 0.15;
+      cursor.style.left = cursorX - 4 + 'px';
+      cursor.style.top = cursorY - 4 + 'px';
+      requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+
+    // Floating words parallax
+    const floatWords = document.querySelectorAll('.float-word');
+    document.addEventListener('mousemove', (e) => {
+      const x = e.clientX / window.innerWidth - 0.5;
+      const y = e.clientY / window.innerHeight - 0.5;
+
+      floatWords.forEach((word, i) => {
+        const speed = (i + 1) * 8;
+        word.style.transform = `translate(${x * speed}px, ${y * speed}px) rotate(${word.style.transform.match(/rotate\(([^)]+)\)/)?.[1] || '0deg'})`;
+      });
+    });
+
+    // Form handling
+    const form = document.getElementById('emailForm');
     form.addEventListener('submit', function(e) {
       e.preventDefault();
-
       const email = this.querySelector('input[type="email"]').value;
       const button = this.querySelector('button span');
       const originalText = button.textContent;
 
-      // Add success state
       this.classList.add('success');
-      button.textContent = 'Added';
+      button.textContent = 'You\'re in';
 
-      // In production, send to backend here
-      console.log('Email captured:', email);
+      console.log('Email:', email);
 
-      // Reset after delay
       setTimeout(() => {
         this.classList.remove('success');
         button.textContent = originalText;
         this.reset();
-      }, 2500);
+      }, 3000);
     });
 
-    // Subtle parallax on hero section
-    const hero = document.querySelector('.hero');
-    const issueNumber = document.querySelector('.issue-number');
+    // Intersection observer for animations
+    const observerOptions = {
+      threshold: 0.2
+    };
 
-    if (window.innerWidth > 900) {
-      hero.addEventListener('mousemove', (e) => {
-        const rect = hero.getBoundingClientRect();
-        const x = (e.clientX - rect.left) / rect.width - 0.5;
-        const y = (e.clientY - rect.top) / rect.height - 0.5;
-
-        issueNumber.style.transform = `translate(${x * 20}px, ${y * 20}px)`;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
       });
+    }, observerOptions);
 
-      hero.addEventListener('mouseleave', () => {
-        issueNumber.style.transform = 'translate(0, 0)';
-        issueNumber.style.transition = 'transform 0.5s ease';
-      });
-
-      hero.addEventListener('mouseenter', () => {
-        issueNumber.style.transition = 'none';
-      });
-    }
+    document.querySelectorAll('.mosaic-tile').forEach(tile => {
+      tile.style.opacity = '0';
+      tile.style.transform = 'translateY(30px)';
+      tile.style.transition = 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+      observer.observe(tile);
+    });
   </script>
 
 </body>
