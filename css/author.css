@@ -1,0 +1,562 @@
+/* ========================================
+   AUTHOR PAGE STYLES
+   Works across all themes
+   ======================================== */
+
+/* Author Hero */
+.author-hero {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  padding: 4rem 2rem 4rem;
+}
+
+.author-hero-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .author-hero {
+    padding: 2rem 2rem 4rem;
+  }
+
+  .author-hero-inner {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+.author-image-container {
+  position: relative;
+}
+
+.author-image {
+  width: 100%;
+  aspect-ratio: 4/5;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.author-image-placeholder {
+  font-family: 'Playfair Display', serif;
+  font-size: 8rem;
+  color: rgba(255, 255, 255, 0.3);
+  font-weight: 700;
+}
+
+.author-number {
+  position: absolute;
+  top: -1rem;
+  left: -1rem;
+  font-family: 'Playfair Display', serif;
+  font-size: 6rem;
+  font-weight: 700;
+  line-height: 1;
+  opacity: 0.1;
+}
+
+.author-info {
+  padding: 2rem 0;
+}
+
+.author-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  opacity: 0.6;
+  margin-bottom: 1rem;
+}
+
+.author-name {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3rem, 8vw, 5rem);
+  font-weight: 400;
+  line-height: 1;
+  margin-bottom: 1.5rem;
+}
+
+.author-essay-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  font-style: italic;
+  opacity: 0.7;
+  margin-bottom: 2rem;
+}
+
+.author-bio {
+  font-size: 1rem;
+  line-height: 1.8;
+  opacity: 0.8;
+  max-width: 500px;
+  margin-bottom: 2rem;
+}
+
+.author-theme-tag {
+  display: inline-block;
+  padding: 0.5rem 1.25rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border: 1px solid currentColor;
+  opacity: 0.6;
+}
+
+/* Essay Preview */
+.essay-preview {
+  padding: 6rem 2rem;
+}
+
+.essay-preview-inner {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.essay-preview-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  opacity: 0.5;
+  margin-bottom: 2rem;
+}
+
+.essay-excerpt {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 400;
+  line-height: 1.5;
+  margin-bottom: 3rem;
+}
+
+.essay-excerpt::first-letter {
+  font-size: 4rem;
+  float: left;
+  line-height: 0.8;
+  margin-right: 0.5rem;
+  margin-top: 0.1em;
+}
+
+.essay-teaser {
+  font-family: 'Instrument Serif', serif;
+  font-size: 1.1rem;
+  font-style: italic;
+  line-height: 1.8;
+  opacity: 0.7;
+}
+
+/* Author CTA */
+.author-cta {
+  padding: 6rem 2rem;
+  text-align: center;
+}
+
+.author-cta-inner {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.author-cta-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 400;
+  margin-bottom: 1rem;
+}
+
+.author-cta-title em {
+  font-style: italic;
+}
+
+.author-cta-text {
+  font-family: 'Instrument Serif', serif;
+  font-size: 1.1rem;
+  font-style: italic;
+  opacity: 0.7;
+  margin-bottom: 2rem;
+}
+
+.author-cta-form {
+  display: flex;
+  gap: 1rem;
+  max-width: 450px;
+  margin: 0 auto;
+}
+
+@media (max-width: 600px) {
+  .author-cta-form {
+    flex-direction: column;
+  }
+}
+
+.author-cta-form input[type="email"] {
+  flex: 1;
+  padding: 1rem 1.25rem;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1rem;
+  border: 2px solid currentColor;
+  background: transparent;
+  color: inherit;
+  outline: none;
+  opacity: 0.8;
+}
+
+.author-cta-form input[type="email"]:focus {
+  opacity: 1;
+}
+
+.author-cta-form input[type="email"]::placeholder {
+  color: inherit;
+  opacity: 0.5;
+}
+
+.author-cta-form button {
+  padding: 1rem 2rem;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Back link */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 5.5rem 0 0 2rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+  color: inherit;
+}
+
+.back-link:hover {
+  opacity: 1;
+}
+
+.back-link svg {
+  width: 16px;
+  height: 16px;
+}
+
+@media (max-width: 768px) {
+  .back-link {
+    margin: 5.5rem 0 0 1.5rem;
+  }
+}
+
+/* Discover Authors Section */
+.discover-authors {
+  padding: 5rem 2rem;
+  text-align: center;
+}
+
+.discover-authors-inner {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.discover-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  opacity: 0.5;
+  margin-bottom: 1.5rem;
+}
+
+.discover-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 400;
+  line-height: 1.3;
+  margin-bottom: 1rem;
+}
+
+.discover-title em {
+  font-style: italic;
+}
+
+.discover-text {
+  font-family: 'Instrument Serif', serif;
+  font-size: 1.1rem;
+  font-style: italic;
+  opacity: 0.7;
+  margin-bottom: 2rem;
+  line-height: 1.7;
+}
+
+.discover-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: inherit;
+  padding: 1rem 2rem;
+  border: 2px solid currentColor;
+  transition: all 0.3s ease;
+}
+
+.discover-link:hover {
+  opacity: 0.7;
+}
+
+.discover-link svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* ========================================
+   THEME: EDITORIAL
+   ======================================== */
+[data-theme="editorial"] .author-image,
+body:not([data-theme]) .author-image {
+  background: linear-gradient(135deg, var(--coral, #ff6b4a) 0%, var(--gold, #d4a853) 100%);
+}
+
+[data-theme="editorial"] .essay-preview,
+body:not([data-theme]) .essay-preview {
+  background: var(--cream, #f8f5f0);
+}
+
+[data-theme="editorial"] .author-cta,
+body:not([data-theme]) .author-cta {
+  background: var(--black, #0a0a0a);
+  color: var(--white, #fefefe);
+}
+
+[data-theme="editorial"] .author-cta-form button,
+body:not([data-theme]) .author-cta-form button {
+  background: var(--coral, #ff6b4a);
+  color: var(--white, #fefefe);
+}
+
+[data-theme="editorial"] .discover-authors,
+body:not([data-theme]) .discover-authors {
+  background: var(--cream, #f8f5f0);
+}
+
+/* ========================================
+   THEME: MINIMAL
+   ======================================== */
+[data-theme="minimal"] .author-image {
+  background: linear-gradient(135deg, #0a0a0a 0%, #333 100%);
+}
+
+[data-theme="minimal"] .essay-preview {
+  background: #f5f5f5;
+}
+
+[data-theme="minimal"] .author-cta {
+  background: #000;
+  color: #fff;
+}
+
+[data-theme="minimal"] .author-cta-form button {
+  background: transparent;
+  color: #fff;
+  border: 1px solid #fff;
+}
+
+[data-theme="minimal"] .author-cta-form button:hover {
+  background: #fff;
+  color: #000;
+}
+
+[data-theme="minimal"] .author-image-placeholder,
+[data-theme="minimal"] .author-name,
+[data-theme="minimal"] .author-number,
+[data-theme="minimal"] .essay-excerpt,
+[data-theme="minimal"] .author-cta-title,
+[data-theme="minimal"] .discover-title {
+  font-family: 'Inter', sans-serif;
+}
+
+[data-theme="minimal"] .author-essay-title,
+[data-theme="minimal"] .author-bio,
+[data-theme="minimal"] .essay-teaser,
+[data-theme="minimal"] .author-cta-text,
+[data-theme="minimal"] .discover-text {
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+}
+
+[data-theme="minimal"] .discover-authors {
+  background: #f5f5f5;
+}
+
+/* ========================================
+   THEME: BRUTALIST
+   ======================================== */
+[data-theme="brutalist"] .author-image {
+  background: #ff0000;
+  border-radius: 0;
+}
+
+[data-theme="brutalist"] .author-image-placeholder {
+  color: #000;
+}
+
+[data-theme="brutalist"] .author-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+[data-theme="brutalist"] .author-essay-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+}
+
+[data-theme="brutalist"] .author-theme-tag {
+  border-width: 2px;
+  border-color: #ff0000;
+  color: #ff0000;
+  opacity: 1;
+}
+
+[data-theme="brutalist"] .essay-preview {
+  background: #ffff00;
+  border-top: 4px solid #000;
+  border-bottom: 4px solid #000;
+}
+
+[data-theme="brutalist"] .author-image-placeholder,
+[data-theme="brutalist"] .author-number,
+[data-theme="brutalist"] .essay-excerpt,
+[data-theme="brutalist"] .author-cta-title,
+[data-theme="brutalist"] .discover-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+[data-theme="brutalist"] .author-bio,
+[data-theme="brutalist"] .essay-teaser,
+[data-theme="brutalist"] .author-cta-text,
+[data-theme="brutalist"] .discover-text {
+  font-family: 'Space Grotesk', sans-serif;
+  font-style: normal;
+}
+
+[data-theme="brutalist"] .author-cta {
+  background: #000;
+  color: #fff;
+  border-top: 4px solid #ff0000;
+}
+
+[data-theme="brutalist"] .author-cta-form input[type="email"] {
+  border: 4px solid #fff;
+}
+
+[data-theme="brutalist"] .author-cta-form button {
+  background: #ff0000;
+  color: #fff;
+  border: 4px solid #ff0000;
+}
+
+[data-theme="brutalist"] .author-cta-form button:hover {
+  background: #ffff00;
+  color: #000;
+  border-color: #ffff00;
+}
+
+[data-theme="brutalist"] .discover-authors {
+  background: #fff;
+  border-top: 4px solid #000;
+}
+
+[data-theme="brutalist"] .discover-link {
+  border-width: 4px;
+  border-color: #000;
+}
+
+[data-theme="brutalist"] .discover-link:hover {
+  background: #ff0000;
+  color: #fff;
+  border-color: #ff0000;
+  opacity: 1;
+}
+
+/* ========================================
+   THEME: NEURAL
+   ======================================== */
+[data-theme="neural"] .author-image {
+  background: linear-gradient(135deg, #6c5ce7 0%, #74b9ff 100%);
+  border-radius: 24px;
+}
+
+[data-theme="neural"] .author-number {
+  color: #6c5ce7;
+}
+
+[data-theme="neural"] .author-image-placeholder,
+[data-theme="neural"] .author-name,
+[data-theme="neural"] .author-number,
+[data-theme="neural"] .essay-excerpt,
+[data-theme="neural"] .author-cta-title,
+[data-theme="neural"] .discover-title {
+  font-family: 'IBM Plex Sans', sans-serif;
+}
+
+[data-theme="neural"] .author-essay-title,
+[data-theme="neural"] .author-bio,
+[data-theme="neural"] .essay-teaser,
+[data-theme="neural"] .author-cta-text,
+[data-theme="neural"] .discover-text {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-style: normal;
+}
+
+[data-theme="neural"] .essay-preview {
+  background: #d1d9e6;
+}
+
+[data-theme="neural"] .author-cta {
+  background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
+  color: #fff;
+}
+
+[data-theme="neural"] .author-cta-form input[type="email"] {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+  border-radius: 12px;
+}
+
+[data-theme="neural"] .author-cta-form input[type="email"]:focus {
+  border-color: #fff;
+}
+
+[data-theme="neural"] .author-cta-form button {
+  background: #fff;
+  color: #6c5ce7;
+  border-radius: 12px;
+}
+
+[data-theme="neural"] .discover-authors {
+  background: #e0e5ec;
+}
+
+[data-theme="neural"] .discover-link {
+  border-radius: 16px;
+  border-color: #6c5ce7;
+  color: #6c5ce7;
+}

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elena Ruiz — Vox Essay Mosaic</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Space+Grotesk:wght@300;400;500;700&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&family=Bebas+Neue&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+
+  <!-- Base styles -->
+  <link rel="stylesheet" href="css/base.css">
+  <!-- Theme stylesheet (swappable) -->
+  <link rel="stylesheet" href="css/theme-editorial.css" id="theme-stylesheet">
+  <!-- Author page styles -->
+  <link rel="stylesheet" href="css/author.css">
+</head>
+<body data-theme="editorial">
+
+  <!-- Neural network canvas (for neural theme) -->
+  <canvas id="networkCanvas" class="network-canvas"></canvas>
+
+  <!-- Cursor dot -->
+  <div class="cursor-dot" id="cursor"></div>
+
+  <!-- Floating background words -->
+  <div class="floating-words">
+    <span class="float-word">courage</span>
+    <span class="float-word">journey</span>
+    <span class="float-word">belonging</span>
+    <span class="float-word">home</span>
+    <span class="float-word">memory</span>
+    <span class="float-word">roots</span>
+  </div>
+
+  <!-- Organic shapes -->
+  <div class="shape shape-1"></div>
+  <div class="shape shape-2"></div>
+  <div class="shape shape-3"></div>
+
+  <div class="page">
+
+    <!-- Top Nav -->
+    <nav class="top-nav">
+      <a href="index.html" class="nav-logo">Vox Mosaic</a>
+      <div class="nav-cta">
+        <div class="nav-status">
+          <span class="pulse-dot"></span>
+          First Edition 2025
+        </div>
+        <a href="#signup" class="cta-button">Get Early Access</a>
+      </div>
+    </nav>
+
+    <!-- Back Link -->
+    <a href="index.html" class="back-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M19 12H5M12 19l-7-7 7-7"/>
+      </svg>
+      Back to Mosaic
+    </a>
+
+    <!-- Author Hero -->
+    <section class="author-hero">
+      <div class="author-hero-inner">
+        <div class="author-image-container">
+          <span class="author-number">01</span>
+          <div class="author-image">
+            <span class="author-image-placeholder">ER</span>
+          </div>
+        </div>
+        <div class="author-info">
+          <p class="author-label">Featured Essayist</p>
+          <h1 class="author-name">Elena Ruiz</h1>
+          <p class="author-essay-title">"The Weight of Suitcases"</p>
+          <p class="author-bio">
+            Elena Ruiz is a journalist and essayist whose work explores the
+            liminal spaces between cultures, languages, and identities. Born
+            in Mexico City and now based in Brooklyn, her writing has appeared
+            in The Atlantic, Guernica, and Catapult.
+          </p>
+          <span class="author-theme-tag">Immigration</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Essay Preview -->
+    <section class="essay-preview">
+      <div class="essay-preview-inner">
+        <p class="essay-preview-label">Excerpt from the Essay</p>
+        <p class="essay-excerpt">
+          I left everything I knew at thirty-two. Not because I was brave,
+          but because staying had become more terrifying than the unknown.
+        </p>
+        <p class="essay-teaser">
+          The essay continues with Elena's journey across borders—both
+          geographical and emotional—exploring what it means to carry home
+          in your heart when you can no longer carry it in your hands.
+          A meditation on loss, adaptation, and the unexpected places we
+          find belonging.
+        </p>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="author-cta" id="signup">
+      <div class="author-cta-inner">
+        <h2 class="author-cta-title">Read Elena's <em>full essay</em></h2>
+        <p class="author-cta-text">
+          Join the early access list to be first to read "The Weight of
+          Suitcases" and nineteen other transformative essays.
+        </p>
+        <form class="author-cta-form" id="authorEmailForm">
+          <input
+            type="email"
+            placeholder="your@email.com"
+            required
+            aria-label="Email address"
+          >
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Discover More Authors -->
+    <section class="discover-authors">
+      <div class="discover-authors-inner">
+        <p class="discover-label">The Mosaic</p>
+        <h2 class="discover-title">Nineteen more voices await</h2>
+        <p class="discover-text">
+          Elena is one of twenty essayists exploring the moments that
+          transform us. Discover the full collection of voices.
+        </p>
+        <a href="index.html#authors" class="discover-link">
+          Meet All Authors
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-logo">Vox Essay Mosaic</div>
+      <nav class="footer-links">
+        <a href="index.html" class="footer-link">Home</a>
+        <a href="#" class="footer-link">About</a>
+        <a href="#" class="footer-link">Submit</a>
+        <a href="#" class="footer-link">Contact</a>
+      </nav>
+      <div class="footer-copy">&copy; 2025</div>
+    </footer>
+
+  </div>
+
+  <!-- Theme Switcher UI -->
+  <div class="theme-switcher">
+    <button class="theme-toggle" aria-label="Switch theme">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="3"/>
+        <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+      </svg>
+    </button>
+    <div class="theme-menu">
+      <button data-theme="editorial">
+        <span class="theme-dot"></span>
+        Editorial
+      </button>
+      <button data-theme="minimal">
+        <span class="theme-dot"></span>
+        Minimal
+      </button>
+      <button data-theme="brutalist">
+        <span class="theme-dot"></span>
+        Brutalist
+      </button>
+      <button data-theme="neural">
+        <span class="theme-dot"></span>
+        Neural
+      </button>
+    </div>
+  </div>
+
+  <script src="js/neural-network.js"></script>
+  <script src="js/theme-switcher.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    // Author page form handling
+    const authorForm = document.getElementById('authorEmailForm');
+    if (authorForm) {
+      authorForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const email = this.querySelector('input[type="email"]').value;
+        const button = this.querySelector('button');
+        const originalText = button.textContent;
+
+        button.textContent = "You're in!";
+        button.style.opacity = '0.7';
+
+        console.log('Author page signup:', email);
+
+        setTimeout(() => {
+          button.textContent = originalText;
+          button.style.opacity = '1';
+          this.reset();
+        }, 3000);
+      });
+    }
+  </script>
+
+</body>
+</html>

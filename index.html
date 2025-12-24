@@ -7,861 +7,17 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Space+Grotesk:wght@300;400;500;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-
-  <style>
-    :root {
-      --black: #0a0a0a;
-      --white: #fefefe;
-      --cream: #f8f5f0;
-      --coral: #ff6b4a;
-      --gold: #d4a853;
-      --sage: #a8b5a0;
-      --lavender: #c4b8d9;
-      --sky: #89b4c8;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background: var(--cream);
-      color: var(--black);
-      font-family: 'Space Grotesk', sans-serif;
-      overflow-x: hidden;
-      cursor: crosshair;
-    }
-
-    ::selection {
-      background: var(--coral);
-      color: var(--white);
-    }
-
-    /* ========================================
-       CURSOR TRAIL
-    ======================================== */
-    .cursor-dot {
-      position: fixed;
-      width: 8px;
-      height: 8px;
-      background: var(--coral);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 9999;
-      mix-blend-mode: difference;
-      transition: transform 0.1s ease;
-    }
-
-    /* ========================================
-       FLOATING WORDS - SCATTERED POETRY
-    ======================================== */
-    .floating-words {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 1;
-      overflow: hidden;
-    }
-
-    .float-word {
-      position: absolute;
-      font-family: 'Instrument Serif', serif;
-      font-style: italic;
-      opacity: 0.08;
-      user-select: none;
-      transition: opacity 0.5s ease, transform 0.5s ease;
-    }
-
-    .float-word:nth-child(1) { top: 8%; left: 5%; font-size: 4rem; color: var(--coral); transform: rotate(-12deg); }
-    .float-word:nth-child(2) { top: 15%; right: 8%; font-size: 2.5rem; color: var(--sage); transform: rotate(8deg); }
-    .float-word:nth-child(3) { top: 45%; left: 2%; font-size: 3rem; color: var(--lavender); transform: rotate(-5deg); }
-    .float-word:nth-child(4) { top: 70%; right: 5%; font-size: 3.5rem; color: var(--sky); transform: rotate(15deg); }
-    .float-word:nth-child(5) { bottom: 10%; left: 10%; font-size: 2rem; color: var(--gold); transform: rotate(-8deg); }
-    .float-word:nth-child(6) { top: 30%; right: 15%; font-size: 2.8rem; color: var(--coral); transform: rotate(3deg); }
-
-    /* ========================================
-       ORGANIC SHAPES
-    ======================================== */
-    .shape {
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(80px);
-      pointer-events: none;
-      z-index: 0;
-      animation: breathe 8s ease-in-out infinite;
-    }
-
-    .shape-1 {
-      width: 500px;
-      height: 500px;
-      background: var(--coral);
-      opacity: 0.15;
-      top: -10%;
-      right: -10%;
-      animation-delay: 0s;
-    }
-
-    .shape-2 {
-      width: 400px;
-      height: 400px;
-      background: var(--lavender);
-      opacity: 0.12;
-      bottom: 10%;
-      left: -5%;
-      animation-delay: 2s;
-    }
-
-    .shape-3 {
-      width: 300px;
-      height: 300px;
-      background: var(--sage);
-      opacity: 0.1;
-      top: 40%;
-      right: 20%;
-      animation-delay: 4s;
-    }
-
-    @keyframes breathe {
-      0%, 100% { transform: scale(1) rotate(0deg); }
-      50% { transform: scale(1.1) rotate(5deg); }
-    }
-
-    /* ========================================
-       MAIN CONTENT
-    ======================================== */
-    .page {
-      position: relative;
-      z-index: 2;
-    }
-
-    /* ========================================
-       TOP NAV / CTA
-    ======================================== */
-    .top-nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      padding: 1rem 3rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: rgba(10, 10, 10, 0.95);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      opacity: 0;
-      animation: fadeIn 1s ease forwards 0.3s;
-    }
-
-    @media (max-width: 768px) {
-      .top-nav {
-        padding: 1rem 1.5rem;
-      }
-    }
-
-    .nav-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1rem;
-      color: var(--white);
-      letter-spacing: 0.02em;
-    }
-
-    .nav-cta {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-    }
-
-    .nav-status {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      font-size: 0.65rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.7);
-    }
-
-    @media (max-width: 600px) {
-      .nav-status {
-        display: none;
-      }
-    }
-
-    .nav-status .pulse-dot {
-      width: 6px;
-      height: 6px;
-      background: var(--coral);
-      border-radius: 50%;
-      animation: pulse 2s ease-in-out infinite;
-    }
-
-    .cta-button {
-      padding: 0.75rem 1.5rem;
-      background: var(--coral);
-      border: none;
-      color: var(--white);
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 0.65rem;
-      font-weight: 600;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      text-decoration: none;
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
-      transition: all 0.3s ease;
-      box-shadow: 0 2px 12px rgba(255, 107, 74, 0.3);
-    }
-
-    .cta-button:hover {
-      background: #ff8266;
-      transform: translateY(-1px);
-      box-shadow: 0 4px 20px rgba(255, 107, 74, 0.4);
-    }
-
-    .cta-button:active {
-      transform: translateY(0);
-    }
-
-    /* ========================================
-       HERO - MASSIVE TYPOGRAPHY
-    ======================================== */
-    .hero {
-      min-height: 75vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 6rem 2rem 3rem;
-      position: relative;
-    }
-
-    .hero-inner {
-      max-width: 1400px;
-      margin: 0 auto;
-      width: 100%;
-    }
-
-    .edition-float {
-      position: absolute;
-      top: 2rem;
-      right: 3rem;
-      writing-mode: vertical-rl;
-      font-size: 0.7rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--coral);
-      opacity: 0;
-      animation: slideIn 1s ease forwards 0.5s;
-    }
-
-    .title-container {
-      position: relative;
-    }
-
-    .title-line {
-      overflow: hidden;
-      padding-bottom: 0.1em;
-    }
-
-    .title {
-      font-family: 'Playfair Display', serif;
-      font-weight: 400;
-      line-height: 0.85;
-      letter-spacing: -0.04em;
-    }
-
-    .title-1 {
-      font-size: clamp(6rem, 20vw, 18rem);
-      color: var(--black);
-      transform: translateY(100%);
-      animation: revealUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.2s;
-    }
-
-    .title-2 {
-      font-size: clamp(5rem, 18vw, 16rem);
-      font-style: italic;
-      background: linear-gradient(135deg, var(--coral) 0%, var(--gold) 50%, var(--coral) 100%);
-      background-size: 200% 200%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-left: 8%;
-      transform: translateY(100%);
-      animation: revealUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.4s,
-                 gradientShift 5s ease infinite 1.5s;
-    }
-
-    @keyframes revealUp {
-      to { transform: translateY(0); }
-    }
-
-    @keyframes gradientShift {
-      0%, 100% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-    }
-
-    .tagline-container {
-      display: flex;
-      justify-content: flex-end;
-      margin-top: 2.5rem;
-      padding-right: 5%;
-    }
-
-    .tagline {
-      max-width: 450px;
-      font-family: 'Instrument Serif', serif;
-      font-size: clamp(1.1rem, 2vw, 1.4rem);
-      font-style: italic;
-      line-height: 1.7;
-      color: #555;
-      opacity: 0;
-      animation: fadeIn 1s ease forwards 0.8s;
-    }
-
-    .tagline strong {
-      font-style: normal;
-      color: var(--black);
-      position: relative;
-    }
-
-    .tagline strong::after {
-      content: '';
-      position: absolute;
-      bottom: 2px;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: var(--coral);
-      transform: scaleX(0);
-      transform-origin: right;
-      animation: underline 0.8s ease forwards 1.5s;
-    }
-
-    @keyframes underline {
-      to { transform: scaleX(1); transform-origin: left; }
-    }
-
-    .scroll-indicator {
-      position: absolute;
-      bottom: 3rem;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
-      opacity: 0;
-      animation: fadeIn 1s ease forwards 1.2s;
-    }
-
-    .scroll-line {
-      width: 1px;
-      height: 60px;
-      background: linear-gradient(to bottom, var(--black), transparent);
-      animation: scrollPulse 2s ease infinite;
-    }
-
-    @keyframes scrollPulse {
-      0%, 100% { opacity: 1; transform: scaleY(1); }
-      50% { opacity: 0.5; transform: scaleY(0.8); }
-    }
-
-    /* ========================================
-       MOSAIC SECTION - AUTHORS AS TILES
-    ======================================== */
-    .mosaic-section {
-      padding: 8rem 2rem;
-      background: var(--black);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .mosaic-header {
-      text-align: center;
-      margin-bottom: 5rem;
-    }
-
-    .mosaic-label {
-      font-size: 0.7rem;
-      letter-spacing: 0.4em;
-      text-transform: uppercase;
-      color: var(--coral);
-      margin-bottom: 1.5rem;
-    }
-
-    .mosaic-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.5rem, 6vw, 5rem);
-      font-weight: 400;
-      color: var(--white);
-      line-height: 1.1;
-    }
-
-    .mosaic-title em {
-      font-style: italic;
-      color: var(--gold);
-    }
-
-    .mosaic-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1px;
-      background: rgba(255,255,255,0.1);
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .mosaic-tile {
-      background: var(--black);
-      padding: 3rem 2rem;
-      position: relative;
-      overflow: hidden;
-      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-      cursor: pointer;
-    }
-
-    .mosaic-tile::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, var(--coral), var(--gold));
-      opacity: 0;
-      transition: opacity 0.5s ease;
-    }
-
-    .mosaic-tile:hover::before {
-      opacity: 0.15;
-    }
-
-    .mosaic-tile:hover {
-      transform: scale(1.02);
-      z-index: 10;
-    }
-
-    .tile-number {
-      font-family: 'Playfair Display', serif;
-      font-size: 4rem;
-      color: rgba(255,255,255,0.05);
-      position: absolute;
-      top: 1rem;
-      right: 1.5rem;
-      line-height: 1;
-      transition: all 0.5s ease;
-    }
-
-    .mosaic-tile:hover .tile-number {
-      color: rgba(255,255,255,0.15);
-      transform: translateY(-10px);
-    }
-
-    .tile-content {
-      position: relative;
-      z-index: 1;
-    }
-
-    .tile-author {
-      font-family: 'Instrument Serif', serif;
-      font-size: 1.5rem;
-      font-style: italic;
-      color: var(--white);
-      margin-bottom: 0.5rem;
-    }
-
-    .tile-essay {
-      font-size: 0.8rem;
-      color: rgba(255,255,255,0.5);
-      letter-spacing: 0.05em;
-    }
-
-    .tile-theme {
-      display: inline-block;
-      margin-top: 1.5rem;
-      padding: 0.3rem 0.8rem;
-      font-size: 0.6rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      border: 1px solid rgba(255,255,255,0.2);
-      color: rgba(255,255,255,0.6);
-      transition: all 0.3s ease;
-    }
-
-    .mosaic-tile:hover .tile-theme {
-      border-color: var(--coral);
-      color: var(--coral);
-    }
-
-    /* ========================================
-       QUOTE - FULL BLEED ARTISTIC
-    ======================================== */
-    .quote-section {
-      min-height: 80vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 6rem 2rem;
-      background: var(--cream);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .quote-bg-text {
-      position: absolute;
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(15rem, 40vw, 50rem);
-      font-weight: 700;
-      color: var(--black);
-      opacity: 0.02;
-      user-select: none;
-      white-space: nowrap;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
-
-    .quote-content {
-      max-width: 800px;
-      text-align: center;
-      position: relative;
-      z-index: 1;
-    }
-
-    .quote-mark {
-      font-family: 'Playfair Display', serif;
-      font-size: 12rem;
-      line-height: 0.5;
-      color: var(--coral);
-      opacity: 0.3;
-      margin-bottom: -2rem;
-    }
-
-    .quote-text {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.75rem, 4vw, 3rem);
-      font-weight: 400;
-      line-height: 1.4;
-      color: var(--black);
-      margin-bottom: 3rem;
-    }
-
-    .quote-author {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1.5rem;
-    }
-
-    .quote-author-line {
-      width: 60px;
-      height: 1px;
-      background: var(--coral);
-    }
-
-    .quote-author-name {
-      font-family: 'Instrument Serif', serif;
-      font-size: 1.1rem;
-      font-style: italic;
-      color: #666;
-    }
-
-    /* ========================================
-       SIGNUP - EDITORIAL SPLIT
-    ======================================== */
-    .signup-section {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      min-height: 100vh;
-    }
-
-    @media (max-width: 900px) {
-      .signup-section {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .signup-left {
-      background: var(--black);
-      padding: 6rem 4rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .signup-left::before {
-      content: 'JOIN';
-      position: absolute;
-      font-family: 'Playfair Display', serif;
-      font-size: 25rem;
-      font-weight: 700;
-      color: rgba(255,255,255,0.02);
-      bottom: -5rem;
-      left: -2rem;
-      line-height: 1;
-    }
-
-    .signup-left-content {
-      position: relative;
-      z-index: 1;
-    }
-
-    .signup-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.5rem, 5vw, 4rem);
-      font-weight: 400;
-      color: var(--white);
-      line-height: 1.1;
-      margin-bottom: 1.5rem;
-    }
-
-    .signup-title em {
-      font-style: italic;
-      color: var(--coral);
-    }
-
-    .signup-text {
-      font-family: 'Instrument Serif', serif;
-      font-size: 1.15rem;
-      font-style: italic;
-      color: rgba(255,255,255,0.6);
-      line-height: 1.7;
-      max-width: 400px;
-    }
-
-    .signup-right {
-      background: var(--white);
-      padding: 6rem 4rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .form-container {
-      max-width: 400px;
-    }
-
-    .form-label {
-      font-size: 0.7rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: #999;
-      margin-bottom: 2rem;
-      display: block;
-    }
-
-    .email-form {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .email-form input[type="email"] {
-      width: 100%;
-      padding: 1.5rem 0;
-      background: transparent;
-      border: none;
-      border-bottom: 2px solid #ddd;
-      font-family: 'Instrument Serif', serif;
-      font-size: 1.5rem;
-      font-style: italic;
-      color: var(--black);
-      outline: none;
-      transition: border-color 0.3s ease;
-    }
-
-    .email-form input[type="email"]:focus {
-      border-color: var(--coral);
-    }
-
-    .email-form input[type="email"]::placeholder {
-      color: #bbb;
-    }
-
-    .email-form button {
-      align-self: flex-start;
-      margin-top: 1.5rem;
-      padding: 1.25rem 3rem;
-      background: var(--black);
-      border: none;
-      color: var(--white);
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 0.75rem;
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
-      transition: all 0.3s ease;
-    }
-
-    .email-form button::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: var(--coral);
-      transition: left 0.4s ease;
-    }
-
-    .email-form button:hover::before {
-      left: 0;
-    }
-
-    .email-form button span {
-      position: relative;
-      z-index: 1;
-    }
-
-    .form-stats {
-      display: flex;
-      gap: 3rem;
-      margin-top: 4rem;
-      padding-top: 2rem;
-      border-top: 1px solid #eee;
-    }
-
-    .stat-item {
-      text-align: left;
-    }
-
-    .stat-number {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.5rem;
-      color: var(--black);
-      line-height: 1;
-    }
-
-    .stat-label {
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: #999;
-      margin-top: 0.5rem;
-    }
-
-    /* ========================================
-       FOOTER - MINIMAL
-    ======================================== */
-    footer {
-      padding: 4rem 3rem;
-      background: var(--black);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 2rem;
-    }
-
-    .footer-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.25rem;
-      color: var(--white);
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 3rem;
-    }
-
-    .footer-link {
-      font-size: 0.7rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.5);
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-
-    .footer-link:hover {
-      color: var(--coral);
-    }
-
-    .footer-copy {
-      font-size: 0.7rem;
-      color: rgba(255,255,255,0.3);
-    }
-
-    /* ========================================
-       ANIMATIONS
-    ======================================== */
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    @keyframes slideIn {
-      from { opacity: 0; transform: translateX(20px); }
-      to { opacity: 1; transform: translateX(0); }
-    }
-
-    /* Success state */
-    .email-form.success input[type="email"] {
-      border-color: #22C55E;
-    }
-
-    .email-form.success button {
-      background: #22C55E;
-    }
-
-    .email-form.success button::before {
-      display: none;
-    }
-
-    /* ========================================
-       RESPONSIVE
-    ======================================== */
-    @media (max-width: 768px) {
-      .edition-float {
-        position: static;
-        writing-mode: horizontal-tb;
-        margin-bottom: 2rem;
-      }
-
-      .tagline-container {
-        justify-content: flex-start;
-        padding-right: 0;
-      }
-
-      .signup-left, .signup-right {
-        padding: 4rem 2rem;
-      }
-
-      .form-stats {
-        flex-direction: column;
-        gap: 1.5rem;
-      }
-
-      .footer {
-        flex-direction: column;
-        text-align: center;
-      }
-
-      .footer-links {
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Space+Grotesk:wght@300;400;500;700&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&family=Bebas+Neue&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+
+  <!-- Base styles -->
+  <link rel="stylesheet" href="css/base.css">
+  <!-- Theme stylesheet (swappable) -->
+  <link rel="stylesheet" href="css/theme-editorial.css" id="theme-stylesheet">
 </head>
-<body>
+<body data-theme="editorial">
+
+  <!-- Neural network canvas (for neural theme) -->
+  <canvas id="networkCanvas" class="network-canvas"></canvas>
 
   <!-- Cursor dot -->
   <div class="cursor-dot" id="cursor"></div>
@@ -885,7 +41,7 @@
 
     <!-- Top Nav with CTA -->
     <nav class="top-nav">
-      <div class="nav-logo">Vox Mosaic</div>
+      <a href="index.html" class="nav-logo">Vox Mosaic</a>
       <div class="nav-cta">
         <div class="nav-status">
           <span class="pulse-dot"></span>
@@ -913,62 +69,66 @@
             <strong>break us open</strong> and remake us whole.
           </p>
         </div>
+
+        <div class="hero-cta-container">
+          <a href="#signup" class="hero-cta">Get Early Access</a>
+        </div>
       </div>
 
       </section>
 
     <!-- Mosaic Grid -->
-    <section class="mosaic-section">
+    <section class="mosaic-section" id="authors">
       <div class="mosaic-header">
         <p class="mosaic-label">The Voices</p>
         <h2 class="mosaic-title">Twenty stories.<br><em>One becoming.</em></h2>
       </div>
 
       <div class="mosaic-grid">
-        <div class="mosaic-tile">
+        <a href="author.html" class="mosaic-tile">
           <span class="tile-number">01</span>
           <div class="tile-content">
             <h3 class="tile-author">Elena Ruiz</h3>
             <p class="tile-essay">"The Weight of Suitcases"</p>
             <span class="tile-theme">Immigration</span>
           </div>
-        </div>
+        </a>
 
-        <div class="mosaic-tile">
+        <a href="author.html" class="mosaic-tile">
           <span class="tile-number">02</span>
           <div class="tile-content">
             <h3 class="tile-author">Marcus Chen</h3>
             <p class="tile-essay">"What the Mirror Forgot"</p>
             <span class="tile-theme">Identity</span>
           </div>
-        </div>
+        </a>
 
-        <div class="mosaic-tile">
+        <a href="author.html" class="mosaic-tile">
           <span class="tile-number">03</span>
           <div class="tile-content">
             <h3 class="tile-author">Amara Okafor</h3>
             <p class="tile-essay">"The Language of Leaving"</p>
             <span class="tile-theme">Divorce</span>
           </div>
-        </div>
+        </a>
 
-        <div class="mosaic-tile">
+        <a href="author.html" class="mosaic-tile">
           <span class="tile-number">04</span>
           <div class="tile-content">
             <h3 class="tile-author">David Mireles</h3>
             <p class="tile-essay">"Burning the Map"</p>
             <span class="tile-theme">Reinvention</span>
           </div>
-        </div>
+        </a>
 
-        <div class="mosaic-tile">
+        <a href="author.html" class="mosaic-tile">
           <span class="tile-number">05</span>
           <div class="tile-content">
             <h3 class="tile-author">Priya Sharma</h3>
             <p class="tile-essay">"Between Two Mothers"</p>
             <span class="tile-theme">Family</span>
           </div>
-        </div>
+        </a>
 
         <div class="mosaic-tile">
           <span class="tile-number">06</span>
@@ -1057,79 +217,37 @@
 
   </div>
 
-  <script>
-    // Custom cursor
-    const cursor = document.getElementById('cursor');
-    let mouseX = 0, mouseY = 0;
-    let cursorX = 0, cursorY = 0;
+  <!-- Theme Switcher UI -->
+  <div class="theme-switcher">
+    <button class="theme-toggle" aria-label="Switch theme">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="3"/>
+        <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+      </svg>
+    </button>
+    <div class="theme-menu">
+      <button data-theme="editorial">
+        <span class="theme-dot"></span>
+        Editorial
+      </button>
+      <button data-theme="minimal">
+        <span class="theme-dot"></span>
+        Minimal
+      </button>
+      <button data-theme="brutalist">
+        <span class="theme-dot"></span>
+        Brutalist
+      </button>
+      <button data-theme="neural">
+        <span class="theme-dot"></span>
+        Neural
+      </button>
+    </div>
+  </div>
 
-    document.addEventListener('mousemove', (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-    });
-
-    function animateCursor() {
-      cursorX += (mouseX - cursorX) * 0.15;
-      cursorY += (mouseY - cursorY) * 0.15;
-      cursor.style.left = cursorX - 4 + 'px';
-      cursor.style.top = cursorY - 4 + 'px';
-      requestAnimationFrame(animateCursor);
-    }
-    animateCursor();
-
-    // Floating words parallax
-    const floatWords = document.querySelectorAll('.float-word');
-    document.addEventListener('mousemove', (e) => {
-      const x = e.clientX / window.innerWidth - 0.5;
-      const y = e.clientY / window.innerHeight - 0.5;
-
-      floatWords.forEach((word, i) => {
-        const speed = (i + 1) * 8;
-        word.style.transform = `translate(${x * speed}px, ${y * speed}px) rotate(${word.style.transform.match(/rotate\(([^)]+)\)/)?.[1] || '0deg'})`;
-      });
-    });
-
-    // Form handling
-    const form = document.getElementById('emailForm');
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      const email = this.querySelector('input[type="email"]').value;
-      const button = this.querySelector('button span');
-      const originalText = button.textContent;
-
-      this.classList.add('success');
-      button.textContent = 'You\'re in';
-
-      console.log('Email:', email);
-
-      setTimeout(() => {
-        this.classList.remove('success');
-        button.textContent = originalText;
-        this.reset();
-      }, 3000);
-    });
-
-    // Intersection observer for animations
-    const observerOptions = {
-      threshold: 0.2
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
-        }
-      });
-    }, observerOptions);
-
-    document.querySelectorAll('.mosaic-tile').forEach(tile => {
-      tile.style.opacity = '0';
-      tile.style.transform = 'translateY(30px)';
-      tile.style.transition = 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
-      observer.observe(tile);
-    });
-  </script>
+  <script src="js/neural-network.js"></script>
+  <script src="js/theme-switcher.js"></script>
+  <script src="js/main.js"></script>
 
 </body>
 </html>
