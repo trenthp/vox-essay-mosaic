@@ -1,0 +1,1029 @@
+/* ========================================
+   THEME: KINTSUGI
+   Beauty in the broken, resilience, the value of scars
+   Reverent, sophisticated, hopeful
+   ======================================== */
+
+:root {
+  --black: #0d0d0f;
+  --white: #fefefe;
+  --snow: #f8f9fa;
+  --indigo: #1e2340;
+  --indigo-deep: #141729;
+  --charcoal: #2a2d3a;
+  --gold: #c9a227;
+  --gold-light: #e6c44a;
+  --gold-shimmer: #daa520;
+  --silver: #8b8fa3;
+  --mist: #e8e9ed;
+}
+
+body {
+  background: var(--snow);
+  color: var(--indigo);
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-weight: 400;
+  cursor: default;
+}
+
+::selection {
+  background: var(--gold);
+  color: var(--indigo-deep);
+}
+
+/* ========================================
+   CURSOR TRAIL - Golden trace
+======================================== */
+.cursor-dot {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  box-shadow: 0 0 12px rgba(201, 162, 39, 0.5);
+  transition: transform 0.15s ease;
+}
+
+/* ========================================
+   FLOATING WORDS - Quiet presence
+======================================== */
+.floating-words {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.float-word {
+  position: absolute;
+  font-family: 'Shippori Mincho', serif;
+  font-weight: 400;
+  opacity: 0.04;
+  user-select: none;
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.float-word:nth-child(1) { top: 10%; left: 6%; font-size: 3rem; color: var(--indigo); transform: rotate(-5deg); }
+.float-word:nth-child(2) { top: 20%; right: 10%; font-size: 2rem; color: var(--gold); transform: rotate(3deg); }
+.float-word:nth-child(3) { top: 50%; left: 4%; font-size: 2.5rem; color: var(--charcoal); transform: rotate(-2deg); }
+.float-word:nth-child(4) { top: 75%; right: 8%; font-size: 2.8rem; color: var(--indigo); transform: rotate(6deg); }
+.float-word:nth-child(5) { bottom: 15%; left: 15%; font-size: 1.8rem; color: var(--gold); transform: rotate(-4deg); }
+.float-word:nth-child(6) { top: 38%; right: 20%; font-size: 2.2rem; color: var(--silver); transform: rotate(1deg); }
+
+/* ========================================
+   GOLDEN FRACTURES - Kintsugi cracks
+======================================== */
+.shape {
+  position: fixed;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+  animation: fractureReveal 2s ease forwards;
+}
+
+/* Primary fracture - diagonal from top right */
+.shape-1 {
+  top: 5%;
+  right: 15%;
+  width: 2px;
+  height: 0;
+  background: linear-gradient(to bottom, transparent, var(--gold), var(--gold-light), var(--gold), transparent);
+  transform: rotate(25deg);
+  animation: crackGrow1 2.5s ease forwards 0.3s;
+  box-shadow: 0 0 20px rgba(201, 162, 39, 0.4), 0 0 40px rgba(201, 162, 39, 0.2);
+}
+
+.shape-1::before,
+.shape-1::after {
+  content: '';
+  position: absolute;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  box-shadow: 0 0 15px rgba(201, 162, 39, 0.3);
+}
+
+.shape-1::before {
+  top: 30%;
+  left: 0;
+  height: 80px;
+  transform: rotate(-35deg);
+  transform-origin: top center;
+}
+
+.shape-1::after {
+  top: 55%;
+  left: 0;
+  height: 60px;
+  transform: rotate(40deg);
+  transform-origin: top center;
+}
+
+/* Secondary fracture - from left side */
+.shape-2 {
+  top: 35%;
+  left: 8%;
+  width: 2px;
+  height: 0;
+  background: linear-gradient(to bottom, transparent, var(--gold-light), var(--gold), transparent);
+  transform: rotate(-15deg);
+  animation: crackGrow2 2s ease forwards 0.8s;
+  box-shadow: 0 0 15px rgba(201, 162, 39, 0.3);
+}
+
+.shape-2::before {
+  content: '';
+  position: absolute;
+  top: 40%;
+  left: 0;
+  width: 2px;
+  height: 50px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  transform: rotate(50deg);
+  transform-origin: top center;
+  box-shadow: 0 0 12px rgba(201, 162, 39, 0.25);
+}
+
+/* Tertiary fracture - bottom area */
+.shape-3 {
+  bottom: 20%;
+  right: 25%;
+  width: 2px;
+  height: 0;
+  background: linear-gradient(to top, transparent, var(--gold), var(--gold-light), transparent);
+  transform: rotate(-30deg);
+  animation: crackGrow3 1.8s ease forwards 1.2s;
+  box-shadow: 0 0 18px rgba(201, 162, 39, 0.35);
+}
+
+.shape-3::before,
+.shape-3::after {
+  content: '';
+  position: absolute;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  box-shadow: 0 0 10px rgba(201, 162, 39, 0.2);
+}
+
+.shape-3::before {
+  bottom: 25%;
+  left: 0;
+  height: 45px;
+  transform: rotate(55deg);
+  transform-origin: bottom center;
+}
+
+.shape-3::after {
+  bottom: 50%;
+  left: 0;
+  height: 35px;
+  transform: rotate(-45deg);
+  transform-origin: bottom center;
+}
+
+@keyframes fractureReveal {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes crackGrow1 {
+  from { height: 0; opacity: 0; }
+  to { height: 350px; opacity: 1; }
+}
+
+@keyframes crackGrow2 {
+  from { height: 0; opacity: 0; }
+  to { height: 200px; opacity: 0.8; }
+}
+
+@keyframes crackGrow3 {
+  from { height: 0; opacity: 0; }
+  to { height: 180px; opacity: 0.7; }
+}
+
+/* ========================================
+   MAIN CONTENT
+======================================== */
+.page {
+  position: relative;
+  z-index: 2;
+}
+
+/* ========================================
+   TOP NAV / CTA
+======================================== */
+.top-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 1.25rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(30, 35, 64, 0.97);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(201, 162, 39, 0.15);
+  opacity: 0;
+  animation: fadeIn 1s ease forwards 0.3s;
+}
+
+@media (max-width: 768px) {
+  .top-nav {
+    padding: 1rem 1.5rem;
+  }
+}
+
+.nav-logo {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--white);
+  letter-spacing: 0.03em;
+}
+
+.nav-cta {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.nav-status {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-weight: 500;
+}
+
+@media (max-width: 600px) {
+  .nav-status {
+    display: none;
+  }
+}
+
+.nav-status .pulse-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%, 100% { opacity: 0.6; box-shadow: 0 0 4px rgba(201, 162, 39, 0.3); }
+  50% { opacity: 1; box-shadow: 0 0 12px rgba(201, 162, 39, 0.6); }
+}
+
+.cta-button {
+  padding: 0.75rem 1.5rem;
+  background: transparent;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+}
+
+.cta-button:hover {
+  background: var(--gold);
+  color: var(--indigo-deep);
+}
+
+.cta-button:active {
+  transform: translateY(0);
+}
+
+/* ========================================
+   HERO - REVERENT TYPOGRAPHY
+======================================== */
+.hero {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 8rem 2rem 4rem;
+  position: relative;
+}
+
+.hero-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.edition-float {
+  position: absolute;
+  top: 2rem;
+  right: 3rem;
+  writing-mode: vertical-rl;
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-weight: 500;
+  opacity: 0;
+  animation: slideIn 1s ease forwards 0.5s;
+}
+
+.title-container {
+  position: relative;
+}
+
+.title-line {
+  overflow: hidden;
+  padding-bottom: 0.1em;
+}
+
+.title {
+  font-family: 'Shippori Mincho', serif;
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: 0.01em;
+}
+
+.title-1 {
+  font-size: clamp(5rem, 18vw, 15rem);
+  color: var(--indigo);
+  transform: translateY(100%);
+  animation: revealUp 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.2s;
+}
+
+.title-2 {
+  font-size: clamp(4.5rem, 16vw, 14rem);
+  font-style: italic;
+  color: var(--gold);
+  margin-left: 10%;
+  transform: translateY(100%);
+  animation: revealUp 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.4s;
+  text-shadow: 0 0 60px rgba(201, 162, 39, 0.2);
+}
+
+@keyframes revealUp {
+  to { transform: translateY(0); }
+}
+
+.tagline-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 3rem;
+  padding-right: 5%;
+}
+
+.tagline {
+  max-width: 420px;
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-size: clamp(1rem, 1.8vw, 1.15rem);
+  font-weight: 400;
+  line-height: 2;
+  color: var(--silver);
+  opacity: 0;
+  animation: fadeIn 1s ease forwards 0.8s;
+}
+
+.tagline strong {
+  font-weight: 500;
+  color: var(--indigo);
+  position: relative;
+}
+
+.tagline strong::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: right;
+  animation: underline 1s ease forwards 1.5s;
+}
+
+@keyframes underline {
+  to { transform: scaleX(1); transform-origin: left; }
+}
+
+.hero-cta-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 3rem;
+  padding-right: 5%;
+  opacity: 0;
+  animation: fadeIn 1s ease forwards 1s;
+}
+
+.hero-cta {
+  display: inline-block;
+  padding: 1rem 2.5rem;
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: var(--indigo);
+  color: var(--gold);
+  border: 1px solid var(--indigo);
+  transition: all 0.4s ease;
+}
+
+.hero-cta:hover {
+  background: var(--gold);
+  color: var(--indigo);
+  border-color: var(--gold);
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  opacity: 0;
+  animation: fadeIn 1s ease forwards 1.2s;
+}
+
+.scroll-line {
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  animation: scrollPulse 3s ease infinite;
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.8; transform: scaleY(1); }
+  50% { opacity: 0.3; transform: scaleY(0.85); }
+}
+
+/* ========================================
+   MOSAIC SECTION - QUIET GRID
+======================================== */
+.mosaic-section {
+  padding: 10rem 2rem;
+  background: var(--indigo-deep);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Gold seam accent - kintsugi reference */
+.mosaic-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 80px;
+  background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+}
+
+.mosaic-header {
+  text-align: center;
+  margin-bottom: 6rem;
+}
+
+.mosaic-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-weight: 500;
+}
+
+.mosaic-title {
+  font-family: 'Shippori Mincho', serif;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 500;
+  color: var(--white);
+  line-height: 1.3;
+}
+
+.mosaic-title em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.mosaic-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1px;
+  background: rgba(201, 162, 39, 0.1);
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.mosaic-tile {
+  background: var(--indigo-deep);
+  padding: 3.5rem 2.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+
+.mosaic-tile::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.mosaic-tile:hover::before {
+  opacity: 0.08;
+}
+
+.mosaic-tile:hover {
+  transform: translateY(-4px);
+  z-index: 10;
+}
+
+/* Gold seam on hover - kintsugi crack effect */
+.mosaic-tile::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.mosaic-tile:hover::after {
+  opacity: 0.6;
+}
+
+.tile-number {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 3.5rem;
+  font-weight: 400;
+  color: rgba(201, 162, 39, 0.06);
+  position: absolute;
+  top: 1.5rem;
+  right: 2rem;
+  line-height: 1;
+  transition: all 0.6s ease;
+}
+
+.mosaic-tile:hover .tile-number {
+  color: rgba(201, 162, 39, 0.15);
+}
+
+.tile-content {
+  position: relative;
+  z-index: 1;
+}
+
+.tile-author {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--white);
+  margin-bottom: 0.5rem;
+}
+
+.tile-essay {
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.02em;
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+}
+
+.tile-theme {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 0.4rem 1rem;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border: 1px solid rgba(201, 162, 39, 0.25);
+  color: rgba(201, 162, 39, 0.7);
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-weight: 500;
+  transition: all 0.4s ease;
+}
+
+.mosaic-tile:hover .tile-theme {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+/* ========================================
+   QUOTE - SPACE & REVERENCE
+======================================== */
+.quote-section {
+  min-height: 85vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8rem 2rem;
+  background: var(--snow);
+  position: relative;
+  overflow: hidden;
+}
+
+.quote-bg-text {
+  position: absolute;
+  font-family: 'Shippori Mincho', serif;
+  font-size: clamp(12rem, 35vw, 45rem);
+  font-weight: 500;
+  color: var(--gold);
+  opacity: 0.03;
+  user-select: none;
+  white-space: nowrap;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.quote-content {
+  max-width: 750px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.quote-mark {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 10rem;
+  font-weight: 400;
+  line-height: 0.5;
+  color: var(--gold);
+  opacity: 0.25;
+  margin-bottom: -1.5rem;
+}
+
+.quote-text {
+  font-family: 'Shippori Mincho', serif;
+  font-size: clamp(1.6rem, 3.5vw, 2.5rem);
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--indigo);
+  margin-bottom: 3rem;
+}
+
+.quote-author {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.quote-author-line {
+  width: 50px;
+  height: 1px;
+  background: var(--gold);
+}
+
+.quote-author-name {
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--silver);
+  letter-spacing: 0.03em;
+}
+
+/* ========================================
+   SIGNUP - ELEGANT SPLIT
+======================================== */
+.signup-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+}
+
+@media (max-width: 900px) {
+  .signup-section {
+    grid-template-columns: 1fr;
+  }
+}
+
+.signup-left {
+  background: var(--indigo);
+  padding: 6rem 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Gold seam accent */
+.signup-left::before {
+  content: '';
+  position: absolute;
+  top: 20%;
+  right: 0;
+  width: 1px;
+  height: 60%;
+  background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+  opacity: 0.4;
+}
+
+.signup-left::after {
+  content: 'MEND';
+  position: absolute;
+  font-family: 'Shippori Mincho', serif;
+  font-size: 18rem;
+  font-weight: 500;
+  color: rgba(201, 162, 39, 0.03);
+  bottom: -3rem;
+  left: -1rem;
+  line-height: 1;
+}
+
+.signup-left-content {
+  position: relative;
+  z-index: 1;
+}
+
+.signup-title {
+  font-family: 'Shippori Mincho', serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 500;
+  color: var(--white);
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+}
+
+.signup-title em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.signup-text {
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.9;
+  max-width: 380px;
+}
+
+.signup-right {
+  background: var(--white);
+  padding: 6rem 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.form-container {
+  max-width: 380px;
+}
+
+.form-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--silver);
+  margin-bottom: 2rem;
+  display: block;
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-weight: 500;
+}
+
+.email-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.email-form input[type="email"] {
+  width: 100%;
+  padding: 1.5rem 0;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--mist);
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: var(--indigo);
+  outline: none;
+  transition: border-color 0.4s ease;
+}
+
+.email-form input[type="email"]:focus {
+  border-color: var(--gold);
+}
+
+.email-form input[type="email"]::placeholder {
+  color: var(--silver);
+}
+
+.email-form button {
+  align-self: flex-start;
+  margin-top: 2rem;
+  padding: 1.25rem 3rem;
+  background: var(--indigo);
+  border: none;
+  color: var(--gold);
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+}
+
+.email-form button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: var(--gold);
+  transition: left 0.4s ease;
+}
+
+.email-form button:hover::before {
+  left: 0;
+}
+
+.email-form button:hover {
+  color: var(--indigo);
+}
+
+.email-form button span {
+  position: relative;
+  z-index: 1;
+}
+
+.form-stats {
+  display: flex;
+  gap: 3rem;
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--mist);
+}
+
+.stat-item {
+  text-align: left;
+}
+
+.stat-number {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 2.5rem;
+  font-weight: 500;
+  color: var(--indigo);
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--silver);
+  margin-top: 0.5rem;
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-weight: 500;
+}
+
+/* ========================================
+   FOOTER - REFINED
+======================================== */
+footer {
+  padding: 4rem 3rem;
+  background: var(--indigo-deep);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  border-top: 1px solid rgba(201, 162, 39, 0.1);
+}
+
+.footer-logo {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--white);
+}
+
+.footer-links {
+  display: flex;
+  gap: 3rem;
+}
+
+.footer-link {
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+  text-decoration: none;
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+  color: var(--gold);
+}
+
+.footer-copy {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.25);
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+}
+
+/* ========================================
+   ANIMATIONS
+======================================== */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* Success state */
+.email-form.success input[type="email"] {
+  border-color: #22C55E;
+}
+
+.email-form.success button {
+  background: #22C55E;
+  color: var(--white);
+}
+
+.email-form.success button::before {
+  display: none;
+}
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+@media (max-width: 768px) {
+  .edition-float {
+    position: static;
+    writing-mode: horizontal-tb;
+    margin-bottom: 2rem;
+  }
+
+  .tagline-container {
+    justify-content: flex-start;
+    padding-right: 0;
+  }
+
+  .hero-cta-container {
+    justify-content: flex-start;
+    padding-right: 0;
+  }
+
+  .signup-left, .signup-right {
+    padding: 4rem 2rem;
+  }
+
+  .form-stats {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  footer {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer-links {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}

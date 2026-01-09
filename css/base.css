@@ -149,6 +149,14 @@ a.nav-logo {
   background: linear-gradient(135deg, #6c5ce7, #74b9ff);
 }
 
+.theme-menu button[data-theme="visceral"] .theme-dot {
+  background: linear-gradient(135deg, #8b2942, #e8c4c4);
+}
+
+.theme-menu button[data-theme="kintsugi"] .theme-dot {
+  background: linear-gradient(135deg, #1e2340, #c9a227);
+}
+
 /* ========================================
    NETWORK CANVAS (hidden by default)
    ======================================== */

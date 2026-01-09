@@ -8,7 +8,9 @@ const ThemeSwitcher = {
     { id: 'editorial', name: 'Editorial', file: 'css/theme-editorial.css' },
     { id: 'minimal', name: 'Minimal', file: 'css/theme-minimal.css' },
     { id: 'brutalist', name: 'Brutalist', file: 'css/theme-brutalist.css' },
-    { id: 'neural', name: 'Neural', file: 'css/theme-neural.css' }
+    { id: 'neural', name: 'Neural', file: 'css/theme-neural.css' },
+    { id: 'visceral', name: 'Visceral', file: 'css/theme-visceral.css' },
+    { id: 'kintsugi', name: 'Kintsugi', file: 'css/theme-kintsugi.css' }
   ],
 
   currentTheme: 'editorial',
