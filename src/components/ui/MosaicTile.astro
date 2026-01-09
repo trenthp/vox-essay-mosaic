@@ -1,0 +1,26 @@
+---
+interface Props {
+  number: string;
+  name: string;
+  essayTitle: string;
+  theme: string;
+  href?: string;
+  isPlaceholder?: boolean;
+}
+
+const { number, name, essayTitle, theme, href, isPlaceholder = false } = Astro.props;
+const Tag = href && !isPlaceholder ? 'a' : 'div';
+---
+
+<Tag
+  href={href}
+  class="mosaic-tile"
+  tabindex={isPlaceholder ? undefined : 0}
+>
+  <span class="tile-number">{number}</span>
+  <div class="tile-content">
+    <h3 class="tile-author">{name}</h3>
+    <p class="tile-essay">{isPlaceholder ? essayTitle : `"${essayTitle}"`}</p>
+    <span class="tile-theme">{theme}</span>
+  </div>
+</Tag>

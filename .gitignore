@@ -1,1 +1,33 @@
+# Claude
 .claude/skills/
+
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+.vercel/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Astro
+.astro/
+
+# Debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Temporary files
+*.tmp
+*.temp

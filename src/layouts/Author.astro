@@ -1,0 +1,88 @@
+---
+import Base from './Base.astro';
+import '@/styles/author.css';
+import EmailForm from '@/components/ui/EmailForm.astro';
+
+interface Props {
+  name: string;
+  number: string;
+  essayTitle: string;
+  theme: string;
+  bio: string;
+  excerpt: string;
+  teaser: string;
+  image?: string;
+}
+
+const { name, number, essayTitle, theme, bio, excerpt, teaser, image } = Astro.props;
+---
+
+<Base title={name} description={`${name}'s essay "${essayTitle}" in Vox Mosaic Edition One`}>
+  <!-- Back Link -->
+  <a href="/#authors" class="back-link">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M19 12H5M12 19l-7-7 7-7"/>
+    </svg>
+    Back to Authors
+  </a>
+
+  <!-- Author Hero -->
+  <section class="author-hero">
+    <div class="author-hero-inner">
+      <div class="author-image-container">
+        <span class="author-number">{number}</span>
+        <div class="author-image">
+          {image ? (
+            <img src={image} alt={name} />
+          ) : (
+            <span class="author-image-placeholder">{name.charAt(0)}</span>
+          )}
+        </div>
+      </div>
+
+      <div class="author-info">
+        <p class="author-label">Contributor</p>
+        <h1 class="author-name">{name}</h1>
+        <p class="author-essay-title">"{essayTitle}"</p>
+        <p class="author-bio">{bio}</p>
+        <span class="author-theme-tag">{theme}</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Essay Preview -->
+  <section class="essay-preview">
+    <div class="essay-preview-inner">
+      <p class="essay-preview-label">From the Essay</p>
+      <p class="essay-excerpt" set:html={excerpt} />
+      <p class="essay-teaser">{teaser}</p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="author-cta">
+    <div class="author-cta-inner">
+      <h2 class="author-cta-title">Read the <em>full essay</em></h2>
+      <p class="author-cta-text">Join our list and be the first to read "{essayTitle}" when Edition One launches.</p>
+      <EmailForm variant="dark" />
+    </div>
+  </section>
+
+  <!-- Discover More -->
+  <section class="discover-authors">
+    <div class="discover-authors-inner">
+      <p class="discover-label">Edition One</p>
+      <h2 class="discover-title">Discover all <em>twenty voices</em></h2>
+      <p class="discover-text">
+        Each contributor brings a unique perspective on transformation.
+        Explore the full collection.
+      </p>
+      <a href="/#authors" class="discover-link">
+        View All Authors
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+    </div>
+  </section>
+</Base>

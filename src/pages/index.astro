@@ -1,0 +1,104 @@
+---
+import Base from '@/layouts/Base.astro';
+import MosaicTile from '@/components/ui/MosaicTile.astro';
+import EmailForm from '@/components/ui/EmailForm.astro';
+import { getCollection } from 'astro:content';
+
+const authors = await getCollection('authors', ({ data }) => data.published);
+const sortedAuthors = authors.sort((a, b) =>
+  parseInt(a.data.number) - parseInt(b.data.number)
+);
+---
+
+<Base title="Vox Essay Mosaic" currentPage="home">
+  <!-- Hero -->
+  <section class="hero hero--mesh">
+    <div class="hero-inner">
+      <div class="title-container">
+        <div class="title-line">
+          <h1 class="title title-1">Vox</h1>
+        </div>
+        <div class="title-line">
+          <h1 class="title title-2">Mosaic</h1>
+        </div>
+      </div>
+
+      <div class="tagline-container">
+        <p class="tagline">
+          Twenty voices. One mosaic. Essays on the moments that
+          <strong>break us open</strong> and remake us whole.
+        </p>
+      </div>
+
+      <div class="hero-cta-container">
+        <a href="#signup" class="hero-cta">Get Early Access</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mosaic Grid -->
+  <section class="mosaic-section" id="authors">
+    <div class="mosaic-header">
+      <p class="mosaic-label">The Voices</p>
+      <h2 class="mosaic-title">Twenty stories.<br><em>One becoming.</em></h2>
+    </div>
+
+    <div class="mosaic-grid">
+      {sortedAuthors.map((author) => (
+        <MosaicTile
+          number={author.data.number}
+          name={author.data.name}
+          essayTitle={author.data.essayTitle}
+          theme={author.data.theme}
+          href={`/authors/${author.id}`}
+        />
+      ))}
+
+      {/* Placeholder for remaining spots */}
+      {sortedAuthors.length < 20 && (
+        <MosaicTile
+          number={String(sortedAuthors.length + 1).padStart(2, '0')}
+          name={`+ ${20 - sortedAuthors.length} more`}
+          essayTitle="voices yet to be revealed"
+          theme="Coming Soon"
+          isPlaceholder={true}
+        />
+      )}
+    </div>
+  </section>
+
+  <!-- Quote -->
+  <section class="quote-section">
+    <div class="quote-content">
+      <div class="quote-mark">"</div>
+      <p class="quote-text">
+        I left everything I knew at thirty-two. Not because I was brave,
+        but because staying had become more terrifying than the unknown.
+      </p>
+      <div class="quote-author">
+        <div class="quote-author-line"></div>
+        <span class="quote-author-name">Elena Ruiz, from "The Weight of Suitcases"</span>
+        <div class="quote-author-line"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Signup -->
+  <section class="signup-section" id="signup">
+    <div class="signup-left">
+      <div class="signup-left-content">
+        <h2 class="signup-title">
+          Be among<br>the <em>first</em>
+        </h2>
+        <p class="signup-text">
+          Early access. Behind-the-scenes. Exclusive previews
+          before anyone else sees them.
+        </p>
+      </div>
+    </div>
+
+    <div class="signup-right">
+      <EmailForm />
+    </div>
+  </section>
+</Base>

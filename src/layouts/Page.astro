@@ -1,0 +1,25 @@
+---
+import Base from './Base.astro';
+import '@/styles/pages.css';
+
+interface Props {
+  title: string;
+  label?: string;
+  description?: string;
+  currentPage?: string;
+}
+
+const { title, label, description, currentPage } = Astro.props;
+---
+
+<Base title={title} description={description} currentPage={currentPage}>
+  <!-- Page Header -->
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      {label && <p class="page-label">{label}</p>}
+      <h1 class="page-title" set:html={title} />
+    </div>
+  </section>
+
+  <slot />
+</Base>

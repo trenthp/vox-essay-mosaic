@@ -1,0 +1,30 @@
+---
+interface Props {
+  currentPage?: string;
+}
+
+const { currentPage = "" } = Astro.props;
+
+const links = [
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
+  { href: "/submit", label: "Submit" },
+  { href: "/contact", label: "Contact" }
+];
+---
+
+<footer>
+  <div class="footer-logo">Vox Essay Mosaic</div>
+  <nav class="footer-links">
+    {links.map(link => (
+      <a
+        href={link.href}
+        class="footer-link"
+        aria-current={currentPage === link.label.toLowerCase() ? "page" : undefined}
+      >
+        {link.label}
+      </a>
+    ))}
+  </nav>
+  <div class="footer-copy">&copy; 2026</div>
+</footer>

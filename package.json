@@ -1,0 +1,27 @@
+{
+  "name": "vox-essay-mosaic",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "A quarterly personal essay publication featuring 20 curated voices",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/trenthp/vox-essay-mosaic.git"
+  },
+  "keywords": ["essays", "literary", "publication"],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/trenthp/vox-essay-mosaic/issues"
+  },
+  "homepage": "https://github.com/trenthp/vox-essay-mosaic#readme",
+  "dependencies": {
+    "@astrojs/vercel": "^9.0.3",
+    "astro": "^5.16.8"
+  }
+}

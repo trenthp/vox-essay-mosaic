@@ -1,0 +1,73 @@
+---
+/**
+ * Analytics Component
+ *
+ * Pluggable analytics integration. Currently configured for Umami.
+ * To enable:
+ * 1. Deploy Umami instance (Railway/Vercel)
+ * 2. Set environment variables:
+ *    - UMAMI_SCRIPT_URL: Your Umami script URL
+ *    - UMAMI_WEBSITE_ID: Your website ID from Umami
+ */
+
+const umamiScriptUrl = import.meta.env.UMAMI_SCRIPT_URL;
+const umamiWebsiteId = import.meta.env.UMAMI_WEBSITE_ID;
+const isEnabled = umamiScriptUrl && umamiWebsiteId;
+---
+
+{isEnabled && (
+  <>
+    <script
+      defer
+      src={umamiScriptUrl}
+      data-website-id={umamiWebsiteId}
+      data-domains="voxmosaic.com"
+    />
+    <!-- Umami Kit for scroll depth tracking -->
+    <script is:inline>
+      window.addEventListener('load', function() {
+        if (window.umami) {
+          // Custom scroll depth tracking
+          const thresholds = [25, 50, 75, 100];
+          const triggered = new Set();
+
+          function getScrollPercentage() {
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight;
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const trackLength = documentHeight - windowHeight;
+            return Math.round((scrollTop / trackLength) * 100);
+          }
+
+          function checkScrollDepth() {
+            const scrollPercentage = getScrollPercentage();
+            thresholds.forEach(threshold => {
+              if (scrollPercentage >= threshold && !triggered.has(threshold)) {
+                triggered.add(threshold);
+                window.umami.track('scroll-depth', { depth: threshold + '%' });
+              }
+            });
+          }
+
+          let ticking = false;
+          window.addEventListener('scroll', () => {
+            if (!ticking) {
+              window.requestAnimationFrame(() => {
+                checkScrollDepth();
+                ticking = false;
+              });
+              ticking = true;
+            }
+          }, { passive: true });
+        }
+      });
+    </script>
+  </>
+)}
+
+<!-- Development placeholder when analytics not configured -->
+{!isEnabled && import.meta.env.DEV && (
+  <script is:inline>
+    console.log('[Analytics] Not configured. Set UMAMI_SCRIPT_URL and UMAMI_WEBSITE_ID environment variables.');
+  </script>
+)}

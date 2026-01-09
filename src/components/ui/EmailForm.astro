@@ -1,0 +1,151 @@
+---
+/**
+ * Email Signup Form Component
+ *
+ * Pluggable email service integration.
+ * Configure via environment variables:
+ *   - EMAIL_SERVICE: 'buttondown' | 'convertkit' | 'mailchimp' | 'resend'
+ *   - EMAIL_FORM_ACTION: The form action URL from your email service
+ *
+ * For Buttondown: EMAIL_FORM_ACTION=https://buttondown.com/api/emails/embed-subscribe/YOUR_USERNAME
+ * For ConvertKit: EMAIL_FORM_ACTION=https://app.convertkit.com/forms/FORM_ID/subscriptions
+ */
+
+interface Props {
+  variant?: 'light' | 'dark';
+  label?: string;
+  buttonText?: string;
+}
+
+const {
+  variant = 'light',
+  label = 'Join the List',
+  buttonText = 'Count Me In'
+} = Astro.props;
+
+const formAction = import.meta.env.EMAIL_FORM_ACTION || '#';
+const emailService = import.meta.env.EMAIL_SERVICE || 'none';
+const isConfigured = formAction !== '#';
+---
+
+<div class="form-container">
+  {variant === 'light' && label && (
+    <label class="form-label">{label}</label>
+  )}
+
+  <form
+    class="email-form"
+    class:list={[{ 'author-cta-form': variant === 'dark' }]}
+    data-email-form
+    action={formAction}
+    method="POST"
+  >
+    {/* Hidden fields for various email services */}
+    {emailService === 'buttondown' && (
+      <input type="hidden" name="embed" value="1" />
+    )}
+
+    <input
+      type="email"
+      name="email"
+      placeholder="your@email.com"
+      required
+      aria-label="Email address"
+    />
+    <button type="submit">
+      <span>{buttonText}</span>
+    </button>
+  </form>
+
+  {variant === 'light' && (
+    <div class="form-stats">
+      <div class="stat-item">
+        <div class="stat-number">20</div>
+        <div class="stat-label">Essays</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">2</div>
+        <div class="stat-label">Formats</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">1</div>
+        <div class="stat-label">Theme</div>
+      </div>
+    </div>
+  )}
+</div>
+
+<script>
+  // Form handling with fallback for unconfigured state
+  document.querySelectorAll('[data-email-form]').forEach((form) => {
+    form.addEventListener('submit', async function(e) {
+      const formEl = e.target as HTMLFormElement;
+      const action = formEl.getAttribute('action');
+
+      // If not configured, show success state but log warning
+      if (action === '#') {
+        e.preventDefault();
+        const email = (formEl.querySelector('input[type="email"]') as HTMLInputElement)?.value;
+        const button = formEl.querySelector('button span') as HTMLElement;
+        const originalText = button?.textContent || '';
+
+        formEl.classList.add('success');
+        if (button) button.textContent = "You're in!";
+
+        console.warn('[Email Form] Not configured. Email would be:', email);
+        console.info('[Email Form] Set EMAIL_FORM_ACTION environment variable to enable.');
+
+        setTimeout(() => {
+          formEl.classList.remove('success');
+          if (button) button.textContent = originalText;
+          formEl.reset();
+        }, 3000);
+
+        return;
+      }
+
+      // For configured services, let the form submit normally
+      // or handle via fetch for better UX
+      e.preventDefault();
+
+      const button = formEl.querySelector('button span') as HTMLElement;
+      const originalText = button?.textContent || '';
+      if (button) button.textContent = 'Sending...';
+
+      try {
+        const formData = new FormData(formEl);
+        const response = await fetch(action, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+
+        if (response.ok) {
+          formEl.classList.add('success');
+          if (button) button.textContent = "You're in!";
+
+          // Track signup event
+          if (typeof window !== 'undefined' && (window as any).umami) {
+            (window as any).umami.track('email-signup');
+          }
+
+          setTimeout(() => {
+            formEl.classList.remove('success');
+            if (button) button.textContent = originalText;
+            formEl.reset();
+          }, 3000);
+        } else {
+          throw new Error('Signup failed');
+        }
+      } catch (error) {
+        console.error('[Email Form] Error:', error);
+        if (button) button.textContent = 'Try again';
+        setTimeout(() => {
+          if (button) button.textContent = originalText;
+        }, 2000);
+      }
+    });
+  });
+</script>

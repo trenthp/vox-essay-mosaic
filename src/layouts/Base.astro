@@ -1,0 +1,96 @@
+---
+import '@/styles/base.css';
+import '@/styles/styles.css';
+import Nav from '@/components/layout/Nav.astro';
+import Footer from '@/components/layout/Footer.astro';
+import Analytics from '@/components/Analytics.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+  currentPage?: string;
+}
+
+const {
+  title,
+  description = "A quarterly personal essay publication featuring 20 curated voices on transformation.",
+  ogImage = "/og-image.jpg",
+  currentPage = ""
+} = Astro.props;
+
+const siteTitle = title === "Vox Essay Mosaic" ? title : `${title} — Vox Essay Mosaic`;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{siteTitle}</title>
+  <meta name="description" content={description}>
+
+  <!-- Open Graph -->
+  <meta property="og:title" content={siteTitle}>
+  <meta property="og:description" content={description}>
+  <meta property="og:image" content={ogImage}>
+  <meta property="og:type" content="website">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content={siteTitle}>
+  <meta name="twitter:description" content={description}>
+  <meta name="twitter:image" content={ogImage}>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Analytics -->
+  <Analytics />
+</head>
+<body>
+  <!-- Decorative elements (hidden from screen readers) -->
+  <div class="cursor-dot" id="cursor" aria-hidden="true"></div>
+
+  <div class="page">
+    <Nav currentPage={currentPage} />
+
+    <slot />
+
+    <Footer currentPage={currentPage} />
+  </div>
+
+  <script>
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Intersection observer for tile animations
+    const tiles = document.querySelectorAll('.mosaic-tile');
+
+    if (tiles.length > 0 && !prefersReducedMotion) {
+      const observerOptions = {
+        threshold: 0.2,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      tiles.forEach((tile, index) => {
+        (tile as HTMLElement).style.transitionDelay = `${index * 0.1}s`;
+        observer.observe(tile);
+      });
+    }
+  </script>
+</body>
+</html>

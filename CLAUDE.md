@@ -8,56 +8,113 @@ Vox Essay Mosaic is a static website for a personal essay publication that relea
 
 ## Development
 
-This is a vanilla HTML/CSS/JS project with no build tools or package manager. To develop:
+This is an Astro project deployed to Vercel.
 
-1. Open any HTML file directly in a browser
-2. Use a local server for development (e.g., `python -m http.server` or VS Code Live Server)
+```bash
+npm install        # Install dependencies
+npm run dev        # Start dev server (localhost:4321)
+npm run build      # Build for production
+npm run preview    # Preview production build
+```
 
 ## Architecture
 
-### CSS Structure (load order matters)
+### Project Structure
 
-1. **`css/base.css`** - Resets, reduced-motion preferences, link resets
-2. **`css/styles.css`** - Main styles with CSS custom properties for theming:
-   - Color palette via `--gray-*` variables
-   - Neumorphic shadow system (`--neu-outset`, `--neu-inset`, `--neu-flat`, `--neu-subtle`)
-   - All interactive elements use these shadow variables for pressed/unpressed states
-3. **`css/pages.css`** - Shared styles for content pages (about, contact, submit, faq)
-4. **`css/author.css`** - Author profile page specific styles
+```
+src/
+├── components/
+│   ├── layout/          # Nav.astro, Footer.astro
+│   ├── ui/              # EmailForm.astro, MosaicTile.astro
+│   └── Analytics.astro  # Pluggable Umami integration
+├── content/
+│   ├── authors/         # Markdown files for each author
+│   ├── essays/          # Essay content (future)
+│   └── editions/        # Edition metadata
+├── layouts/
+│   ├── Base.astro       # Root layout with head, nav, footer
+│   ├── Page.astro       # Content pages (about, faq, etc.)
+│   └── Author.astro     # Author profile pages
+├── lib/                 # Utility functions
+├── pages/               # File-based routing
+│   ├── index.astro
+│   ├── about.astro
+│   ├── submit.astro
+│   ├── faq.astro
+│   ├── author-faq.astro
+│   ├── contact.astro
+│   └── authors/[...slug].astro
+└── styles/              # CSS files
+    ├── base.css
+    ├── styles.css
+    ├── pages.css
+    └── author.css
+```
 
-### JavaScript (`js/main.js`)
+### Content Collections
 
-Single file handling:
-- Parallax effect on floating words (disabled for `prefers-reduced-motion`)
-- Email form submission with success state
-- Intersection Observer for mosaic tile reveal animations
+Authors, essays, and editions are managed via Astro content collections. Schema defined in `src/content.config.ts`.
 
-### Page Types
+**Adding an author:**
+```markdown
+<!-- src/content/authors/name-slug.md -->
+---
+name: "Author Name"
+number: "01"
+essayTitle: "Essay Title"
+theme: "Theme Tag"
+bio: "Author bio text..."
+excerpt: "Opening excerpt from essay..."
+teaser: "Description of the essay..."
+edition: edition-one
+published: true
+---
+```
 
-- **`index.html`** - Home/landing with hero, author mosaic grid, quote, and signup
-- **`author.html`** - Individual author profile template
-- **`about.html`, `submit.html`, `faq.html`, `contact.html`** - Content pages using `pages.css`
-- **`author-faq.html`** - FAQ specific to contributors
+### CSS Structure
+
+1. **`styles/base.css`** - Resets, reduced-motion preferences
+2. **`styles/styles.css`** - Main styles, neumorphic system, components
+3. **`styles/pages.css`** - Content page styles
+4. **`styles/author.css`** - Author profile styles
 
 ### Design System
 
 - Font: Inter (Google Fonts) with weights 300, 400, 500, 600
-- Minimal grayscale palette with black as the only accent color
+- Minimal grayscale palette with black as accent
 
 **Shadow system (interactive elements only):**
-- Neumorphic shadows (`--neu-outset`, `--neu-inset`) are ONLY for functional/pressable elements
-- Buttons toggle between `--neu-outset` (raised) and `--neu-inset` (pressed) on hover
-- Form inputs use `--neu-inset` to indicate "pressable" input area
-- Never apply neumorphic shadows to decorative or informational elements
-
-**Grid pattern (non-interactive content):**
-- `--grid-pattern` CSS variable defines a subtle 80px grid
-- `.grid-pattern` utility class applies grid to any container
-- Used on content areas that need visual interest without implying interactivity (e.g., quote section)
+- `--neu-outset`: Raised/unpressed state
+- `--neu-inset`: Pressed state
+- Only apply to buttons, form inputs, interactive tiles
 
 **Non-interactive elements:**
-- Use subtle borders (`border: 1px solid var(--gray-200)`) instead of shadows
-- Examples: stat cards, feature items, theme tags, informational badges
+- Use borders (`border: 1px solid var(--gray-200)`) instead of shadows
+
+## Environment Variables
+
+Copy `.env.example` to `.env` and configure:
+
+```bash
+# Analytics (Umami)
+UMAMI_SCRIPT_URL=https://your-umami.com/script.js
+UMAMI_WEBSITE_ID=your-website-id
+
+# Email Service
+EMAIL_SERVICE=buttondown
+EMAIL_FORM_ACTION=https://buttondown.com/api/emails/embed-subscribe/USERNAME
+```
+
+## External Services
+
+| Service | Purpose | Status |
+|---------|---------|--------|
+| **Umami** | Analytics with scroll depth | Configure via env vars |
+| **Buttondown/ConvertKit** | Email signups | Configure via env vars |
+| **Tally** | Submission forms | Embed in submit page |
+| **n8n** | Automation (Tally → Notion) | Self-hosted on Railway |
+| **Notion** | Submission tracking | Database for pipeline |
+| **Vercel** | Hosting | Auto-deploy from main |
 
 ## Documentation
 

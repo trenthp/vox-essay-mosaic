@@ -1,0 +1,62 @@
+---
+import Page from '@/layouts/Page.astro';
+---
+
+<Page
+  title="Get in<br><em>touch</em>"
+  label="Contact"
+  description="Contact Vox Essay Mosaic for submissions, press inquiries, or general questions."
+  currentPage="contact"
+>
+  <section class="content-section">
+    <div class="content-inner">
+      <div class="content-block">
+        <p class="lead-text">
+          We'd love to hear from you. Whether you have questions about submissions,
+          want to collaborate, or just want to say hello.
+        </p>
+
+        <div class="contact-grid">
+          <div class="contact-card">
+            <h3 class="contact-card-title">Submissions</h3>
+            <a href="mailto:submit@voxmosaic.com" class="contact-email">submit@voxmosaic.com</a>
+            <p>For essay submissions and contributor questions</p>
+          </div>
+
+          <div class="contact-card">
+            <h3 class="contact-card-title">General</h3>
+            <a href="mailto:hello@voxmosaic.com" class="contact-email">hello@voxmosaic.com</a>
+            <p>For everything else—partnerships, feedback, or just to say hi</p>
+          </div>
+
+          <div class="contact-card">
+            <h3 class="contact-card-title">Press</h3>
+            <a href="mailto:press@voxmosaic.com" class="contact-email">press@voxmosaic.com</a>
+            <p>For media inquiries and interview requests</p>
+          </div>
+        </div>
+
+        <div class="response-note">
+          <p>
+            We read every message and aim to respond within 48 hours. For submission-related
+            questions, please check our <a href="/faq">FAQ</a> first—your answer might already be there.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="page-cta">
+    <div class="page-cta-inner">
+      <h2 class="page-cta-title">Ready to submit?</h2>
+      <p class="page-cta-text">
+        We're accepting essays for Edition One now.
+      </p>
+      <div class="page-cta-buttons">
+        <a href="/submit" class="btn-primary">Submit Your Essay</a>
+        <a href="/#signup" class="btn-secondary">Join the List</a>
+      </div>
+    </div>
+  </section>
+</Page>

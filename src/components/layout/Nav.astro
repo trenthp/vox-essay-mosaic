@@ -1,0 +1,18 @@
+---
+interface Props {
+  currentPage?: string;
+}
+
+const { currentPage = "" } = Astro.props;
+---
+
+<nav class="top-nav">
+  <a href="/" class="nav-logo">Vox Mosaic</a>
+  <div class="nav-cta">
+    <div class="nav-status">
+      <span class="pulse-dot"></span>
+      First Edition 2026
+    </div>
+    <a href="/#signup" class="cta-button">Get Early Access</a>
+  </div>
+</nav>
