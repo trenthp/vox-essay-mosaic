@@ -79,21 +79,33 @@ import Page from '@/layouts/Page.astro';
       </div>
 
       <div class="content-block">
-        <h2 class="section-title">How to submit</h2>
-        <p>
-          We use Tally for submissions. Click the button below to access our submission form.
-          You'll need to provide your essay (as a document upload or Google Doc link), a brief bio,
-          and a headshot.
-        </p>
+        <h2 class="section-title">Submit your essay</h2>
 
-        <div class="submit-email-highlight">
-          <p>Ready to share your story?</p>
-          <a href="#" id="submit-button">Open Submission Form</a>
+        <div class="tally-embed-container">
+          <div class="tally-loading" id="tally-loading">
+            <p>Loading submission form...</p>
+          </div>
+          <iframe
+            data-tally-src="https://tally.so/embed/Ekdpzr?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+            loading="lazy"
+            width="100%"
+            height="500"
+            frameborder="0"
+            marginheight="0"
+            marginwidth="0"
+            title="Vox Mosaic Essay Submission Form"
+            aria-label="Essay submission form for Edition One: Transformation"
+          ></iframe>
+          <noscript>
+            <div class="tally-fallback">
+              <p>JavaScript is required to load the form.</p>
+              <a href="https://tally.so/r/Ekdpzr" target="_blank" rel="noopener" class="btn-primary">Open Form in New Tab</a>
+            </div>
+          </noscript>
         </div>
 
-        <p>
-          Questions about the submission process? Check out our <a href="/faq">FAQ</a> or
-          <a href="/contact">get in touch</a>.
+        <p class="form-fallback-text">
+          Having trouble? <a href="https://tally.so/r/Ekdpzr" target="_blank" rel="noopener">Open form in new tab</a> or check our <a href="/faq">FAQ</a>.
         </p>
       </div>
 
@@ -134,4 +146,49 @@ import Page from '@/layouts/Page.astro';
       </div>
     </div>
   </section>
+
+  <script>
+    // Tally embed loader
+    var d = document,
+      w = "https://tally.so/widgets/embed.js",
+      v = function () {
+        if (typeof Tally !== "undefined") {
+          Tally.loadEmbeds();
+          // Hide loading state once Tally is ready
+          var loading = d.getElementById("tally-loading");
+          if (loading) loading.style.display = "none";
+        } else {
+          d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach(
+            function (e) {
+              e.src = e.dataset.tallySrc;
+            }
+          );
+        }
+      };
+    if (typeof Tally !== "undefined") {
+      v();
+    } else if (d.querySelector('script[src="' + w + '"]') == null) {
+      var s = d.createElement("script");
+      s.src = w;
+      s.onload = v;
+      s.onerror = function () {
+        // Show fallback on error
+        var loading = d.getElementById("tally-loading");
+        if (loading) {
+          loading.innerHTML =
+            '<p>Form failed to load. <a href="https://tally.so/r/Ekdpzr" target="_blank" rel="noopener">Open form in new tab</a></p>';
+        }
+      };
+      d.body.appendChild(s);
+    }
+
+    // Hide loading once iframe loads
+    var iframe = d.querySelector('iframe[data-tally-src]');
+    if (iframe) {
+      iframe.addEventListener("load", function () {
+        var loading = d.getElementById("tally-loading");
+        if (loading) loading.style.display = "none";
+      });
+    }
+  </script>
 </Page>
