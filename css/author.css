@@ -44,7 +44,7 @@
   align-items: center;
   justify-content: center;
   background: linear-gradient(135deg, var(--gray-800) 0%, var(--gray-600) 100%);
-  box-shadow: var(--neu-outset);
+  border: 2px solid var(--gray-300);
 }
 
 .author-image-placeholder {
@@ -117,9 +117,8 @@
   text-transform: uppercase;
   color: var(--gray-600);
   background: var(--gray-100);
-  border: none;
+  border: 1px solid var(--gray-200);
   border-radius: 20px;
-  box-shadow: var(--neu-flat);
 }
 
 /* Essay Preview */

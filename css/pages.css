@@ -108,7 +108,7 @@
   padding: 1.5rem;
   background: var(--gray-100);
   border-radius: 12px;
-  box-shadow: var(--neu-flat);
+  border: 1px solid var(--gray-200);
 }
 
 .feature-title {
@@ -229,7 +229,7 @@
   padding: 2rem;
   background: var(--gray-100);
   border-radius: 16px;
-  box-shadow: var(--neu-outset);
+  border: 1px solid var(--gray-200);
 }
 
 .contact-card-title {
@@ -284,7 +284,7 @@
   padding: 2rem;
   background: var(--gray-100);
   border-radius: 16px;
-  box-shadow: var(--neu-flat);
+  border: 1px solid var(--gray-200);
   margin: 2rem 0;
 }
 
@@ -318,7 +318,7 @@
   border-radius: 20px;
   font-size: 0.8rem;
   color: var(--gray-700);
-  box-shadow: var(--neu-flat);
+  border: 1px solid var(--gray-200);
 }
 
 .requirements-list {
