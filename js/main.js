@@ -1,50 +1,38 @@
 /* ========================================
    MAIN.JS
-   Shared functionality across all themes
+   Shared functionality - optimized
    ======================================== */
 
-// Custom cursor
-const cursor = document.getElementById('cursor');
-let mouseX = 0, mouseY = 0;
-let cursorX = 0, cursorY = 0;
-
-document.addEventListener('mousemove', (e) => {
-  mouseX = e.clientX;
-  mouseY = e.clientY;
-});
-
-function animateCursor() {
-  cursorX += (mouseX - cursorX) * 0.15;
-  cursorY += (mouseY - cursorY) * 0.15;
-  if (cursor) {
-    cursor.style.left = cursorX - 4 + 'px';
-    cursor.style.top = cursorY - 4 + 'px';
-  }
-  requestAnimationFrame(animateCursor);
-}
-animateCursor();
-
-// Floating words parallax
+// Only run parallax if floating words exist and reduced motion not preferred
 const floatWords = document.querySelectorAll('.float-word');
-document.addEventListener('mousemove', (e) => {
-  const x = e.clientX / window.innerWidth - 0.5;
-  const y = e.clientY / window.innerHeight - 0.5;
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  floatWords.forEach((word, i) => {
-    const speed = (i + 1) * 8;
-    const currentRotation = word.dataset.rotation || '0deg';
-    word.style.transform = `translate(${x * speed}px, ${y * speed}px) rotate(${currentRotation})`;
+if (floatWords.length > 0 && !prefersReducedMotion) {
+  let mouseX = 0, mouseY = 0;
+
+  // Store original rotations
+  floatWords.forEach((word) => {
+    const match = word.style.transform?.match(/rotate\(([^)]+)\)/);
+    if (match) {
+      word.dataset.rotation = match[1];
+    }
   });
-});
 
-// Store original rotations for floating words
-floatWords.forEach((word) => {
-  const transform = window.getComputedStyle(word).transform;
-  const match = word.style.transform?.match(/rotate\(([^)]+)\)/);
-  if (match) {
-    word.dataset.rotation = match[1];
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX / window.innerWidth - 0.5;
+    mouseY = e.clientY / window.innerHeight - 0.5;
+  }, { passive: true });
+
+  function updateParallax() {
+    floatWords.forEach((word, i) => {
+      const speed = (i + 1) * 8;
+      const currentRotation = word.dataset.rotation || '0deg';
+      word.style.transform = `translate(${mouseX * speed}px, ${mouseY * speed}px) rotate(${currentRotation})`;
+    });
+    requestAnimationFrame(updateParallax);
   }
-});
+  updateParallax();
+}
 
 // Form handling
 const form = document.getElementById('emailForm');
@@ -68,23 +56,26 @@ if (form) {
   });
 }
 
-// Intersection observer for animations
-const observerOptions = {
-  threshold: 0.2
-};
+// Intersection observer for tile animations
+const tiles = document.querySelectorAll('.mosaic-tile');
 
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.style.opacity = '1';
-      entry.target.style.transform = 'translateY(0)';
-    }
+if (tiles.length > 0 && !prefersReducedMotion) {
+  const observerOptions = {
+    threshold: 0.2,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  tiles.forEach((tile, index) => {
+    tile.style.transitionDelay = `${index * 0.1}s`;
+    observer.observe(tile);
   });
-}, observerOptions);
-
-document.querySelectorAll('.mosaic-tile').forEach(tile => {
-  tile.style.opacity = '0';
-  tile.style.transform = 'translateY(30px)';
-  tile.style.transition = 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
-  observer.observe(tile);
-});
+}

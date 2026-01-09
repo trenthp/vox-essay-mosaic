@@ -1,21 +1,32 @@
 /* ========================================
-   THEME: MINIMAL
-   Clean, stark, high-contrast design
+   VOX MOSAIC - MAIN STYLES
+   Neumorphic design with minimal palette
    ======================================== */
 
 :root {
-  --black: #000000;
+  /* Minimal color palette */
+  --black: #0a0a0a;
   --white: #ffffff;
+  --gray-50: #fafafa;
   --gray-100: #f5f5f5;
   --gray-200: #e5e5e5;
+  --gray-300: #d4d4d4;
   --gray-400: #a3a3a3;
+  --gray-500: #737373;
   --gray-600: #525252;
   --gray-800: #262626;
-  --accent: #000000;
+
+  /* Neumorphic shadows */
+  --shadow-light: #ffffff;
+  --shadow-dark: #d1d1d1;
+  --neu-outset: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light);
+  --neu-inset: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light);
+  --neu-flat: 3px 3px 6px var(--shadow-dark), -3px -3px 6px var(--shadow-light);
+  --neu-subtle: 2px 2px 4px var(--shadow-dark), -2px -2px 4px var(--shadow-light);
 }
 
 body {
-  background: var(--white);
+  background: var(--gray-100);
   color: var(--black);
   font-family: 'Inter', sans-serif;
   cursor: default;
@@ -27,14 +38,7 @@ body {
 }
 
 /* ========================================
-   CURSOR - Hidden for minimal
-======================================== */
-.cursor-dot {
-  display: none;
-}
-
-/* ========================================
-   FLOATING WORDS - Subtle
+   FLOATING WORDS - Subtle pills
 ======================================== */
 .floating-words {
   position: fixed;
@@ -50,28 +54,25 @@ body {
 .float-word {
   position: absolute;
   font-family: 'Inter', sans-serif;
-  font-weight: 300;
-  font-style: normal;
-  opacity: 0.03;
-  user-select: none;
-  color: var(--black);
+  font-weight: 400;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
-  letter-spacing: 0.2em;
+  opacity: 0.4;
+  user-select: none;
+  color: var(--gray-500);
+  background: var(--gray-100);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  box-shadow: var(--neu-subtle);
 }
 
-.float-word:nth-child(1) { top: 10%; left: 5%; font-size: 2rem; transform: rotate(0deg); }
-.float-word:nth-child(2) { top: 20%; right: 10%; font-size: 1.5rem; transform: rotate(0deg); }
-.float-word:nth-child(3) { top: 50%; left: 3%; font-size: 1.8rem; transform: rotate(90deg); }
-.float-word:nth-child(4) { top: 70%; right: 5%; font-size: 2rem; transform: rotate(0deg); }
-.float-word:nth-child(5) { bottom: 15%; left: 15%; font-size: 1.2rem; transform: rotate(0deg); }
-.float-word:nth-child(6) { top: 35%; right: 20%; font-size: 1.6rem; transform: rotate(-90deg); }
-
-/* ========================================
-   ORGANIC SHAPES - Hidden
-======================================== */
-.shape {
-  display: none;
-}
+.float-word:nth-child(1) { top: 12%; left: 8%; }
+.float-word:nth-child(2) { top: 25%; right: 12%; }
+.float-word:nth-child(3) { top: 55%; left: 5%; }
+.float-word:nth-child(4) { top: 75%; right: 8%; }
+.float-word:nth-child(5) { bottom: 15%; left: 15%; }
+.float-word:nth-child(6) { top: 40%; right: 18%; }
 
 /* ========================================
    MAIN CONTENT
@@ -82,7 +83,7 @@ body {
 }
 
 /* ========================================
-   TOP NAV
+   TOP NAV - Neumorphic bar
 ======================================== */
 .top-nav {
   position: fixed;
@@ -90,12 +91,12 @@ body {
   left: 0;
   right: 0;
   z-index: 100;
-  padding: 1.5rem 3rem;
+  padding: 1rem 3rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: var(--white);
-  border-bottom: 1px solid var(--gray-200);
+  background: var(--gray-100);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
 }
 
 @media (max-width: 768px) {
@@ -106,27 +107,37 @@ body {
 
 .nav-logo {
   font-family: 'Inter', sans-serif;
-  font-size: 0.75rem;
-  font-weight: 500;
+  font-size: 0.8rem;
+  font-weight: 600;
   color: var(--black);
-  letter-spacing: 0.2em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
+  transition: color 0.2s ease;
+}
+
+.nav-logo:hover {
+  color: var(--gray-600);
+}
+
+.nav-logo:focus-visible {
+  outline: 2px solid var(--black);
+  outline-offset: 3px;
 }
 
 .nav-cta {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 1.5rem;
 }
 
 .nav-status {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.6rem;
   font-size: 0.65rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--gray-400);
+  color: var(--gray-600);
 }
 
 @media (max-width: 600px) {
@@ -140,33 +151,51 @@ body {
   height: 6px;
   background: var(--black);
   border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(0.85);
+  }
 }
 
 .cta-button {
   padding: 0.75rem 1.5rem;
-  background: transparent;
-  border: 1px solid var(--black);
+  background: var(--gray-100);
+  border: none;
   color: var(--black);
   font-family: 'Inter', sans-serif;
   font-size: 0.65rem;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   text-decoration: none;
   cursor: pointer;
+  border-radius: 12px;
+  box-shadow: var(--neu-outset);
   transition: all 0.2s ease;
 }
 
 .cta-button:hover {
-  background: var(--black);
-  color: var(--white);
+  box-shadow: var(--neu-inset);
+}
+
+.cta-button:focus-visible {
+  outline: 3px solid var(--black);
+  outline-offset: 3px;
 }
 
 /* ========================================
    HERO
 ======================================== */
 .hero {
-  min-height: 90vh;
+  min-height: 85vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -174,14 +203,55 @@ body {
   position: relative;
 }
 
+/* ----------------------------------------
+   Hero Background - Mesh Gradient
+   ---------------------------------------- */
+.hero--mesh {
+  background:
+    radial-gradient(ellipse 80% 60% at 10% 20%, #ffffff 0%, transparent 50%),
+    radial-gradient(ellipse 70% 80% at 95% 60%, #e0e0e0 0%, transparent 50%),
+    radial-gradient(ellipse 90% 50% at 40% 90%, #ebebeb 0%, transparent 50%),
+    radial-gradient(ellipse 60% 70% at 80% 10%, #f8f8f8 0%, transparent 50%),
+    radial-gradient(ellipse 100% 100% at 50% 50%, #f0f0f0 0%, transparent 70%),
+    #f5f5f5;
+}
+
+.hero--mesh::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 80px,
+      rgba(255, 255, 255, 0.7) 80px,
+      rgba(255, 255, 255, 0.7) 81px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 80px,
+      rgba(180, 180, 180, 0.25) 80px,
+      rgba(180, 180, 180, 0.25) 81px
+    );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Ensure hero-inner stays above background effects */
+.hero--mesh .hero-inner {
+  position: relative;
+  z-index: 1;
+}
+
 .hero-inner {
   max-width: 1200px;
   margin: 0 auto;
   width: 100%;
-}
-
-.edition-float {
-  display: none;
 }
 
 .title-container {
@@ -196,48 +266,42 @@ body {
   font-family: 'Inter', sans-serif;
   font-weight: 300;
   line-height: 1;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
 }
 
 .title-1 {
-  font-size: clamp(4rem, 15vw, 12rem);
+  font-size: clamp(3rem, 14vw, 11rem);
   color: var(--black);
 }
 
 .title-2 {
-  font-size: clamp(4rem, 15vw, 12rem);
+  font-size: clamp(3rem, 14vw, 11rem);
   font-style: normal;
-  color: var(--gray-400);
+  color: var(--gray-500);
   margin-left: 0;
   background: none;
-  -webkit-text-fill-color: var(--gray-400);
+  -webkit-text-fill-color: var(--gray-500);
 }
 
 .tagline-container {
   display: flex;
   justify-content: flex-start;
   margin-top: 3rem;
-  padding-right: 0;
 }
 
 .tagline {
-  max-width: 500px;
+  max-width: 480px;
   font-family: 'Inter', sans-serif;
   font-size: 1rem;
-  font-style: normal;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.8;
   color: var(--gray-600);
+  padding: 1.5rem 0;
 }
 
 .tagline strong {
-  font-style: normal;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--black);
-}
-
-.tagline strong::after {
-  display: none;
 }
 
 .hero-cta-container {
@@ -251,36 +315,41 @@ body {
   padding: 1rem 2.5rem;
   font-family: 'Inter', sans-serif;
   font-size: 0.8rem;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   text-decoration: none;
   background: var(--black);
   color: var(--white);
-  border: 1px solid var(--black);
+  border: none;
+  border-radius: 12px;
+  box-shadow: var(--neu-outset);
   transition: all 0.3s ease;
 }
 
 .hero-cta:hover {
-  background: transparent;
-  color: var(--black);
+  transform: translateY(-2px);
+  box-shadow:
+    0 8px 25px rgba(0, 0, 0, 0.3),
+    0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-.scroll-indicator {
-  display: none;
+.hero-cta:focus-visible {
+  outline: 3px solid var(--black);
+  outline-offset: 3px;
 }
 
 /* ========================================
    MOSAIC SECTION
 ======================================== */
 .mosaic-section {
-  padding: 8rem 2rem;
-  background: var(--gray-100);
+  padding: 6rem 2rem;
+  background: var(--gray-200);
   position: relative;
 }
 
 .mosaic-header {
-  text-align: left;
+  text-align: center;
   margin-bottom: 4rem;
   max-width: 1200px;
   margin-left: auto;
@@ -289,15 +358,19 @@ body {
 
 .mosaic-label {
   font-size: 0.65rem;
-  letter-spacing: 0.3em;
+  font-weight: 500;
+  letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: var(--gray-400);
-  margin-bottom: 1rem;
+  color: var(--gray-600);
+  margin-bottom: 1.5rem;
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  border-radius: 30px;
 }
 
 .mosaic-title {
   font-family: 'Inter', sans-serif;
-  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-size: clamp(2rem, 5vw, 4rem);
   font-weight: 300;
   color: var(--black);
   line-height: 1.2;
@@ -310,50 +383,53 @@ body {
 
 .mosaic-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1px;
-  background: var(--gray-200);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
   max-width: 1200px;
   margin: 0 auto;
 }
 
 .mosaic-tile {
-  background: var(--white);
+  background: var(--gray-200);
   padding: 2.5rem 2rem;
   position: relative;
-  transition: all 0.2s ease;
+  border-radius: 24px;
+  box-shadow: var(--neu-outset);
+  transition: all 0.3s ease, opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
+  opacity: 0;
+  transform: translateY(30px);
 }
 
-.mosaic-tile::before {
-  display: none;
+.mosaic-tile.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .mosaic-tile:hover {
-  background: var(--black);
-  transform: none;
+  box-shadow: var(--neu-inset);
 }
 
-.mosaic-tile:hover .tile-author,
-.mosaic-tile:hover .tile-essay,
-.mosaic-tile:hover .tile-theme,
-.mosaic-tile:hover .tile-number {
-  color: var(--white);
+.mosaic-tile:focus-visible {
+  outline: 3px solid var(--black);
+  outline-offset: 2px;
+}
+
+.mosaic-tile:hover .tile-number,
+.mosaic-tile:focus-visible .tile-number {
+  color: var(--black);
 }
 
 .tile-number {
   font-family: 'Inter', sans-serif;
-  font-size: 0.7rem;
-  font-weight: 500;
-  color: var(--gray-400);
+  font-size: 3rem;
+  font-weight: 200;
+  color: var(--gray-300);
   position: absolute;
-  top: 2rem;
+  top: 1.5rem;
   right: 2rem;
-  letter-spacing: 0.1em;
-}
-
-.mosaic-tile:hover .tile-number {
-  transform: none;
+  line-height: 1;
+  transition: all 0.3s ease;
 }
 
 .tile-content {
@@ -364,34 +440,35 @@ body {
 .tile-author {
   font-family: 'Inter', sans-serif;
   font-size: 1.25rem;
-  font-weight: 400;
-  font-style: normal;
+  font-weight: 500;
   color: var(--black);
   margin-bottom: 0.5rem;
 }
 
 .tile-essay {
   font-size: 0.85rem;
-  font-weight: 300;
+  font-weight: 400;
   color: var(--gray-600);
-  letter-spacing: 0;
 }
 
 .tile-theme {
   display: inline-block;
   margin-top: 1.5rem;
-  padding: 0.25rem 0;
+  padding: 0.5rem 1rem;
   font-size: 0.6rem;
+  font-weight: 500;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   border: none;
-  border-bottom: 1px solid var(--gray-200);
-  color: var(--gray-400);
-  transition: all 0.2s ease;
+  background: var(--gray-200);
+  color: var(--gray-500);
+  border-radius: 20px;
+  box-shadow: var(--neu-flat);
+  transition: all 0.3s ease;
 }
 
 .mosaic-tile:hover .tile-theme {
-  border-color: var(--white);
+  box-shadow: inset 2px 2px 4px var(--shadow-dark), inset -2px -2px 4px var(--shadow-light);
 }
 
 /* ========================================
@@ -403,34 +480,34 @@ body {
   align-items: center;
   justify-content: center;
   padding: 6rem 2rem;
-  background: var(--white);
+  background: var(--gray-100);
   position: relative;
-}
-
-.quote-bg-text {
-  display: none;
 }
 
 .quote-content {
   max-width: 700px;
-  text-align: left;
+  text-align: center;
   position: relative;
+  background: var(--gray-100);
+  padding: 4rem;
+  border-radius: 40px;
+  box-shadow: var(--neu-outset);
 }
 
 .quote-mark {
   font-family: 'Inter', sans-serif;
-  font-size: 6rem;
+  font-size: 5rem;
   font-weight: 200;
   line-height: 0.5;
-  color: var(--gray-200);
-  margin-bottom: 0;
+  color: var(--gray-300);
+  margin-bottom: 1rem;
 }
 
 .quote-text {
   font-family: 'Inter', sans-serif;
-  font-size: clamp(1.5rem, 3vw, 2rem);
-  font-weight: 300;
-  line-height: 1.6;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  font-weight: 400;
+  line-height: 1.7;
   color: var(--black);
   margin-bottom: 2rem;
 }
@@ -438,27 +515,22 @@ body {
 .quote-author {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   gap: 1rem;
 }
 
 .quote-author-line {
   width: 40px;
   height: 1px;
-  background: var(--gray-200);
-}
-
-.quote-author-line:last-child {
-  display: none;
+  background: var(--gray-300);
 }
 
 .quote-author-name {
   font-family: 'Inter', sans-serif;
   font-size: 0.8rem;
-  font-style: normal;
-  font-weight: 400;
-  letter-spacing: 0.05em;
-  color: var(--gray-400);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--gray-600);
 }
 
 /* ========================================
@@ -485,10 +557,6 @@ body {
   position: relative;
 }
 
-.signup-left::before {
-  display: none;
-}
-
 .signup-left-content {
   position: relative;
   z-index: 1;
@@ -497,7 +565,7 @@ body {
 .signup-title {
   font-family: 'Inter', sans-serif;
   font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 300;
+  font-weight: 400;
   color: var(--white);
   line-height: 1.2;
   margin-bottom: 1.5rem;
@@ -505,14 +573,13 @@ body {
 
 .signup-title em {
   font-style: normal;
-  color: var(--gray-400);
+  font-weight: 600;
 }
 
 .signup-text {
   font-family: 'Inter', sans-serif;
   font-size: 1rem;
-  font-style: normal;
-  font-weight: 300;
+  font-weight: 400;
   color: var(--gray-400);
   line-height: 1.8;
   max-width: 400px;
@@ -532,9 +599,10 @@ body {
 
 .form-label {
   font-size: 0.65rem;
-  letter-spacing: 0.3em;
+  font-weight: 500;
+  letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: var(--gray-400);
+  color: var(--gray-600);
   margin-bottom: 2rem;
   display: block;
 }
@@ -547,21 +615,21 @@ body {
 
 .email-form input[type="email"] {
   width: 100%;
-  padding: 1.25rem 0;
-  background: transparent;
+  padding: 1.25rem 1.5rem;
+  background: var(--gray-100);
   border: none;
-  border-bottom: 1px solid var(--gray-200);
+  border-radius: 16px;
+  box-shadow: var(--neu-inset);
   font-family: 'Inter', sans-serif;
-  font-size: 1.25rem;
-  font-weight: 300;
-  font-style: normal;
+  font-size: 1rem;
+  font-weight: 400;
   color: var(--black);
   outline: none;
-  transition: border-color 0.2s ease;
+  transition: all 0.3s ease;
 }
 
 .email-form input[type="email"]:focus {
-  border-color: var(--black);
+  box-shadow: var(--neu-inset), 0 0 0 2px var(--black);
 }
 
 .email-form input[type="email"]::placeholder {
@@ -570,27 +638,29 @@ body {
 
 .email-form button {
   align-self: flex-start;
-  margin-top: 1.5rem;
+  margin-top: 1rem;
   padding: 1rem 2rem;
-  background: transparent;
-  border: 1px solid var(--black);
+  background: var(--gray-100);
+  border: none;
+  border-radius: 16px;
+  box-shadow: var(--neu-outset);
   color: var(--black);
   font-family: 'Inter', sans-serif;
-  font-size: 0.7rem;
-  font-weight: 500;
+  font-size: 0.75rem;
+  font-weight: 600;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
-.email-form button::before {
-  display: none;
+.email-form button:hover {
+  box-shadow: var(--neu-inset);
 }
 
-.email-form button:hover {
-  background: var(--black);
-  color: var(--white);
+.email-form button:focus-visible {
+  outline: 3px solid var(--black);
+  outline-offset: 2px;
 }
 
 .email-form button span {
@@ -599,14 +669,17 @@ body {
 
 .form-stats {
   display: flex;
-  gap: 3rem;
-  margin-top: 4rem;
+  gap: 2.5rem;
+  margin-top: 3rem;
   padding-top: 2rem;
-  border-top: 1px solid var(--gray-200);
 }
 
 .stat-item {
   text-align: left;
+  background: var(--gray-100);
+  padding: 1.5rem;
+  border-radius: 16px;
+  box-shadow: var(--neu-outset);
 }
 
 .stat-number {
@@ -619,9 +692,10 @@ body {
 
 .stat-label {
   font-size: 0.65rem;
+  font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--gray-400);
+  color: var(--gray-600);
   margin-top: 0.5rem;
 }
 
@@ -630,8 +704,7 @@ body {
 ======================================== */
 footer {
   padding: 3rem;
-  background: var(--white);
-  border-top: 1px solid var(--gray-200);
+  background: var(--gray-200);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -641,59 +714,115 @@ footer {
 
 .footer-logo {
   font-family: 'Inter', sans-serif;
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.15em;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--black);
+  background: var(--gray-200);
+  padding: 0.75rem 1.25rem;
+  border-radius: 12px;
+  box-shadow: var(--neu-flat);
 }
 
 .footer-links {
   display: flex;
-  gap: 2rem;
+  gap: 1rem;
 }
 
 .footer-link {
   font-size: 0.7rem;
+  font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--gray-400);
+  color: var(--gray-600);
   text-decoration: none;
-  transition: color 0.2s ease;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  transition: all 0.2s ease;
 }
 
 .footer-link:hover {
+  background: var(--gray-200);
+  box-shadow: var(--neu-inset);
   color: var(--black);
+}
+
+.footer-link:focus-visible {
+  outline: 2px solid var(--black);
+  outline-offset: 2px;
 }
 
 .footer-copy {
   font-size: 0.7rem;
-  color: var(--gray-400);
+  color: var(--gray-600);
 }
 
 /* ========================================
    SUCCESS STATE
 ======================================== */
 .email-form.success input[type="email"] {
-  border-color: var(--black);
+  box-shadow: var(--neu-inset), 0 0 0 2px #22C55E;
 }
 
 .email-form.success button {
-  background: var(--black);
-  color: var(--white);
+  background: #22C55E;
+  color: white;
+  box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
 }
 
 /* ========================================
    RESPONSIVE
 ======================================== */
+
+/* Tablet landscape */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .hero {
+    min-height: 70vh;
+    padding: 6rem 2rem 4rem;
+  }
+
+  .mosaic-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .quote-content {
+    padding: 3rem;
+  }
+}
+
+/* Tablet and mobile */
 @media (max-width: 768px) {
+  .top-nav {
+    padding: 0.75rem 1rem;
+  }
+
+  .nav-logo {
+    font-size: 0.7rem;
+  }
+
+  .cta-button {
+    padding: 0.6rem 1rem;
+    font-size: 0.6rem;
+  }
+
+  .hero {
+    min-height: auto;
+    padding: 6rem 1.5rem 4rem;
+  }
+
   .signup-left, .signup-right {
     padding: 4rem 2rem;
   }
 
   .form-stats {
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1rem;
+  }
+
+  .stat-item {
+    padding: 1rem;
+    text-align: center;
   }
 
   footer {
@@ -704,5 +833,34 @@ footer {
   .footer-links {
     flex-wrap: wrap;
     justify-content: center;
+  }
+
+  .quote-section {
+    min-height: auto;
+    padding: 4rem 1.5rem;
+  }
+
+  .quote-content {
+    padding: 2rem 1.5rem;
+  }
+
+  .quote-mark {
+    font-size: 3.5rem;
+  }
+}
+
+/* Small mobile */
+@media (max-width: 480px) {
+  .title-1,
+  .title-2 {
+    font-size: clamp(2.5rem, 16vw, 11rem);
+  }
+
+  .quote-content {
+    padding: 1.5rem 1rem;
+  }
+
+  .mosaic-section {
+    padding: 4rem 1.5rem;
   }
 }
