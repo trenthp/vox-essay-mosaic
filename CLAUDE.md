@@ -111,10 +111,32 @@ EMAIL_FORM_ACTION=https://buttondown.com/api/emails/embed-subscribe/USERNAME
 |---------|---------|--------|
 | **Umami** | Analytics with scroll depth | Configure via env vars |
 | **Buttondown/ConvertKit** | Email signups | Configure via env vars |
-| **Tally** | Submission forms | Embed in submit page |
+| **Tally** | Submission forms | Embedded on submit page |
 | **n8n** | Automation (Tally → Notion) | Self-hosted on Railway |
 | **Notion** | Submission tracking | Database for pipeline |
 | **Vercel** | Hosting | Auto-deploy from main |
+
+### Tally Submission Form
+
+The submission form is embedded inline on `/submit` using Tally (form ID: `Ekdpzr`).
+
+**Form URL:** https://tally.so/r/Ekdpzr
+
+**Embed settings:**
+- `transparentBackground=1` - blends with page background
+- `hideTitle=1` - title shown in page heading instead
+- `dynamicHeight=1` - adjusts to form content
+- `alignLeft=1` - left-aligned form fields
+
+**Fields collected:**
+- Full Name, Email
+- Essay Title, Word Count
+- Essay (file upload or Google Doc link)
+- Bio (50-100 words, third person)
+- Headshot (min 800x800px)
+- Website/Social Links
+- Previously Published (yes/no + where)
+- Agreement checkbox
 
 ## Documentation
 
