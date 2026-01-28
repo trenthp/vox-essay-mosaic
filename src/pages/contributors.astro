@@ -1,0 +1,1219 @@
+---
+import Page from '@/layouts/Page.astro';
+import { getCollection } from 'astro:content';
+
+// Get all published authors for cross-promo section
+const authors = await getCollection('authors', ({ data }) => data.published);
+---
+
+<Page
+  title="Contributor<br><em>resources</em>"
+  label="Contributors"
+  description="Everything you need to share your Vox Mosaic essay with the world."
+  currentPage="contributors"
+>
+  <!-- Welcome Section -->
+  <section class="content-section">
+    <div class="content-inner">
+      <div class="contributor-welcome">
+        <h2>Welcome to Edition One</h2>
+        <p>
+          Thank you for being one of twenty voices in our debut edition. This page has
+          everything you need to share your work—graphics, templates, and suggested timelines.
+        </p>
+        <p>
+          The more we all share, the more readers discover <em>everyone's</em> essays.
+          Your audience becomes their audience, and theirs becomes yours.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Links -->
+  <section class="content-section">
+    <div class="content-inner">
+      <h2 class="section-title">Quick Links</h2>
+      <div class="quick-links-grid">
+        <a href="/" class="quick-link-card">
+          <span class="quick-link-label">Full Edition</span>
+          <span class="quick-link-desc">Browse all 20 essays</span>
+        </a>
+        <a href="#assets" class="quick-link-card">
+          <span class="quick-link-label">Share Assets</span>
+          <span class="quick-link-desc">Graphics & templates</span>
+        </a>
+        <a href="#timeline" class="quick-link-card">
+          <span class="quick-link-label">Timeline</span>
+          <span class="quick-link-desc">Suggested posting schedule</span>
+        </a>
+        <a href="#cross-promo" class="quick-link-card">
+          <span class="quick-link-label">Cross-Promote</span>
+          <span class="quick-link-desc">Share fellow contributors</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Share Assets -->
+  <section class="content-section" id="assets">
+    <div class="content-inner">
+      <h2 class="section-title">Share Assets</h2>
+      <p class="section-intro">
+        Download these graphics to share on social media. Right-click to save, or use the download links.
+      </p>
+
+      <div class="asset-category">
+        <h3>General Edition Assets</h3>
+        <p class="asset-note">Use these to promote the full edition.</p>
+        <div class="asset-grid">
+          <div class="asset-card">
+            <div class="asset-preview">
+              <span class="asset-placeholder">1200 × 675</span>
+            </div>
+            <div class="asset-info">
+              <span class="asset-name">Edition Cover (Twitter/LinkedIn)</span>
+              <a href="#" class="asset-download">Download PNG</a>
+            </div>
+          </div>
+          <div class="asset-card">
+            <div class="asset-preview square">
+              <span class="asset-placeholder">1080 × 1080</span>
+            </div>
+            <div class="asset-info">
+              <span class="asset-name">Edition Cover (Instagram)</span>
+              <a href="#" class="asset-download">Download PNG</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="asset-category">
+        <h3>Your Personalized Assets</h3>
+        <p class="asset-note">
+          We'll send your custom quote cards and profile graphics via email before launch.
+          They'll also be available for download here.
+        </p>
+        <div class="asset-coming-soon">
+          <p>Personalized assets will appear here after you receive your launch email.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Copy Templates -->
+  <section class="content-section" id="templates">
+    <div class="content-inner">
+      <h2 class="section-title">Copy Templates</h2>
+      <p class="section-intro">
+        Ready-to-use text organized by when to use it. Replace [BRACKETED TEXT] with your details.
+      </p>
+
+      <!-- Template Navigation -->
+      <div class="template-nav">
+        <button class="template-nav-btn active" data-tab="launch">Launch Day</button>
+        <button class="template-nav-btn" data-tab="week">During the Week</button>
+        <button class="template-nav-btn" data-tab="newsletter">Newsletter</button>
+        <button class="template-nav-btn" data-tab="ongoing">Ongoing</button>
+      </div>
+
+      <!-- Launch Day Templates -->
+      <div class="template-tab active" id="tab-launch">
+        <p class="tab-intro">Your main announcement. Post these when the edition goes live.</p>
+
+        <div class="template-grid">
+          <div class="template-card">
+            <div class="template-header">
+              <span class="template-platform">Twitter / X</span>
+              <span class="template-length">Short</span>
+            </div>
+            <div class="template-content">
+              <pre>It's here.
+
+My essay "[YOUR ESSAY TITLE]" is now live as part of @VoxMosaic Edition One—twenty personal essays on transformation.
+
+Read it free: [YOUR LINK]</pre>
+            </div>
+            <button class="copy-btn">Copy</button>
+          </div>
+
+          <div class="template-card">
+            <div class="template-header">
+              <span class="template-platform">Twitter / X</span>
+              <span class="template-length">With tags</span>
+            </div>
+            <div class="template-content">
+              <pre>My essay "[YOUR ESSAY TITLE]" just went live in @VoxMosaic's debut edition.
+
+Twenty writers on transformation. Free to read.
+
+[YOUR LINK]
+
+Don't miss pieces by @[AUTHOR] @[AUTHOR] @[AUTHOR] — all worth your time.</pre>
+            </div>
+            <button class="copy-btn">Copy</button>
+          </div>
+
+          <div class="template-card">
+            <div class="template-header">
+              <span class="template-platform">LinkedIn</span>
+              <span class="template-length">Professional</span>
+            </div>
+            <div class="template-content">
+              <pre>My personal essay "[YOUR ESSAY TITLE]" has been published in Vox Mosaic's debut edition.
+
+The collection brings together twenty writers exploring transformation—career pivots, identity shifts, geographic moves, and the internal work of becoming who we're meant to be.
+
+For anyone navigating their own transformation, I hope this resonates.
+
+Read it here: [YOUR LINK]
+
+#personalgrowth #writing #transformation</pre>
+            </div>
+            <button class="copy-btn">Copy</button>
+          </div>
+
+          <div class="template-card">
+            <div class="template-header">
+              <span class="template-platform">Instagram</span>
+              <span class="template-length">Caption</span>
+            </div>
+            <div class="template-content">
+              <pre>Something I've been working on is finally here.
+
+My essay "[YOUR ESSAY TITLE]" is part of @voxmosaic's first edition—twenty writers exploring transformation.
+
+It's about [ONE SENTENCE DESCRIPTION].
+
+Link in bio to read the full piece (free).
+
+#voxmosaic #personalessay #transformation #writing</pre>
+            </div>
+            <button class="copy-btn">Copy</button>
+          </div>
+
+          <div class="template-card">
+            <div class="template-header">
+              <span class="template-platform">Threads / Bluesky</span>
+              <span class="template-length">Casual</span>
+            </div>
+            <div class="template-content">
+              <pre>wrote an essay about [TOPIC] and it's finally out in the world
+
+it's part of @voxmosaic — 20 personal essays on transformation, all free to read
+
+[YOUR LINK]</pre>
+            </div>
+            <button class="copy-btn">Copy</button>
+          </div>
+
+          <div class="template-card">
+            <div class="template-header">
+              <span class="template-platform">Facebook</span>
+              <span class="template-length">Personal</span>
+            </div>
+            <div class="template-content">
+              <pre>I'm excited to share that my essay "[YOUR ESSAY TITLE]" is now published!
+
+It's part of Vox Mosaic Edition One — a collection of twenty personal essays exploring transformation. The whole thing is free to read online.
+
+If you've ever [RELATE TO YOUR ESSAY'S THEME], I think this might resonate.
+
+[YOUR LINK]</pre>
+            </div>
+            <button class="copy-btn">Copy</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- During the Week Templates -->
+      <div class="template-tab" id="tab-week">
+        <p class="tab-intro">Keep momentum going. Use these for days 2-7 after launch.</p>
+
+        <div class="template-grid">
+          <div class="template-card">
+            <div class="template-header">
+              <span class="template-platform">Any platform</span>
+              <span class="template-length">Quote share</span>
+            </div>
+            <div class="template-content">
+              <pre>From my essay in @VoxMosaic:
+
+"[YOUR FAVORITE 1-2 SENTENCES FROM YOUR ESSAY]"
+
+Read the full piece: [YOUR LINK]</pre>
+            </div>
+            <button class="copy-btn">Copy</button>
+          </div>
+
+          <div class="template-card">
+            <div class="template-header">
+              <span class="template-platform">Any platform</span>
+              <span class="template-length">Cross-promo</span>
+            </div>
+            <div class="template-content">
+              <pre>One of my favorites from @VoxMosaic Edition One:
+
+"[THEIR ESSAY TITLE]" by @[THEIR HANDLE]
+
+[WHY YOU LOVED IT — 1-2 sentences]
+
+[THEIR LINK]</pre>
+            </div>
+            <button class="copy-btn">Copy</button>
+          </div>
+
+          <div class="template-card">
+            <div class="template-header">
+              <span class="template-platform">Twitter / X</span>
+              <span class="template-length">Thread starter</span>
+            </div>
+            <div class="template-content">
+              <pre>I wrote about [TOPIC] for @VoxMosaic. Here's the story behind the essay:
+
+[THREAD CONTINUES WITH 2-4 TWEETS ABOUT YOUR PROCESS, INSPIRATION, OR KEY INSIGHTS]
+
+Read the full essay: [YOUR LINK]</pre>
+            </div>
+            <button class="copy-btn">Copy</button>
+          </div>
+
+          <div class="template-card">
+            <div class="template-header">
+              <span class="template-platform">Instagram Stories</span>
+              <span class="template-length">Casual</span>
+            </div>
+            <div class="template-content">
+              <pre>still thinking about this line I wrote:
+
+"[SHORT QUOTE FROM YOUR ESSAY]"
+
+full essay in bio</pre>
+            </div>
+            <button class="copy-btn">Copy</button>
+          </div>
+
+          <div class="template-card">
+            <div class="template-header">
+              <span class="template-platform">Any platform</span>
+              <span class="template-length">End of week</span>
+            </div>
+            <div class="template-content">
+              <pre>If you missed it this week — my essay "[YOUR ESSAY TITLE]" is live in @VoxMosaic's first edition.
+
+Twenty essays on transformation. All free.
+
+[YOUR LINK]</pre>
+            </div>
+            <button class="copy-btn">Copy</button>
+          </div>
+
+          <div class="template-card">
+            <div class="template-header">
+              <span class="template-platform">Any platform</span>
+              <span class="template-length">Behind the scenes</span>
+            </div>
+            <div class="template-content">
+              <pre>The hardest part of writing "[YOUR ESSAY TITLE]" was [BRIEF INSIGHT].
+
+[1-2 SENTENCES ABOUT YOUR PROCESS OR WHAT YOU LEARNED]
+
+If you haven't read it yet: [YOUR LINK]</pre>
+            </div>
+            <button class="copy-btn">Copy</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Newsletter Templates -->
+      <div class="template-tab" id="tab-newsletter">
+        <p class="tab-intro">For your email list. Personal recommendations convert best.</p>
+
+        <div class="template-grid single-column">
+          <div class="template-card">
+            <div class="template-header">
+              <span class="template-platform">Email</span>
+              <span class="template-length">Full announcement</span>
+            </div>
+            <div class="template-content">
+              <pre>Subject: My essay on [THEME] is live
+
+Hi [NAME],
+
+Quick note to share that my essay "[YOUR ESSAY TITLE]" is now live.
+
+It's part of Vox Mosaic Edition One—a collection of twenty personal essays exploring transformation. Immigration, identity, divorce, reinvention, family... the moments that change us.
+
+The whole edition is free to read online (and as a PDF).
+
+→ Read my essay: [YOUR LINK]
+→ Explore all 20 essays: voxmosaic.com
+
+A few I'd recommend:
+• "[ESSAY]" by [AUTHOR] — [ONE LINE]
+• "[ESSAY]" by [AUTHOR] — [ONE LINE]
+
+Thanks for reading,
+[YOUR NAME]</pre>
+            </div>
+            <button class="copy-btn">Copy</button>
+          </div>
+
+          <div class="template-card">
+            <div class="template-header">
+              <span class="template-platform">Email</span>
+              <span class="template-length">Short version</span>
+            </div>
+            <div class="template-content">
+              <pre>Subject: New essay: [YOUR ESSAY TITLE]
+
+[NAME] —
+
+I have a new essay out. It's called "[YOUR ESSAY TITLE]" and it's about [ONE SENTENCE].
+
+It's part of a collection called Vox Mosaic — 20 writers on transformation. Free to read.
+
+Here's the link: [YOUR LINK]
+
+[YOUR NAME]</pre>
+            </div>
+            <button class="copy-btn">Copy</button>
+          </div>
+
+          <div class="template-card">
+            <div class="template-header">
+              <span class="template-platform">Email</span>
+              <span class="template-length">P.S. addition</span>
+            </div>
+            <div class="template-content">
+              <pre>P.S. My essay "[YOUR ESSAY TITLE]" just came out in Vox Mosaic — a collection of 20 personal essays on transformation. It's free to read here: [YOUR LINK]</pre>
+            </div>
+            <button class="copy-btn">Copy</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ongoing Templates -->
+      <div class="template-tab" id="tab-ongoing">
+        <p class="tab-intro">For your bio, future mentions, and reshares down the road.</p>
+
+        <div class="template-grid">
+          <div class="template-card">
+            <div class="template-header">
+              <span class="template-platform">Bio link</span>
+              <span class="template-length">One line</span>
+            </div>
+            <div class="template-content">
+              <pre>Latest: "[YOUR ESSAY TITLE]" in Vox Mosaic → [YOUR LINK]</pre>
+            </div>
+            <button class="copy-btn">Copy</button>
+          </div>
+
+          <div class="template-card">
+            <div class="template-header">
+              <span class="template-platform">Podcast / Interview</span>
+              <span class="template-length">Mention</span>
+            </div>
+            <div class="template-content">
+              <pre>I recently wrote about [TOPIC] in an essay for Vox Mosaic. It's called "[YOUR ESSAY TITLE]" — you can read it free at voxmosaic.com.</pre>
+            </div>
+            <button class="copy-btn">Copy</button>
+          </div>
+
+          <div class="template-card">
+            <div class="template-header">
+              <span class="template-platform">Any platform</span>
+              <span class="template-length">1 month later</span>
+            </div>
+            <div class="template-content">
+              <pre>A month ago, my essay "[YOUR ESSAY TITLE]" came out in @VoxMosaic.
+
+If you missed it — or want to revisit — it's still free: [YOUR LINK]
+
+Thank you to everyone who read and shared. It meant a lot.</pre>
+            </div>
+            <button class="copy-btn">Copy</button>
+          </div>
+
+          <div class="template-card">
+            <div class="template-header">
+              <span class="template-platform">Any platform</span>
+              <span class="template-length">Anniversary</span>
+            </div>
+            <div class="template-content">
+              <pre>A year ago, I published "[YOUR ESSAY TITLE]" — still one of my favorites I've written.
+
+[BRIEF REFLECTION ON THE PIECE OR WHAT'S CHANGED SINCE]
+
+[YOUR LINK]</pre>
+            </div>
+            <button class="copy-btn">Copy</button>
+          </div>
+
+          <div class="template-card">
+            <div class="template-header">
+              <span class="template-platform">Portfolio / Website</span>
+              <span class="template-length">Publication credit</span>
+            </div>
+            <div class="template-content">
+              <pre>"[YOUR ESSAY TITLE]" — Vox Mosaic, Edition One (2026)
+[YOUR LINK]</pre>
+            </div>
+            <button class="copy-btn">Copy</button>
+          </div>
+
+          <div class="template-card">
+            <div class="template-header">
+              <span class="template-platform">Speaker bio</span>
+              <span class="template-length">One line</span>
+            </div>
+            <div class="template-content">
+              <pre>Their essay "[YOUR ESSAY TITLE]" appeared in Vox Mosaic's debut edition on transformation.</pre>
+            </div>
+            <button class="copy-btn">Copy</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Timeline -->
+  <section class="content-section" id="timeline">
+    <div class="content-inner">
+      <h2 class="section-title">Suggested Timeline</h2>
+      <p class="section-intro">
+        A recommended posting schedule for launch week. Adjust to fit your style—there's no pressure to post daily.
+      </p>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-day">Launch Day</div>
+          <div class="timeline-action">
+            <strong>Share your launch announcement</strong>
+            <p>Post to your primary platforms. Tag @VoxMosaic and other contributors you'd like to highlight.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-day">Day 2</div>
+          <div class="timeline-action">
+            <strong>Share a quote card</strong>
+            <p>Post your personalized quote graphic with a brief caption.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-day">Day 3</div>
+          <div class="timeline-action">
+            <strong>Cross-promote a fellow contributor</strong>
+            <p>Share an essay you loved. Tag the author. They'll likely return the favor.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-day">Day 4</div>
+          <div class="timeline-action">
+            <strong>Email your newsletter</strong>
+            <p>Send to your list using the template above. Personal recommendations convert best.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-day">Day 5-6</div>
+          <div class="timeline-action">
+            <strong>Engage with other posts</strong>
+            <p>Like, comment, and reshare what other contributors are posting. Builds momentum.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-day">Day 7</div>
+          <div class="timeline-action">
+            <strong>Final reminder</strong>
+            <p>"If you missed it this week..." post. Some followers need multiple touches.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cross-Promote Section -->
+  <section class="content-section" id="cross-promo">
+    <div class="content-inner">
+      <h2 class="section-title">Your Fellow Contributors</h2>
+      <p class="section-intro">
+        Quick links to all contributor profiles. Read their essays, find your favorites, and share them with your audience.
+      </p>
+
+      <div class="contributors-grid">
+        {authors.map((author) => (
+          <a href={`/authors/${author.slug}`} class="contributor-card">
+            <span class="contributor-number">{author.data.number}</span>
+            <span class="contributor-name">{author.data.name}</span>
+            <span class="contributor-essay">"{author.data.essayTitle}"</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="content-section" id="faq">
+    <div class="content-inner">
+      <h2 class="section-title">FAQ</h2>
+
+      <div class="faq-item">
+        <h3 class="faq-question">When should I start sharing?</h3>
+        <p class="faq-answer">
+          Launch day is ideal for your main announcement. You'll receive an email the moment
+          the edition goes live with all your assets and direct links ready to share.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3 class="faq-question">Do I have to share?</h3>
+        <p class="faq-answer">
+          Not required, but encouraged. The more contributors share, the more readers discover
+          everyone's work. Your audience becomes a gateway to 19 other writers—and theirs to you.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3 class="faq-question">Can I customize the templates?</h3>
+        <p class="faq-answer">
+          Absolutely. The templates are starting points. Your authentic voice will always
+          perform better than copy-paste. Make them yours.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3 class="faq-question">What if I don't have a large following?</h3>
+        <p class="faq-answer">
+          Every share matters. A thoughtful post to 200 engaged followers often outperforms
+          a generic post to 20,000. Focus on authentic sharing, not numbers.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3 class="faq-question">Can I share after launch week?</h3>
+        <p class="faq-answer">
+          Yes! Your essay lives on permanently. Share it in your bio, mention it in interviews,
+          reshare on anniversaries. Evergreen content stays relevant.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3 class="faq-question">Will I get metrics on my essay?</h3>
+        <p class="faq-answer">
+          Yes. We'll share read counts and engagement highlights at 1 week, 1 month, and
+          periodically after. We'll also let you know if your essay hits milestones.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Support -->
+  <section class="page-cta">
+    <div class="page-cta-inner">
+      <h2 class="page-cta-title">Need help?</h2>
+      <p class="page-cta-text">
+        Questions about assets, sharing, or anything else? We're here.
+      </p>
+      <div class="page-cta-buttons">
+        <a href="mailto:contributors@voxmosaic.com" class="btn-primary">Email Us</a>
+        <a href="/" class="btn-secondary">View Edition</a>
+      </div>
+    </div>
+  </section>
+</Page>
+
+<style>
+  /* Welcome */
+  .contributor-welcome {
+    max-width: 640px;
+  }
+
+  .contributor-welcome h2 {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: var(--black);
+    margin-bottom: 1.25rem;
+  }
+
+  .contributor-welcome p {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--gray-700);
+    margin-bottom: 1.25rem;
+  }
+
+  .contributor-welcome p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Section titles */
+  .section-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--black);
+    margin-bottom: 1rem;
+  }
+
+  .section-intro {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--gray-600);
+    margin-bottom: 2.5rem;
+    max-width: 640px;
+  }
+
+  /* Quick Links */
+  .quick-links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+
+  .quick-link-card {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    background: var(--gray-100);
+    border: 1px solid var(--gray-200);
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .quick-link-card:hover {
+    border-color: var(--gray-300);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+
+  .quick-link-card:focus-visible {
+    outline: 2px solid var(--black);
+    outline-offset: 2px;
+  }
+
+  .quick-link-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--black);
+    margin-bottom: 0.35rem;
+  }
+
+  .quick-link-desc {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    color: var(--gray-600);
+    line-height: 1.4;
+  }
+
+  /* Assets */
+  .asset-category {
+    margin-bottom: 3rem;
+  }
+
+  .asset-category:last-child {
+    margin-bottom: 0;
+  }
+
+  .asset-category h3 {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--black);
+    margin-bottom: 0.5rem;
+  }
+
+  .asset-note {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--gray-600);
+    margin-bottom: 1.5rem;
+  }
+
+  .asset-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .asset-card {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.2s ease;
+  }
+
+  .asset-card:hover {
+    border-color: var(--gray-300);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+
+  .asset-preview {
+    aspect-ratio: 1200 / 675;
+    background: var(--gray-100);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid var(--gray-200);
+  }
+
+  .asset-preview.square {
+    aspect-ratio: 1 / 1;
+  }
+
+  .asset-placeholder {
+    font-family: 'Inter', monospace;
+    font-size: 0.85rem;
+    color: var(--gray-400);
+  }
+
+  .asset-info {
+    padding: 1rem 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .asset-name {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--black);
+  }
+
+  .asset-download {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--gray-600);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 0.2s ease;
+  }
+
+  .asset-download:hover {
+    color: var(--black);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .asset-coming-soon {
+    padding: 3rem 2rem;
+    background: var(--gray-100);
+    border: 1px solid var(--gray-200);
+    border-radius: 12px;
+    text-align: center;
+  }
+
+  .asset-coming-soon p {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    color: var(--gray-600);
+    margin: 0;
+  }
+
+  /* Template Navigation */
+  .template-nav {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .template-nav-btn {
+    padding: 0.6rem 1rem;
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--gray-600);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .template-nav-btn:hover {
+    border-color: var(--gray-300);
+    color: var(--black);
+  }
+
+  .template-nav-btn.active {
+    background: var(--black);
+    border-color: var(--black);
+    color: var(--white);
+  }
+
+  .template-nav-btn:focus-visible {
+    outline: 2px solid var(--black);
+    outline-offset: 2px;
+  }
+
+  /* Template Tabs */
+  .template-tab {
+    display: none;
+  }
+
+  .template-tab.active {
+    display: block;
+  }
+
+  .tab-intro {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--gray-600);
+    margin-bottom: 1.5rem;
+  }
+
+  /* Template Grid */
+  .template-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1rem;
+  }
+
+  .template-grid.single-column {
+    grid-template-columns: 1fr;
+    max-width: 640px;
+  }
+
+  .template-card {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.2s ease;
+  }
+
+  .template-card:hover {
+    border-color: var(--gray-300);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  }
+
+  .template-header {
+    padding: 0.75rem 1rem;
+    background: var(--gray-100);
+    border-bottom: 1px solid var(--gray-200);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .template-platform {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--black);
+  }
+
+  .template-length {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--gray-500);
+    background: var(--white);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+  }
+
+  .template-content {
+    padding: 1.25rem 1rem;
+    background: var(--white);
+    flex: 1;
+  }
+
+  .template-content pre {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    line-height: 1.65;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    color: var(--gray-700);
+    margin: 0;
+  }
+
+  .copy-btn {
+    display: block;
+    width: 100%;
+    padding: 0.75rem;
+    background: var(--gray-100);
+    border: none;
+    border-top: 1px solid var(--gray-200);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--gray-600);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .copy-btn:hover {
+    background: var(--gray-200);
+    color: var(--black);
+  }
+
+  .copy-btn:focus-visible {
+    outline: 2px solid var(--black);
+    outline-offset: -2px;
+  }
+
+  .copy-btn.copied {
+    background: var(--black);
+    color: var(--white);
+  }
+
+  /* Timeline */
+  .timeline {
+    max-width: 640px;
+  }
+
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 1.5rem;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--gray-200);
+  }
+
+  .timeline-item:first-child {
+    padding-top: 0;
+  }
+
+  .timeline-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .timeline-day {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--gray-500);
+    padding-top: 0.15rem;
+  }
+
+  .timeline-action strong {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--black);
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .timeline-action p {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--gray-600);
+    margin: 0;
+  }
+
+  /* Contributors Grid */
+  .contributors-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1rem;
+  }
+
+  .contributor-card {
+    display: flex;
+    flex-direction: column;
+    padding: 1.25rem;
+    background: var(--gray-100);
+    border: 1px solid var(--gray-200);
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .contributor-card:hover {
+    border-color: var(--gray-300);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+
+  .contributor-card:focus-visible {
+    outline: 2px solid var(--black);
+    outline-offset: 2px;
+  }
+
+  .contributor-number {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--gray-400);
+    margin-bottom: 0.5rem;
+  }
+
+  .contributor-name {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--black);
+    margin-bottom: 0.35rem;
+  }
+
+  .contributor-essay {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    color: var(--gray-600);
+    font-style: italic;
+  }
+
+  /* FAQ */
+  .faq-item {
+    margin-bottom: 2rem;
+  }
+
+  .faq-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .faq-question {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--black);
+    margin-bottom: 0.75rem;
+  }
+
+  .faq-answer {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--gray-600);
+    margin: 0;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .contributor-welcome h2 {
+      font-size: 1.5rem;
+    }
+
+    .section-title {
+      font-size: 1.1rem;
+    }
+
+    .template-nav {
+      gap: 0.4rem;
+    }
+
+    .template-nav-btn {
+      padding: 0.5rem 0.75rem;
+      font-size: 0.8rem;
+    }
+
+    .template-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .timeline-item {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+      padding: 1.25rem 0;
+    }
+
+    .timeline-day {
+      font-size: 0.75rem;
+    }
+
+    .quick-links-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .asset-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .contributors-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .template-nav {
+      flex-direction: column;
+    }
+
+    .template-nav-btn {
+      text-align: center;
+    }
+
+    .asset-info {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+
+    .asset-download {
+      align-self: flex-start;
+    }
+  }
+</style>
+
+<script>
+  // Tab navigation functionality
+  const tabButtons = document.querySelectorAll('.template-nav-btn');
+  const tabPanels = document.querySelectorAll('.template-tab');
+
+  tabButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetTab = btn.dataset.tab;
+
+      // Update button states
+      tabButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      // Update panel visibility
+      tabPanels.forEach(panel => {
+        panel.classList.remove('active');
+        if (panel.id === `tab-${targetTab}`) {
+          panel.classList.add('active');
+        }
+      });
+    });
+  });
+
+  // Copy button functionality
+  document.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const card = btn.closest('.template-card');
+      const pre = card?.querySelector('pre');
+      if (!pre) return;
+
+      try {
+        await navigator.clipboard.writeText(pre.textContent || '');
+        btn.textContent = 'Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = 'Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      } catch (err) {
+        btn.textContent = 'Failed';
+        setTimeout(() => {
+          btn.textContent = 'Copy';
+        }, 2000);
+      }
+    });
+  });
+</script>

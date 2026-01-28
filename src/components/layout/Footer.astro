@@ -11,6 +11,11 @@ const links = [
   { href: "/submit", label: "Submit" },
   { href: "/contact", label: "Contact" }
 ];
+
+const legalLinks = [
+  { href: "/privacy", label: "Privacy" },
+  { href: "/terms", label: "Terms" }
+];
 ---
 
 <footer>
@@ -26,5 +31,18 @@ const links = [
       </a>
     ))}
   </nav>
-  <div class="footer-copy">&copy; 2026</div>
+  <div class="footer-bottom">
+    <div class="footer-copy">&copy; 2026 Luminous Estates LLC</div>
+    <nav class="footer-legal">
+      {legalLinks.map(link => (
+        <a
+          href={link.href}
+          class="footer-legal-link"
+          aria-current={currentPage === link.label.toLowerCase() ? "page" : undefined}
+        >
+          {link.label}
+        </a>
+      ))}
+    </nav>
+  </div>
 </footer>
