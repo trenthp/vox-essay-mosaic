@@ -1,0 +1,60 @@
+---
+interface Props {
+  size?: 'small' | 'medium' | 'large';
+  className?: string;
+}
+
+const { size = 'medium', className = '' } = Astro.props;
+
+const sizeMap = {
+  small: { width: 48, height: 20 },
+  medium: { width: 80, height: 32 },
+  large: { width: 120, height: 48 },
+};
+
+const dimensions = sizeMap[size];
+---
+
+<svg
+  class={`skeleton-key skeleton-key-${size} ${className}`}
+  viewBox="0 0 120 48"
+  width={dimensions.width}
+  height={dimensions.height}
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  aria-hidden="true"
+>
+  <g opacity="0.25">
+    <!-- Key bow (circular handle) -->
+    <circle cx="18" cy="24" r="12" stroke="var(--wm-compass)" stroke-width="1" fill="none" />
+    <circle cx="18" cy="24" r="6" stroke="var(--wm-compass)" stroke-width="0.5" fill="none" opacity="0.5" />
+    <!-- Cross inside bow -->
+    <line x1="18" y1="18" x2="18" y2="30" stroke="var(--wm-compass)" stroke-width="0.5" opacity="0.4" />
+    <line x1="12" y1="24" x2="24" y2="24" stroke="var(--wm-compass)" stroke-width="0.5" opacity="0.4" />
+
+    <!-- Shaft -->
+    <line x1="30" y1="24" x2="95" y2="24" stroke="var(--wm-compass)" stroke-width="1.25" stroke-linecap="round" />
+
+    <!-- Collar / ward -->
+    <rect x="42" y="21" width="4" height="6" rx="0.5" stroke="var(--wm-compass)" stroke-width="0.5" fill="none" opacity="0.5" />
+
+    <!-- Key bit (teeth) -->
+    <line x1="80" y1="24" x2="80" y2="18" stroke="var(--wm-compass)" stroke-width="0.75" stroke-linecap="round" />
+    <line x1="86" y1="24" x2="86" y2="16" stroke="var(--wm-compass)" stroke-width="0.75" stroke-linecap="round" />
+    <line x1="92" y1="24" x2="92" y2="19" stroke="var(--wm-compass)" stroke-width="0.75" stroke-linecap="round" />
+
+    <!-- Tip -->
+    <path d="M95 24 L102 24 L102 20 L105 24 L102 28 L102 24" stroke="var(--wm-compass)" stroke-width="0.75" fill="none" stroke-linejoin="round" />
+
+    <!-- Decorative dots along shaft -->
+    <circle cx="55" cy="24" r="0.75" fill="var(--wm-compass)" opacity="0.3" />
+    <circle cx="68" cy="24" r="0.75" fill="var(--wm-compass)" opacity="0.3" />
+  </g>
+</svg>
+
+<style>
+  .skeleton-key {
+    display: block;
+    margin: 0 auto;
+  }
+</style>

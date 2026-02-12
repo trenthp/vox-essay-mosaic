@@ -29,6 +29,75 @@ body {
   overflow-x: hidden;
 }
 
+/* Paper grain texture overlay — CSS-only noise via layered gradients */
+body::after {
+  content: '';
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  pointer-events: none;
+  z-index: 9999;
+  background-image:
+    repeating-conic-gradient(
+      rgba(120,100,80,0.03) 0% 25%,
+      transparent 0% 50%
+    ),
+    repeating-conic-gradient(
+      rgba(80,70,60,0.04) 0% 25%,
+      transparent 0% 50%
+    );
+  background-size: 4px 4px, 3px 3px;
+  background-position: 0 0, 1px 1px;
+  opacity: 0.9;
+  animation: grain-shift 0.5s steps(1) infinite;
+}
+
+@keyframes grain-shift {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-2px, 1px); }
+  50% { transform: translate(1px, -1px); }
+  75% { transform: translate(-1px, 2px); }
+  100% { transform: translate(2px, -2px); }
+}
+
+/* Skip to content link */
+.skip-to-content {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  z-index: 200;
+  padding: 0.75rem 1.5rem;
+  background: var(--wm-ink);
+  color: var(--wm-moth);
+  font-family: var(--ff-ui);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  transition: top 0.2s ease;
+}
+
+.skip-to-content:focus {
+  top: 1rem;
+  outline: 3px solid var(--wm-rust);
+  outline-offset: 2px;
+}
+
+/* Screen-reader only utility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* Reset link styles for tile links */
 a.mosaic-tile {
   text-decoration: none;
@@ -40,9 +109,112 @@ a.nav-logo {
   text-decoration: none;
 }
 
+/* Custom cursor */
+@media (pointer: fine) {
+  .cursor-dot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 8px;
+    height: 8px;
+    background: var(--wm-rust);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 10000;
+    mix-blend-mode: multiply;
+    transition: width 0.3s var(--ease-trace), height 0.3s var(--ease-trace),
+                background 0.3s var(--ease-trace), opacity 0.3s var(--ease-trace);
+    transform: translate(-50%, -50%);
+    opacity: 0;
+  }
+
+  .cursor-dot.visible {
+    opacity: 1;
+  }
+
+  .cursor-dot.expanded {
+    width: 24px;
+    height: 24px;
+    background: transparent;
+    border: 1.5px solid var(--wm-rust);
+  }
+}
+
 /* Hide custom cursor on touch devices */
 @media (pointer: coarse), (max-width: 768px) {
   .cursor-dot {
+    display: none !important;
+  }
+}
+
+/* ========================================
+   TRACE REVEAL ANIMATIONS
+   ======================================== */
+.content-block,
+.feature-item,
+.contact-card,
+.faq-item,
+.stat-item,
+.quote-content {
+  opacity: 0;
+  transform: translateY(15px);
+  transition: opacity var(--duration-trace) var(--ease-trace),
+              transform var(--duration-trace) var(--ease-trace);
+  transition-delay: var(--trace-delay, 0s);
+}
+
+.content-block.trace-visible,
+.feature-item.trace-visible,
+.contact-card.trace-visible,
+.faq-item.trace-visible,
+.stat-item.trace-visible,
+.quote-content.trace-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Mobile: reduced grain intensity */
+@media (max-width: 768px) {
+  body::after {
+    opacity: 0.5;
+    animation: none;
+  }
+}
+
+@media (max-width: 480px) {
+  body::after {
+    opacity: 0.35;
+    animation: none;
+  }
+}
+
+/* Reduced motion: show everything immediately */
+@media (prefers-reduced-motion: reduce) {
+  .content-block,
+  .feature-item,
+  .contact-card,
+  .faq-item,
+  .stat-item,
+  .quote-content {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .mosaic-tile {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .title-1::after {
+    width: 60px !important;
+  }
+
+  .cursor-dot {
+    display: none !important;
+  }
+
+  body::after {
     display: none !important;
   }
 }

@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luminous Estates + Wingmarks — Brand System</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Darker+Grotesque:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    /* Parent — Luminous Estates */
+    --le-charcoal: #2C2C2A;
+    --le-linen: #F0EBE1;
+    --le-sage: #8B9A7E;
+    --le-gold: #B8A88A;
+    --le-forest: #3D4F3D;
+    --le-stone: #C4B9A8;
+    --le-parchment: #E8E0D0;
+    --le-fog: #D5CFC5;
+    /* Product — Wingmarks */
+    --wm-ink: #1E2823;
+    --wm-moth: #F6F1E7;
+    --wm-olive: #7A8B6F;
+    --wm-rust: #A67C5B;
+    --wm-dust: #C9BFA8;
+    --wm-compass: #8A7060;
+    --wm-vellum: #EDE6D6;
+    /* Util */
+    --ff-display: "Cormorant Garamond", serif;
+    --ff-body-le: "Libre Baskerville", serif;
+    --ff-body-wm: "Source Serif 4", serif;
+    --ff-ui: "DM Sans", sans-serif;
+    --ff-utility: "Darker Grotesque", sans-serif;
+    --radius: 10px;
+    --radius-sm: 6px;
+    --radius-lg: 12px;
+  }
+
+  body {
+    font-family: var(--ff-ui);
+    background: var(--le-linen);
+    color: var(--le-charcoal);
+    -webkit-font-smoothing: antialiased;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+  }
+  body.loaded { opacity: 1; }
+
+  /* ─── HEADER ─── */
+  .brand-header {
+    background: var(--wm-ink);
+    padding: 44px 48px 36px;
+    position: relative;
+    overflow: hidden;
+  }
+  .brand-header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: 0.04;
+    background-image:
+      radial-gradient(circle at 20% 50%, var(--le-sage) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, var(--wm-rust) 0%, transparent 40%);
+  }
+  .header-inner { position: relative; max-width: 1100px; margin: 0 auto; }
+  .header-dot {
+    display: inline-block;
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--wm-rust);
+    box-shadow: 0 0 10px rgba(166,124,91,0.35);
+    vertical-align: middle;
+    margin-right: 12px;
+  }
+  .header-label {
+    font-size: 10px; text-transform: uppercase;
+    letter-spacing: 0.28em; color: var(--wm-olive);
+    font-weight: 600; vertical-align: middle;
+  }
+  .header-title {
+    font-family: var(--ff-display);
+    font-size: 46px; font-weight: 300;
+    color: var(--wm-moth); margin: 6px 0 2px;
+    line-height: 1; letter-spacing: 0.02em;
+  }
+  .header-subtitle {
+    font-family: var(--ff-display);
+    font-size: 20px; color: var(--wm-rust);
+    font-weight: 300; font-style: italic;
+  }
+  .header-desc {
+    font-size: 12px; color: #6B7B68;
+    margin-top: 12px; max-width: 520px; line-height: 1.6;
+  }
+
+  /* ─── TABS ─── */
+  .tab-bar {
+    background: var(--wm-ink);
+    border-bottom: 1px solid rgba(122,139,111,0.18);
+    position: sticky; top: 0; z-index: 100;
+  }
+  .tab-bar-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: flex; gap: 0; padding: 0 48px;
+    overflow-x: auto;
+  }
+  .tab-btn {
+    background: none; border: none; cursor: pointer;
+    padding: 13px 20px;
+    font-size: 11px; letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-family: var(--ff-ui); font-weight: 600;
+    color: #6B7B68;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+  .tab-btn:hover { color: var(--wm-dust); }
+  .tab-btn.active {
+    color: var(--wm-moth);
+    border-bottom-color: var(--wm-rust);
+  }
+
+  /* ─── CONTENT ─── */
+  .content { max-width: 1100px; margin: 0 auto; padding: 48px 48px 80px; }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* ─── SECTION ─── */
+  .section { margin-bottom: 64px; }
+  .section-label {
+    font-size: 10px; text-transform: uppercase;
+    letter-spacing: 0.22em; color: var(--le-sage);
+    margin-bottom: 6px; font-weight: 600;
+  }
+  .section-title {
+    font-family: var(--ff-display);
+    font-size: 30px; font-weight: 300;
+    color: var(--le-charcoal); line-height: 1.1;
+  }
+  .section-rule {
+    width: 44px; height: 1px;
+    background: var(--le-gold); margin-top: 14px;
+  }
+  .section-header { margin-bottom: 28px; }
+
+  /* ─── GRID HELPERS ─── */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+  .flex-wrap { display: flex; flex-wrap: wrap; gap: 14px; }
+
+  /* ─── COLOR SWATCH ─── */
+  .swatch { flex: 1 1 130px; min-width: 130px; cursor: pointer; }
+  .swatch-color {
+    height: 96px; border-radius: 8px;
+    position: relative;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    border: 1px solid transparent;
+  }
+  .swatch-color.light-border { border-color: var(--le-stone); }
+  .swatch-color:hover {
+    transform: scale(1.04);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  }
+  .swatch-copied {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(0,0,0,0.45); border-radius: 8px;
+    color: #fff; font-size: 11px;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    animation: fadeInOut 1.2s ease forwards;
+  }
+  @keyframes fadeInOut {
+    0% { opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } 100% { opacity: 0; }
+  }
+  .swatch-name { font-size: 12px; font-weight: 600; color: var(--le-charcoal); margin-top: 8px; }
+  .swatch-hex { font-size: 11px; color: var(--le-sage); font-family: monospace; letter-spacing: 0.04em; }
+  .swatch-use { font-size: 11px; color: #999; margin-top: 2px; line-height: 1.4; }
+
+  /* ─── TYPE SAMPLE ─── */
+  .type-sample {
+    margin-bottom: 24px; padding: 20px 24px;
+    background: #FAFAF5; border-radius: 8px;
+    border: 1px solid var(--le-parchment);
+  }
+  .type-sample-header {
+    display: flex; justify-content: space-between;
+    align-items: baseline; margin-bottom: 12px;
+  }
+  .type-sample-label {
+    font-size: 10px; text-transform: uppercase;
+    letter-spacing: 0.16em; color: var(--le-sage); font-weight: 600;
+  }
+  .type-sample-weight { font-family: monospace; font-size: 11px; color: var(--le-gold); }
+  .type-sample-text { line-height: 1.25; color: var(--le-charcoal); }
+  .type-sample-desc { font-size: 12px; color: #999; margin-top: 8px; font-style: italic; }
+
+  /* ─── CARDS ─── */
+  .card {
+    padding: 24px; background: #fff;
+    border-radius: var(--radius); border: 1px solid var(--le-parchment);
+  }
+  .card-label {
+    font-size: 10px; text-transform: uppercase;
+    letter-spacing: 0.2em; margin-bottom: 10px; font-weight: 600;
+  }
+  .card-title {
+    font-family: var(--ff-display);
+    font-size: 19px; font-weight: 500;
+    color: var(--le-charcoal); margin-bottom: 8px;
+  }
+  .card p { font-size: 13px; line-height: 1.65; color: #777; }
+
+  /* ─── AUTHOR CARDS ─── */
+  .author-card {
+    border-radius: var(--radius); padding: 22px 16px;
+    display: flex; flex-direction: column;
+    justify-content: space-between; min-height: 185px;
+    cursor: pointer; position: relative; overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .author-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  }
+  .author-card .trace-circle {
+    position: absolute; top: -15px; right: -15px;
+    width: 60px; height: 60px; border-radius: 50%;
+    opacity: 0.15;
+  }
+  .author-num {
+    font-family: var(--ff-display);
+    font-size: 26px; font-weight: 300; opacity: 0.3;
+  }
+  .author-name { font-size: 12px; font-weight: 600; margin-bottom: 3px; }
+  .author-essay {
+    font-family: var(--ff-display);
+    font-size: 13px; font-style: italic; opacity: 0.8; margin-bottom: 8px;
+  }
+  .author-tag {
+    display: inline-block; padding: 3px 10px; border-radius: 20px;
+    font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase;
+    background: rgba(255,255,255,0.12);
+  }
+
+  /* ─── BUTTONS ─── */
+  .btn {
+    font-family: var(--ff-ui); font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    border: none; border-radius: var(--radius-sm);
+    cursor: pointer; font-size: 12px;
+    padding: 13px 30px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+  .btn-primary { background: var(--wm-ink); color: var(--wm-moth); }
+  .btn-outline { background: transparent; color: var(--le-charcoal); border: 1.5px solid var(--le-charcoal); padding: 12px 30px; }
+  .btn-forest { background: var(--le-forest); color: var(--le-linen); }
+  .btn-ghost {
+    background: transparent; color: var(--le-sage);
+    border: 1px solid var(--le-stone);
+    font-weight: 500; letter-spacing: 0.04em;
+    text-transform: none; padding: 12px 26px;
+  }
+  .btn-rust { background: var(--wm-rust); color: var(--wm-moth); }
+
+  /* ─── MISC ─── */
+  .palette-dot {
+    width: 26px; height: 26px; border-radius: 50%;
+    display: inline-block;
+  }
+  .note {
+    font-size: 13px; color: #888; line-height: 1.6;
+    font-style: italic; margin-top: 16px;
+  }
+  .info-box {
+    padding: 20px; border-radius: 8px;
+    border: 1px solid var(--le-parchment);
+  }
+  .dark-box {
+    background: var(--wm-ink); border-radius: var(--radius-lg);
+    padding: 28px; position: relative; overflow: hidden;
+  }
+  .dark-box::before {
+    content: ""; position: absolute; inset: 0; opacity: 0.035;
+    background-image: radial-gradient(circle at 70% 30%, var(--wm-rust) 0%, transparent 50%);
+  }
+  .dark-box > * { position: relative; }
+
+  /* Stats row */
+  .stats-row {
+    display: flex; gap: 1px;
+    background: var(--le-parchment); border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .stat {
+    flex: 1; background: var(--wm-moth);
+    padding: 26px 18px; text-align: center;
+  }
+  .stat-num {
+    font-family: var(--ff-display);
+    font-size: 34px; font-weight: 300; color: var(--wm-ink);
+  }
+  .stat-label {
+    font-size: 10px; text-transform: uppercase;
+    letter-spacing: 0.15em; color: var(--le-sage); margin-top: 4px;
+  }
+
+  /* Context mini-cards */
+  .context-card {
+    padding: 10px 14px; background: #FAFAF5; border-radius: 6px;
+  }
+  .context-card-title { font-size: 11px; font-weight: 600; color: var(--le-charcoal); margin-bottom: 2px; }
+  .context-card-value { font-size: 12px; color: var(--le-sage); }
+
+  /* Spacing bars */
+  .spacing-bar { background: var(--wm-rust); height: 6px; border-radius: 2px; }
+
+  /* Principle card */
+  .principle {
+    display: flex; gap: 16px; padding: 20px;
+    border-radius: 8px; border: 1px solid var(--le-parchment);
+  }
+  .principle-num {
+    font-family: var(--ff-display);
+    font-size: 30px; font-weight: 300;
+    color: var(--le-stone); line-height: 1; min-width: 36px;
+  }
+  .principle-title {
+    font-family: var(--ff-display);
+    font-size: 17px; font-weight: 600;
+    color: var(--le-charcoal); margin-bottom: 4px;
+  }
+  .principle p { font-size: 13px; line-height: 1.6; color: #777; }
+
+  /* Tagline card */
+  .tagline-card {
+    padding: 18px 20px; background: #fff;
+    border-radius: 8px; border: 1px solid var(--le-parchment);
+  }
+  .tagline-text {
+    font-family: var(--ff-display);
+    font-size: 17px; font-style: italic;
+    color: var(--le-charcoal); margin-bottom: 6px; line-height: 1.3;
+  }
+  .tagline-note { font-size: 11px; color: #999; }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .grid-2, .grid-3, .grid-4, .grid-5 { grid-template-columns: 1fr; }
+    .brand-header, .tab-bar-inner, .content { padding-left: 24px; padding-right: 24px; }
+    .header-title { font-size: 32px; }
+  }
+  @media (max-width: 600px) {
+    .grid-2 { gap: 16px; }
+    .swatch { flex: 1 1 calc(50% - 8px); min-width: 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════ HEADER ═══════════ -->
+<header class="brand-header">
+  <div class="header-inner">
+    <div><span class="header-dot"></span><span class="header-label">Brand System · 2026</span></div>
+    <h1 class="header-title">Luminous Estates</h1>
+    <p class="header-subtitle">+ Wingmarks — Visual Identity &amp; Design System</p>
+    <p class="header-desc">The encounters that rearranged us. A brand system for a publisher and its debut essay collection about the marks left by contact.</p>
+  </div>
+</header>
+
+<!-- ═══════════ TAB BAR ═══════════ -->
+<nav class="tab-bar">
+  <div class="tab-bar-inner">
+    <button class="tab-btn active" data-tab="overview">Overview</button>
+    <button class="tab-btn" data-tab="parent">Luminous Estates</button>
+    <button class="tab-btn" data-tab="product">Wingmarks</button>
+    <button class="tab-btn" data-tab="ui">UI System</button>
+    <button class="tab-btn" data-tab="guidelines">Guidelines</button>
+  </div>
+</nav>
+
+<!-- ═══════════ CONTENT ═══════════ -->
+<main class="content">
+
+<!-- ══════════════════════════════════════════ -->
+<!-- OVERVIEW -->
+<!-- ══════════════════════════════════════════ -->
+<div id="tab-overview" class="tab-panel active">
+
+  <!-- Brand Architecture -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-label">Hierarchy</div>
+      <h2 class="section-title">Brand Architecture</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="grid-2">
+      <!-- Parent -->
+      <div style="background:var(--le-charcoal);border-radius:12px;padding:36px;color:var(--le-linen)">
+        <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.22em;color:var(--le-sage);margin-bottom:16px;font-weight:600">Parent Publisher</div>
+        <div style="font-family:var(--ff-display);font-size:34px;font-weight:300;line-height:1.1;margin-bottom:16px;letter-spacing:0.03em">Luminous Estates</div>
+        <p style="font-size:13px;line-height:1.7;color:var(--le-stone)">The prestige house. Timeless, authoritative, literary. Luminous Estates is the institutional voice — the estate, the archive, the curator. It conveys permanence and literary weight. The container that gives shape to what lives inside.</p>
+        <div style="margin-top:20px;display:flex;gap:8px">
+          <span class="palette-dot" style="background:#2C2C2A;border:1px solid #3D4F3D"></span>
+          <span class="palette-dot" style="background:#F0EBE1;border:1px solid #C4B9A8"></span>
+          <span class="palette-dot" style="background:#8B9A7E"></span>
+          <span class="palette-dot" style="background:#B8A88A"></span>
+          <span class="palette-dot" style="background:#3D4F3D"></span>
+        </div>
+      </div>
+      <!-- Product -->
+      <div style="background:var(--wm-moth);border-radius:12px;padding:36px;border:1px solid var(--le-parchment);position:relative;overflow:hidden">
+        <div style="position:absolute;top:-20px;right:-20px;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,rgba(166,124,91,0.06) 0%,transparent 70%)"></div>
+        <div style="position:relative">
+          <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.22em;color:var(--wm-olive);margin-bottom:16px;font-weight:600">First Publication</div>
+          <div style="font-family:var(--ff-display);font-size:34px;font-weight:300;line-height:1.05;margin-bottom:16px;color:var(--wm-ink);letter-spacing:0.04em">Wingmarks</div>
+          <p style="font-size:13px;line-height:1.7;color:#666">The debut voice. Contemplative, intimate, psychologically rich. A collection of essays about the encounters that rearranged us — the people, animals, and living systems that left lasting impressions. The name is the thesis: we carry the marks of everything that has touched us.</p>
+          <div style="margin-top:20px;display:flex;gap:8px">
+            <span class="palette-dot" style="background:#1E2823"></span>
+            <span class="palette-dot" style="background:#F6F1E7;border:1px solid #C4B9A8"></span>
+            <span class="palette-dot" style="background:#7A8B6F"></span>
+            <span class="palette-dot" style="background:#A67C5B"></span>
+            <span class="palette-dot" style="background:#C9BFA8"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Central Metaphor -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-label">Concept</div>
+      <h2 class="section-title">The Central Metaphor</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="dark-box" style="padding:44px 48px">
+      <div style="max-width:680px">
+        <div style="font-family:var(--ff-display);font-size:11px;font-weight:400;text-transform:uppercase;letter-spacing:0.3em;color:var(--wm-olive);margin-bottom:20px">Wingmarks</div>
+        <p style="font-family:var(--ff-display);font-size:22px;font-weight:300;font-style:italic;color:var(--wm-moth);line-height:1.65;margin-bottom:20px">When a moth lands on glass, it leaves a faint dusting of wing scales — a trace of contact so delicate you might miss it. But the mark is real. The encounter happened. Something was exchanged.</p>
+        <p style="font-family:var(--ff-body-wm);font-size:15px;color:var(--wm-dust);line-height:1.7;margin-bottom:24px">This is the brand's organizing metaphor. Every design choice should feel like a trace of contact — embossed textures (a mark pressed into paper), warm residue tones (Impression Rust, Wing Dust), photography of light through windows and shadows on walls. The aesthetic is what remains after something meaningful has passed through.</p>
+        <div style="display:flex;gap:24px;flex-wrap:wrap">
+          <span style="font-size:10px;text-transform:uppercase;letter-spacing:0.18em;color:var(--wm-rust);font-weight:600">Impression</span>
+          <span style="font-size:10px;text-transform:uppercase;letter-spacing:0.18em;color:var(--wm-rust);font-weight:600">Trace</span>
+          <span style="font-size:10px;text-transform:uppercase;letter-spacing:0.18em;color:var(--wm-rust);font-weight:600">Residue</span>
+          <span style="font-size:10px;text-transform:uppercase;letter-spacing:0.18em;color:var(--wm-rust);font-weight:600">Contact</span>
+          <span style="font-size:10px;text-transform:uppercase;letter-spacing:0.18em;color:var(--wm-rust);font-weight:600">Rearrangement</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Brand Positioning -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-label">Strategy</div>
+      <h2 class="section-title">Brand Positioning</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-label" style="color:var(--le-sage)">Audience</div>
+        <div class="card-title">The Combined Following</div>
+        <p>Each essayist brings their own community. The aggregate audience is literary-curious, digitally native, and values psychological depth over surface spectacle.</p>
+      </div>
+      <div class="card">
+        <div class="card-label" style="color:var(--le-sage)">Differentiator</div>
+        <div class="card-title">Creator-Led Publishing</div>
+        <p>Not traditional publishing. Not self-publishing. A curated collective where social media voices become literary voices — with the credibility of a prestige house behind them.</p>
+      </div>
+      <div class="card">
+        <div class="card-label" style="color:var(--le-sage)">Tone</div>
+        <div class="card-title">Contemplative Warmth</div>
+        <p>Luminous Estates speaks with quiet confidence. Wingmarks speaks with reflective intimacy. Together: gravitas without pretension, depth without exclusion. A book left open on a table.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Design Principles -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-label">Philosophy</div>
+      <h2 class="section-title">Design Principles</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="grid-2" style="gap:20px">
+      <div class="principle" style="background:#FAFAF5"><div class="principle-num">01</div><div><div class="principle-title">Literary Materiality</div><p>Design should feel like it has weight — embossed paper, aged book spines, letterpress texture. Digital design that honors the physical book. Wingmarks adds a layer: the materiality of impression itself.</p></div></div>
+      <div class="principle" style="background:#fff"><div class="principle-num">02</div><div><div class="principle-title">The Aesthetics of Trace</div><p>Where the previous concept was about assembling fragments, Wingmarks is about what remains after contact. Subtle shadows, soft overlays, warm residue tones. Design that feels like something meaningful was just here.</p></div></div>
+      <div class="principle" style="background:#fff"><div class="principle-num">03</div><div><div class="principle-title">Diverse Voices, Unified Quiet</div><p>Each author has their own presence, but the visual system holds them in contemplative unity. Not a loud mosaic — a shared hush. Distinct marks creating one surface.</p></div></div>
+      <div class="principle" style="background:#FAFAF5"><div class="principle-num">04</div><div><div class="principle-title">Modern Antiquarian</div><p>The mood board's core tension remains: misty forests and gothic doorways meet clean digital UI. Old-world gravitas with contemporary accessibility. But now warmer, more intimate, less architectural.</p></div></div>
+    </div>
+  </div>
+
+  <!-- Tagline Directions -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-label">Language</div>
+      <h2 class="section-title">Tagline Directions</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="grid-3" style="gap:16px">
+      <div class="tagline-card"><div class="tagline-text">The encounters that rearranged us.</div><div class="tagline-note">Direct, mirrors the call for submissions</div></div>
+      <div class="tagline-card"><div class="tagline-text">Marked by contact.</div><div class="tagline-note">Minimal, evocative, brand-name-adjacent</div></div>
+      <div class="tagline-card"><div class="tagline-text">What touched you, changed you.</div><div class="tagline-note">Personal, second-person, warm</div></div>
+      <div class="tagline-card"><div class="tagline-text">There is no permanent self.</div><div class="tagline-note">Bold thesis statement from the brief</div></div>
+      <div class="tagline-card"><div class="tagline-text">Essays on being rearranged.</div><div class="tagline-note">Casual, specific, genre-clear</div></div>
+      <div class="tagline-card"><div class="tagline-text">The impressions we carry.</div><div class="tagline-note">Quiet, interior, psychologically resonant</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- LUMINOUS ESTATES -->
+<!-- ══════════════════════════════════════════ -->
+<div id="tab-parent" class="tab-panel">
+
+  <!-- Colors -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-label">Luminous Estates</div>
+      <h2 class="section-title">Color Palette</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="flex-wrap" id="parent-swatches"></div>
+    <div class="dark-box" style="margin-top:24px;padding:28px;background:var(--le-charcoal)">
+      <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.2em;color:var(--le-sage);margin-bottom:16px;font-weight:600">Palette in Context</div>
+      <div class="grid-3" style="gap:14px">
+        <div style="background:var(--le-linen);border-radius:8px;padding:24px;text-align:center">
+          <div style="font-family:var(--ff-display);font-size:26px;color:var(--le-charcoal);font-weight:300">Light</div>
+          <div style="font-size:11px;color:var(--le-sage);margin-top:4px">Aged Linen base</div>
+        </div>
+        <div style="background:var(--le-forest);border-radius:8px;padding:24px;text-align:center">
+          <div style="font-family:var(--ff-display);font-size:26px;color:var(--le-linen);font-weight:300">Forest</div>
+          <div style="font-size:11px;color:#9BAF8E;margin-top:4px">Deep Forest base</div>
+        </div>
+        <div style="background:var(--le-charcoal);border-radius:8px;padding:24px;text-align:center;border:1px solid var(--le-forest)">
+          <div style="font-family:var(--ff-display);font-size:26px;color:var(--le-gold);font-weight:300">Dark</div>
+          <div style="font-size:11px;color:#666;margin-top:4px">Charcoal base</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Typography -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-label">Luminous Estates</div>
+      <h2 class="section-title">Typography</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="type-sample">
+      <div class="type-sample-header"><span class="type-sample-label">Wordmark, hero headings, prestige moments</span><span class="type-sample-weight">300–700</span></div>
+      <div class="type-sample-text" style="font-family:var(--ff-display);font-size:42px">Luminous Estates</div>
+      <div class="type-sample-desc">Elegant old-style serif with high contrast strokes</div>
+    </div>
+    <div class="type-sample">
+      <div class="type-sample-header"><span class="type-sample-label">Body copy, long-form reading, editorial</span><span class="type-sample-weight">400, 700</span></div>
+      <div class="type-sample-text" style="font-family:var(--ff-body-le);font-size:21px">Stories illuminate the corridors of experience, casting light on what we thought we knew.</div>
+      <div class="type-sample-desc">Readable transitional serif for literary credibility</div>
+    </div>
+    <div class="type-sample">
+      <div class="type-sample-header"><span class="type-sample-label">Navigation, labels, metadata, UI</span><span class="type-sample-weight">400–700</span></div>
+      <div class="type-sample-text" style="font-family:var(--ff-utility);font-size:17px">NAVIGATION · METADATA · LABELS · 2026</div>
+      <div class="type-sample-desc">Refined geometric sans for modern contrast</div>
+    </div>
+  </div>
+
+  <!-- Wordmark -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-label">Luminous Estates</div>
+      <h2 class="section-title">Wordmark</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="grid-2" style="gap:24px">
+      <div style="background:var(--le-charcoal);border-radius:12px;padding:48px;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:200px">
+        <div style="font-family:var(--ff-display);font-size:38px;font-weight:300;color:var(--le-linen);letter-spacing:0.1em;text-align:center;line-height:1">LUMINOUS</div>
+        <div style="font-family:var(--ff-display);font-size:13px;font-weight:400;color:var(--le-gold);letter-spacing:0.5em;text-transform:uppercase;margin-top:5px">ESTATES</div>
+        <div style="width:36px;height:1px;background:var(--le-gold);margin-top:12px"></div>
+        <div style="font-size:9px;color:#666;letter-spacing:0.3em;margin-top:8px;text-transform:uppercase">Publishers</div>
+      </div>
+      <div style="background:var(--le-linen);border-radius:12px;padding:48px;display:flex;flex-direction:column;align-items:center;justify-content:center;border:1px solid var(--le-parchment);min-height:200px">
+        <div style="font-family:var(--ff-display);font-size:38px;font-weight:300;color:var(--le-charcoal);letter-spacing:0.1em;text-align:center;line-height:1">LUMINOUS</div>
+        <div style="font-family:var(--ff-display);font-size:13px;font-weight:400;color:var(--le-sage);letter-spacing:0.5em;text-transform:uppercase;margin-top:5px">ESTATES</div>
+        <div style="width:36px;height:1px;background:var(--le-sage);margin-top:12px"></div>
+        <div style="font-size:9px;color:#999;letter-spacing:0.3em;margin-top:8px;text-transform:uppercase">Publishers</div>
+      </div>
+    </div>
+    <p class="note">Cormorant Garamond Light, generous letter-spacing. "LUMINOUS" carries the weight; "ESTATES" sits beneath in spaced small-caps. A thin gold rule and the descriptor "Publishers" anchor the mark. Consider an embossed "LE" monogram or a key icon for favicon/social.</p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- WINGMARKS -->
+<!-- ══════════════════════════════════════════ -->
+<div id="tab-product" class="tab-panel">
+
+  <!-- Colors -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-label">Wingmarks</div>
+      <h2 class="section-title">Color Palette</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="flex-wrap" id="product-swatches"></div>
+    <div class="dark-box" style="margin-top:20px;padding:28px">
+      <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.2em;color:var(--wm-olive);margin-bottom:12px;font-weight:600">Palette Story</div>
+      <p style="font-family:var(--ff-body-wm);font-size:14px;color:var(--wm-dust);line-height:1.7;max-width:600px">The Wingmarks palette is built around the metaphor of trace and residue. <strong style="color:var(--wm-rust)">Impression Rust</strong> is the color of the mark itself — warm, earthen, the stain left by contact. <strong style="color:var(--wm-dust)">Wing Dust</strong> is what remains after something delicate has passed through. <strong style="color:var(--wm-olive)">Trace Olive</strong> is growth after contact — the new pattern forming over old grooves.</p>
+    </div>
+  </div>
+
+  <!-- Typography -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-label">Wingmarks</div>
+      <h2 class="section-title">Typography</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="type-sample">
+      <div class="type-sample-header"><span class="type-sample-label">Book title, chapter headings, the quiet mark</span><span class="type-sample-weight">300–600</span></div>
+      <div class="type-sample-text" style="font-family:var(--ff-display);font-size:48px;font-weight:300">Wingmarks</div>
+      <div class="type-sample-desc">Light-weight serif — a trace, not a shout</div>
+    </div>
+    <div class="type-sample">
+      <div class="type-sample-header"><span class="type-sample-label">Pull quotes, essay titles, interior voice</span><span class="type-sample-weight">300i</span></div>
+      <div class="type-sample-text" style="font-family:var(--ff-display);font-size:26px;font-style:italic;font-weight:300">The encounters that rearranged us.</div>
+      <div class="type-sample-desc">Italic as the impression left behind — the wingmark itself</div>
+    </div>
+    <div class="type-sample">
+      <div class="type-sample-header"><span class="type-sample-label">Essay text, immersive reading, contemplation</span><span class="type-sample-weight">300–600</span></div>
+      <div class="type-sample-text" style="font-family:var(--ff-body-wm);font-size:18px">There is no permanent self. As humans, we're constantly shaped and reshaped by contact, with new patterns forming over even our most entrenched grooves when we brush up against what's other.</div>
+      <div class="type-sample-desc">Crisp optical-size serif optimized for long reading</div>
+    </div>
+    <div class="type-sample">
+      <div class="type-sample-header"><span class="type-sample-label">Author names, tags, numbers, CTAs</span><span class="type-sample-weight">400–600</span></div>
+      <div class="type-sample-text" style="font-family:var(--ff-ui);font-size:14px">ELENA RUIZ · ESSAY 01 · GET EARLY ACCESS</div>
+      <div class="type-sample-desc">Clean geometric sans — contemporary, precise</div>
+    </div>
+    <div class="info-box" style="background:#fff;margin-top:8px">
+      <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.2em;color:var(--wm-rust);margin-bottom:10px;font-weight:600">Typography Note</div>
+      <p style="font-size:13px;color:#777;line-height:1.65">Wingmarks uses Cormorant Garamond at lighter weights than the parent brand. Where Luminous Estates uses it for prestige, Wingmarks uses it for intimacy — the same family, rendered more delicately. The italic weight is the typographic wingmark: a trace, a leaning-toward, the shape of being changed by contact.</p>
+    </div>
+  </div>
+
+  <!-- Title Treatment -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-label">Wingmarks</div>
+      <h2 class="section-title">Title Treatment</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="grid-3" style="gap:18px">
+      <!-- Dark hero -->
+      <div style="background:var(--wm-ink);border-radius:12px;padding:40px;display:flex;flex-direction:column;justify-content:center;align-items:center;min-height:240px;position:relative;overflow:hidden">
+        <div style="position:absolute;bottom:-30px;right:-30px;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(166,124,91,0.08) 0%,transparent 70%)"></div>
+        <div style="position:relative;text-align:center">
+          <div style="font-family:var(--ff-display);font-size:42px;font-weight:300;color:var(--wm-moth);line-height:1;letter-spacing:0.06em">Wingmarks</div>
+          <div style="width:28px;height:1px;background:var(--wm-rust);margin:14px auto 10px"></div>
+          <div style="font-family:var(--ff-ui);font-size:10px;color:var(--wm-olive);letter-spacing:0.25em;text-transform:uppercase">First Edition · 2026</div>
+        </div>
+      </div>
+      <!-- Light -->
+      <div style="background:var(--wm-moth);border-radius:12px;padding:40px;display:flex;flex-direction:column;justify-content:center;align-items:center;min-height:240px;border:1px solid var(--le-parchment);text-align:center">
+        <div style="font-family:var(--ff-display);font-size:42px;font-weight:300;color:var(--wm-ink);line-height:1;letter-spacing:0.06em">Wingmarks</div>
+        <div style="width:28px;height:1px;background:var(--wm-rust);margin:14px auto 10px"></div>
+        <div style="font-family:var(--ff-ui);font-size:10px;color:#999;letter-spacing:0.25em;text-transform:uppercase">The encounters that rearranged us</div>
+      </div>
+      <!-- Inline -->
+      <div style="background:var(--le-charcoal);border-radius:12px;padding:40px;display:flex;flex-direction:column;justify-content:center;align-items:center;min-height:240px;text-align:center">
+        <div style="font-family:var(--ff-display);font-size:28px;font-weight:300;color:var(--wm-moth);line-height:1;letter-spacing:0.05em">Wingmarks</div>
+        <div style="font-family:var(--ff-ui);font-size:9px;color:#666;letter-spacing:0.3em;text-transform:uppercase;margin-top:10px">By Luminous Estates</div>
+      </div>
+    </div>
+    <p class="note">The title treatment uses a single word in Cormorant Garamond Light — unhurried, unadorned. No bold weight, no stacking. The thin rust rule beneath is the wingmark itself: a trace of something landing. Consider a subtle moth-wing or feather-trace icon for social/favicon use.</p>
+  </div>
+
+  <!-- Author Cards -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-label">Wingmarks</div>
+      <h2 class="section-title">Author Card System</h2>
+      <div class="section-rule"></div>
+    </div>
+    <p style="font-size:13px;color:#888;margin-bottom:20px;line-height:1.6">Each author gets a numbered card representing one encounter, one mark left. The palette rotates through brand colors — each card is a different trace.</p>
+    <div class="grid-5" id="author-cards"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- UI SYSTEM -->
+<!-- ══════════════════════════════════════════ -->
+<div id="tab-ui" class="tab-panel">
+
+  <!-- Buttons -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-label">Interactive Elements</div>
+      <h2 class="section-title">Buttons</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-bottom:16px">
+      <button class="btn btn-primary">Get Early Access</button>
+      <button class="btn btn-outline">Learn More</button>
+      <button class="btn btn-forest">Join the List</button>
+      <button class="btn btn-ghost">Read Excerpt →</button>
+    </div>
+    <p style="font-size:12px;color:#999;font-style:italic">Rounded corners at 6px — enough softness to feel approachable, enough structure to feel literary. No pill shapes, no sharp corners.</p>
+  </div>
+
+  <!-- Pull Quote -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-label">The Wingmark Moment</div>
+      <h2 class="section-title">Pull Quote</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="dark-box" style="padding:44px 52px">
+      <div style="position:absolute;top:20px;right:40px;width:100px;height:100px;border-radius:50%;background:radial-gradient(circle,rgba(166,124,91,0.06) 0%,transparent 70%)"></div>
+      <div style="font-family:var(--ff-display);font-size:64px;color:var(--wm-rust);line-height:0.5;position:absolute;top:30px;left:36px;opacity:0.4">"</div>
+      <blockquote style="font-family:var(--ff-display);font-size:22px;font-weight:300;color:var(--wm-moth);line-height:1.65;font-style:italic;padding:0 0 0 24px;border-left:2px solid var(--wm-rust)">I left everything I knew at thirty-two. Not because I was brave, but because staying had become more terrifying than the unknown.</blockquote>
+      <div style="margin-top:20px;padding-left:24px">
+        <div style="font-family:var(--ff-ui);font-size:12px;color:var(--wm-rust);font-weight:600;letter-spacing:0.04em">Elena Ruiz</div>
+        <div style="font-family:var(--ff-display);font-size:13px;color:#6B7B68;font-style:italic">from "The Weight of Suitcases"</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Email Signup -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-label">Conversion</div>
+      <h2 class="section-title">Email Signup</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div style="background:var(--wm-moth);border-radius:12px;padding:44px;border:1px solid var(--le-parchment);text-align:center;max-width:580px">
+      <div style="font-family:var(--ff-display);font-size:26px;font-weight:300;color:var(--wm-ink);margin-bottom:6px">Be among the <em>first</em></div>
+      <p style="font-size:13px;color:#888;margin-bottom:24px">Early access. Behind-the-scenes. Exclusive previews before anyone else.</p>
+      <div style="display:flex;gap:8px;max-width:400px;margin:0 auto">
+        <input type="email" placeholder="your@email.com" style="flex:1;padding:13px 16px;border-radius:6px;border:1px solid var(--le-fog);background:#fff;font-family:var(--ff-ui);font-size:13px;color:var(--le-charcoal);outline:none">
+        <button class="btn btn-primary" style="white-space:nowrap;padding:13px 22px;font-size:12px">Count Me In</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-label">Header Pattern</div>
+      <h2 class="section-title">Navigation</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div style="background:var(--wm-ink);border-radius:10px;padding:14px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px">
+      <div style="font-family:var(--ff-display);font-size:20px;color:var(--wm-moth);font-weight:300;letter-spacing:0.04em">Wingmarks</div>
+      <div style="display:flex;gap:24px;align-items:center;flex-wrap:wrap">
+        <span style="font-size:12px;color:var(--wm-dust);cursor:pointer">The Voices</span>
+        <span style="font-size:12px;color:var(--wm-dust);cursor:pointer">About</span>
+        <span style="font-size:12px;color:var(--wm-dust);cursor:pointer">Submit</span>
+        <button class="btn btn-rust" style="padding:9px 18px;font-size:11px">Early Access</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-label">Social Proof</div>
+      <h2 class="section-title">Stats Row</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="stats-row">
+      <div class="stat"><div class="stat-num">20</div><div class="stat-label">Essays</div></div>
+      <div class="stat"><div class="stat-num">500K+</div><div class="stat-label">Combined Following</div></div>
+      <div class="stat"><div class="stat-num">2</div><div class="stat-label">Formats</div></div>
+      <div class="stat"><div class="stat-num">2026</div><div class="stat-label">Release</div></div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-label">Brand Hierarchy in Practice</div>
+      <h2 class="section-title">Footer</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div style="background:var(--wm-ink);border-radius:12px;padding:32px 36px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:24px;flex-wrap:wrap;gap:16px">
+        <div>
+          <div style="font-family:var(--ff-display);font-size:18px;font-weight:300;color:var(--wm-moth);letter-spacing:0.04em;margin-bottom:4px">Wingmarks</div>
+          <div style="font-family:var(--ff-display);font-size:12px;font-style:italic;color:#6B7B68">The encounters that rearranged us</div>
+        </div>
+        <div style="display:flex;gap:20px;flex-wrap:wrap">
+          <span style="font-size:12px;color:var(--wm-dust);cursor:pointer">Home</span>
+          <span style="font-size:12px;color:var(--wm-dust);cursor:pointer">About</span>
+          <span style="font-size:12px;color:var(--wm-dust);cursor:pointer">Submit</span>
+          <span style="font-size:12px;color:var(--wm-dust);cursor:pointer">Contact</span>
+        </div>
+      </div>
+      <div style="border-top:1px solid rgba(122,139,111,0.15);padding-top:16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+        <div style="font-size:11px;color:#6B7B68">© 2026 Luminous Estates LLC</div>
+        <div style="display:flex;gap:16px">
+          <span style="font-size:11px;color:#6B7B68;cursor:pointer">Privacy</span>
+          <span style="font-size:11px;color:#6B7B68;cursor:pointer">Terms</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- GUIDELINES -->
+<!-- ══════════════════════════════════════════ -->
+<div id="tab-guidelines" class="tab-panel">
+
+  <!-- Photography -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-label">Visual Guidelines</div>
+      <h2 class="section-title">Photography Direction</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="grid-2" style="gap:20px">
+      <div class="card">
+        <div class="card-label" style="color:var(--wm-rust)">Author Portraits</div>
+        <p>Warm, natural light. Shallow depth of field. Shot against organic backdrops — never studio white. Authors should look contemplative and present, not posed. Think: someone caught mid-thought, post-encounter. Earth-toned wardrobe. Muted color grading with warm, amber-leaning shadows.</p>
+      </div>
+      <div class="card">
+        <div class="card-label" style="color:var(--wm-rust)">Traces &amp; Impressions</div>
+        <p>Light through windows casting shadows. Water marks on stone. Pressed flowers. Moth wings. Fingerprints on fogged glass. Paths worn through grass. These serve as section dividers, hero textures, and ambient imagery. Always desaturated, leaning into the sage/rust/dust palette. The subject is always what was <em>left behind</em>.</p>
+      </div>
+    </div>
+    <div class="info-box" style="background:#FAFAF5;margin-top:16px">
+      <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.2em;color:var(--wm-olive);margin-bottom:8px;font-weight:600">Shift from V1 Mood Board</div>
+      <p style="font-size:13px;color:#777;line-height:1.6">The gothic architecture and antique keys from the mood board remain valid but should be secondary to organic traces. Less "entering an old estate" and more "finding what someone left on the windowsill." The misty forest imagery is perfect — it's the feeling of moving through something that changes you.</p>
+    </div>
+  </div>
+
+  <!-- Textures -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-label">Visual Guidelines</div>
+      <h2 class="section-title">Texture &amp; Material Language</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="grid-4">
+      <div style="border-radius:10px;overflow:hidden"><div style="height:72px;background:var(--le-parchment)"></div><div style="padding:10px 14px;background:#fff;border:1px solid var(--le-parchment);border-top:none;border-radius:0 0 10px 10px"><div style="font-size:12px;font-weight:600;color:var(--le-charcoal)">Embossed Linen</div><div style="font-size:11px;color:#999;line-height:1.4">Letterpress impression — a mark pressed into paper</div></div></div>
+      <div style="border-radius:10px;overflow:hidden"><div style="height:72px;background:var(--wm-vellum)"></div><div style="padding:10px 14px;background:#fff;border:1px solid var(--le-parchment);border-top:none;border-radius:0 0 10px 10px"><div style="font-size:12px;font-weight:600;color:var(--le-charcoal)">Aged Vellum</div><div style="font-size:11px;color:#999;line-height:1.4">Warm parchment with subtle grain, time-touched</div></div></div>
+      <div style="border-radius:10px;overflow:hidden"><div style="height:72px;background:var(--wm-ink)"></div><div style="padding:10px 14px;background:#fff;border:1px solid var(--le-parchment);border-top:none;border-radius:0 0 10px 10px"><div style="font-size:12px;font-weight:600;color:var(--le-charcoal)">Night Forest</div><div style="font-size:11px;color:#999;line-height:1.4">Deep surfaces where encounters happen</div></div></div>
+      <div style="border-radius:10px;overflow:hidden"><div style="height:72px;background:var(--wm-dust)"></div><div style="padding:10px 14px;background:#fff;border:1px solid var(--le-parchment);border-top:none;border-radius:0 0 10px 10px"><div style="font-size:12px;font-weight:600;color:var(--le-charcoal)">Wing Dust</div><div style="font-size:11px;color:#999;line-height:1.4">The residue of contact, delicate overlay</div></div></div>
+    </div>
+  </div>
+
+  <!-- Voice & Tone -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-label">Copy Guidelines</div>
+      <h2 class="section-title">Voice &amp; Tone</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="grid-2" style="gap:20px">
+      <div class="card">
+        <div class="card-label" style="color:var(--le-forest)">Luminous Estates Voice</div>
+        <p style="margin-bottom:12px">Institutional warmth. A curator opening the doors to a private library. Quiet confidence, never shouting.</p>
+        <div style="font-size:12px;color:var(--le-charcoal);margin-bottom:4px"><strong>Do:</strong> "We publish the stories that illuminate."</div>
+        <div style="font-size:12px;color:#999"><strong>Don't:</strong> "Check out our amazing new book!"</div>
+      </div>
+      <div class="card">
+        <div class="card-label" style="color:var(--wm-rust)">Wingmarks Voice</div>
+        <p style="margin-bottom:12px">Contemplative warmth. Reflective, unhurried, psychologically precise. A book left open on a table for someone to discover — not pressed into their hands.</p>
+        <div style="font-size:12px;color:var(--le-charcoal);margin-bottom:4px"><strong>Do:</strong> "The encounters that rearranged us."</div>
+        <div style="font-size:12px;color:#999"><strong>Don't:</strong> "A groundbreaking anthology experience!"</div>
+      </div>
+    </div>
+    <div class="dark-box" style="margin-top:16px;padding:20px 24px">
+      <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.2em;color:var(--wm-rust);margin-bottom:10px;font-weight:600">Key Voice Principle</div>
+      <p style="font-family:var(--ff-body-wm);font-size:14px;color:var(--wm-dust);line-height:1.7;max-width:580px">Wingmarks copy should sound like the essayists themselves — people who notice subtlety, who sit with complexity, who describe inner experience with precision. The brand voice mirrors the submission call: "We're especially interested in subtle, psychologically rich moments."</p>
+    </div>
+  </div>
+
+  <!-- Brand Relationship -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-label">Usage Rules</div>
+      <h2 class="section-title">Brand Relationship</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="card">
+      <p style="margin-bottom:16px">Luminous Estates appears in footer, legal, and "About" contexts — the quiet institutional backing. Wingmarks leads the consumer experience. Think: Penguin Random House sits behind individual imprints. Present but not competing for attention.</p>
+      <div class="grid-3" style="gap:14px">
+        <div class="context-card"><div class="context-card-title">Website Header</div><div class="context-card-value">Wingmarks only</div></div>
+        <div class="context-card"><div class="context-card-title">Website Footer</div><div class="context-card-value">© 2026 Luminous Estates LLC</div></div>
+        <div class="context-card"><div class="context-card-title">Social Media</div><div class="context-card-value">Wingmarks primary, LE in bio</div></div>
+        <div class="context-card"><div class="context-card-title">Book Cover</div><div class="context-card-value">LE small logo on spine</div></div>
+        <div class="context-card"><div class="context-card-title">Press / Media</div><div class="context-card-value">Both, LE first</div></div>
+        <div class="context-card"><div class="context-card-title">Email Marketing</div><div class="context-card-value">Wingmarks primary</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Spacing -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-label">Layout</div>
+      <h2 class="section-title">Spacing System</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="card">
+      <p style="margin-bottom:16px">Base unit: 8px. All spacing in multiples of 8. Generous whitespace is essential — the space between things is where the impression lives.</p>
+      <div class="grid-4" style="gap:12px" id="spacing-bars"></div>
+    </div>
+  </div>
+
+  <!-- Icons -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-label">Visual Assets</div>
+      <h2 class="section-title">Icon &amp; Symbol Direction</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="grid-3" style="gap:16px">
+      <div class="card">
+        <div class="card-title" style="font-size:17px">Moth Wing Trace</div>
+        <p style="margin-bottom:10px">Primary mark. A faint, abstract wing shape — not a literal moth, but the dust pattern left by one. Used for favicon, social avatar, section breaks.</p>
+        <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.15em;color:var(--wm-rust);font-weight:600">Favicon, Social, Dividers</div>
+      </div>
+      <div class="card">
+        <div class="card-title" style="font-size:17px">Embossed LE Monogram</div>
+        <p style="margin-bottom:10px">Interlocking L and E in Cormorant weight. Letterpress / deboss treatment. Used for the parent brand in formal contexts.</p>
+        <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.15em;color:var(--wm-rust);font-weight:600">Spine, Letterhead, Watermark</div>
+      </div>
+      <div class="card">
+        <div class="card-title" style="font-size:17px">Compass/Orbit Line</div>
+        <p style="margin-bottom:10px">A thin elliptical arc suggesting "pulled into a new orbit" from the brief. Used as decorative accent, never dominant.</p>
+        <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.15em;color:var(--wm-rust);font-weight:600">Section ornaments, Borders</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<script>
+// ─── Tab switching ───
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+});
+
+// ─── Color Swatches (dynamic) ───
+const lightHexes = ['#F0EBE1','#F6F1E7','#E8E0D0','#EDE6D6','#D5CFC5','#C9BFA8','#C4B9A8'];
+
+const parentColors = [
+  { name:"Estate Charcoal", hex:"#2C2C2A", use:"Primary text, headers, institutional authority" },
+  { name:"Aged Linen", hex:"#F0EBE1", use:"Canvas, backgrounds, breathing space" },
+  { name:"Sage Moss", hex:"#8B9A7E", use:"Botanical accent, CTAs, life" },
+  { name:"Burnished Gold", hex:"#B8A88A", use:"Metallic details, prestige, borders" },
+  { name:"Deep Forest", hex:"#3D4F3D", use:"Rich depth, sophistication" },
+  { name:"Warm Stone", hex:"#C4B9A8", use:"Dividers, subtle backgrounds" },
+  { name:"Parchment", hex:"#E8E0D0", use:"Cards, secondary surfaces" },
+  { name:"Fog", hex:"#D5CFC5", use:"Muted elements, disabled states" },
+];
+const productColors = [
+  { name:"Dusk Ink", hex:"#1E2823", use:"Deep anchor, hero backgrounds, night forest" },
+  { name:"Moth Light", hex:"#F6F1E7", use:"Page canvas, essay backgrounds, the glow" },
+  { name:"Trace Olive", hex:"#7A8B6F", use:"Section markers, author tags, growth" },
+  { name:"Impression Rust", hex:"#A67C5B", use:"The mark itself — pull quotes, warm highlights" },
+  { name:"Wing Dust", hex:"#C9BFA8", use:"Subtle textures, overlays, residue of contact" },
+  { name:"Compass Rose", hex:"#8A7060", use:"Warm anchor, navigation, earthen grounding" },
+  { name:"Vellum", hex:"#EDE6D6", use:"Textured overlays, essay cards, old paper" },
+];
+
+function renderSwatches(container, colors) {
+  const el = document.getElementById(container);
+  colors.forEach(c => {
+    const swatch = document.createElement('div');
+    swatch.className = 'swatch';
+    const isLight = lightHexes.includes(c.hex);
+    swatch.innerHTML = `
+      <div class="swatch-color ${isLight ? 'light-border' : ''}" style="background:${c.hex}"></div>
+      <div class="swatch-name">${c.name}</div>
+      <div class="swatch-hex">${c.hex}</div>
+      <div class="swatch-use">${c.use}</div>
+    `;
+    swatch.addEventListener('click', () => {
+      navigator.clipboard?.writeText(c.hex);
+      const colorDiv = swatch.querySelector('.swatch-color');
+      const copied = document.createElement('div');
+      copied.className = 'swatch-copied';
+      copied.textContent = 'Copied';
+      colorDiv.appendChild(copied);
+      setTimeout(() => copied.remove(), 1200);
+    });
+    el.appendChild(swatch);
+  });
+}
+renderSwatches('parent-swatches', parentColors);
+renderSwatches('product-swatches', productColors);
+
+// ─── Author Cards ───
+const authors = [
+  { num:"01", name:"Elena Ruiz", essay:"The Weight of Suitcases", tag:"Immigration", bg:"#1E2823", text:"#F6F1E7", accent:"#A67C5B" },
+  { num:"02", name:"Marcus Chen", essay:"What the Mirror Forgot", tag:"Identity", bg:"#F6F1E7", text:"#1E2823", accent:"#7A8B6F", border:true },
+  { num:"03", name:"Amara Okafor", essay:"The Language of Leaving", tag:"Divorce", bg:"#3D4F3D", text:"#F6F1E7", accent:"#C9BFA8" },
+  { num:"04", name:"David Mireles", essay:"Burning the Map", tag:"Reinvention", bg:"#A67C5B", text:"#F6F1E7", accent:"#F6F1E7" },
+  { num:"05", name:"Priya Sharma", essay:"Between Two Mothers", tag:"Family", bg:"#8B9A7E", text:"#F6F1E7", accent:"#EDE6D6" },
+];
+const cardsEl = document.getElementById('author-cards');
+authors.forEach(a => {
+  const card = document.createElement('div');
+  card.className = 'author-card';
+  card.style.cssText = `background:${a.bg};color:${a.text};${a.border?'border:1px solid #E8E0D0;':''}`;
+  card.innerHTML = `
+    <div class="trace-circle" style="border:1px solid ${a.accent}"></div>
+    <div class="author-num">${a.num}</div>
+    <div>
+      <div class="author-name">${a.name}</div>
+      <div class="author-essay">"${a.essay}"</div>
+      <div class="author-tag" ${a.border?'style="border:1px solid rgba(0,0,0,0.08)"':''}>${a.tag}</div>
+    </div>
+  `;
+  cardsEl.appendChild(card);
+});
+
+// ─── Spacing bars ───
+const spacings = [
+  {l:"xs",v:"8px",s:8},{l:"sm",v:"16px",s:16},{l:"md",v:"24px",s:24},{l:"lg",v:"32px",s:32},
+  {l:"xl",v:"48px",s:48},{l:"2xl",v:"64px",s:64},{l:"3xl",v:"96px",s:96},{l:"4xl",v:"128px",s:128},
+];
+const spacingEl = document.getElementById('spacing-bars');
+spacings.forEach((s,i) => {
+  const row = document.createElement('div');
+  row.style.cssText = 'display:flex;align-items:center;gap:10px;margin-bottom:4px';
+  row.innerHTML = `
+    <div class="spacing-bar" style="width:${Math.min(s.s,128)}px;opacity:${0.6+i*0.05}"></div>
+    <div><span style="font-family:monospace;font-size:12px;color:#2C2C2A">${s.l}</span><span style="font-family:monospace;font-size:11px;color:#999;margin-left:6px">${s.v}</span></div>
+  `;
+  spacingEl.appendChild(row);
+});
+
+// ─── Fade in ───
+requestAnimationFrame(() => document.body.classList.add('loaded'));
+</script>
+</body>
+</html>

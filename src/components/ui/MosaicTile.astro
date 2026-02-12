@@ -10,13 +10,30 @@ interface Props {
 
 const { number, name, essayTitle, theme, href, isPlaceholder = false } = Astro.props;
 const Tag = href && !isPlaceholder ? 'a' : 'div';
+
+// Color rotation palette (5 combos from brand guide)
+const palettes = [
+  { bg: '#1E2823', text: '#F6F1E7', accent: '#C9BFA8', num: 'rgba(255,255,255,0.08)' },        // Dusk Ink
+  { bg: '#F6F1E7', text: '#1E2823', accent: '#7A8B6F', num: 'rgba(0,0,0,0.06)', border: true }, // Moth Light
+  { bg: '#3D4F3D', text: '#F6F1E7', accent: '#C9BFA8', num: 'rgba(255,255,255,0.08)' },        // Deep Forest
+  { bg: '#A67C5B', text: '#F6F1E7', accent: '#F6F1E7', num: 'rgba(255,255,255,0.1)' },         // Impression Rust
+  { bg: '#8B9A7E', text: '#F6F1E7', accent: '#EDE6D6', num: 'rgba(255,255,255,0.1)' },         // Sage Moss
+];
+
+const idx = isPlaceholder ? 1 : (parseInt(number) - 1) % palettes.length;
+const palette = palettes[idx];
+
+const tileStyle = `--tile-bg: ${palette.bg}; --tile-text: ${palette.text}; --tile-accent: ${palette.accent}; --tile-num: ${palette.num}; background: ${palette.bg}; color: ${palette.text};${palette.border ? ' border: 1px solid #E8E0D0;' : ''}`;
 ---
 
 <Tag
   href={href}
-  class="mosaic-tile"
-  tabindex={isPlaceholder ? undefined : 0}
+  class:list={["mosaic-tile", { "tile-colored": !isPlaceholder }]}
+  role={Tag === 'div' && !isPlaceholder ? "group" : undefined}
+  style={tileStyle}
 >
+  <span class="trace-circle" style={`border-color: ${palette.accent}`}></span>
+  <span class="trace-impression" aria-hidden="true"></span>
   <span class="tile-number">{number}</span>
   <div class="tile-content">
     <h3 class="tile-author">{name}</h3>

@@ -9,7 +9,7 @@ const authors = await getCollection('authors', ({ data }) => data.published);
 <Page
   title="Contributor<br><em>resources</em>"
   label="Contributors"
-  description="Everything you need to share your Vox Mosaic essay with the world."
+  description="Everything you need to share your Wingmarks essay with the world."
   currentPage="contributors"
 >
   <!-- Welcome Section -->
@@ -109,15 +109,15 @@ const authors = await getCollection('authors', ({ data }) => data.published);
       </p>
 
       <!-- Template Navigation -->
-      <div class="template-nav">
-        <button class="template-nav-btn active" data-tab="launch">Launch Day</button>
-        <button class="template-nav-btn" data-tab="week">During the Week</button>
-        <button class="template-nav-btn" data-tab="newsletter">Newsletter</button>
-        <button class="template-nav-btn" data-tab="ongoing">Ongoing</button>
+      <div class="template-nav" role="tablist" aria-label="Copy templates by timing">
+        <button class="template-nav-btn active" data-tab="launch" role="tab" aria-selected="true" aria-controls="tab-launch" id="tab-btn-launch">Launch Day</button>
+        <button class="template-nav-btn" data-tab="week" role="tab" aria-selected="false" aria-controls="tab-week" id="tab-btn-week" tabindex="-1">During the Week</button>
+        <button class="template-nav-btn" data-tab="newsletter" role="tab" aria-selected="false" aria-controls="tab-newsletter" id="tab-btn-newsletter" tabindex="-1">Newsletter</button>
+        <button class="template-nav-btn" data-tab="ongoing" role="tab" aria-selected="false" aria-controls="tab-ongoing" id="tab-btn-ongoing" tabindex="-1">Ongoing</button>
       </div>
 
       <!-- Launch Day Templates -->
-      <div class="template-tab active" id="tab-launch">
+      <div class="template-tab active" id="tab-launch" role="tabpanel" aria-labelledby="tab-btn-launch">
         <p class="tab-intro">Your main announcement. Post these when the edition goes live.</p>
 
         <div class="template-grid">
@@ -129,7 +129,7 @@ const authors = await getCollection('authors', ({ data }) => data.published);
             <div class="template-content">
               <pre>It's here.
 
-My essay "[YOUR ESSAY TITLE]" is now live as part of @VoxMosaic Edition One—twenty personal essays on transformation.
+My essay "[YOUR ESSAY TITLE]" is now live as part of @Wingmarks Edition One—twenty essays on the encounters that rearranged us.
 
 Read it free: [YOUR LINK]</pre>
             </div>
@@ -142,9 +142,9 @@ Read it free: [YOUR LINK]</pre>
               <span class="template-length">With tags</span>
             </div>
             <div class="template-content">
-              <pre>My essay "[YOUR ESSAY TITLE]" just went live in @VoxMosaic's debut edition.
+              <pre>My essay "[YOUR ESSAY TITLE]" just went live in @Wingmarks's debut edition.
 
-Twenty writers on transformation. Free to read.
+Twenty writers. The encounters that rearranged us. Free to read.
 
 [YOUR LINK]
 
@@ -159,15 +159,15 @@ Don't miss pieces by @[AUTHOR] @[AUTHOR] @[AUTHOR] — all worth your time.</pre
               <span class="template-length">Professional</span>
             </div>
             <div class="template-content">
-              <pre>My personal essay "[YOUR ESSAY TITLE]" has been published in Vox Mosaic's debut edition.
+              <pre>My personal essay "[YOUR ESSAY TITLE]" has been published in Wingmarks's debut edition.
 
-The collection brings together twenty writers exploring transformation—career pivots, identity shifts, geographic moves, and the internal work of becoming who we're meant to be.
+The collection brings together twenty writers on the encounters that rearranged them—the people, animals, and living systems that left lasting impressions.
 
-For anyone navigating their own transformation, I hope this resonates.
+For anyone who's been changed by contact with something other, I hope this resonates.
 
 Read it here: [YOUR LINK]
 
-#personalgrowth #writing #transformation</pre>
+#personalgrowth #writing #encounters</pre>
             </div>
             <button class="copy-btn">Copy</button>
           </div>
@@ -180,13 +180,13 @@ Read it here: [YOUR LINK]
             <div class="template-content">
               <pre>Something I've been working on is finally here.
 
-My essay "[YOUR ESSAY TITLE]" is part of @voxmosaic's first edition—twenty writers exploring transformation.
+My essay "[YOUR ESSAY TITLE]" is part of @wingmarks's first edition—twenty writers on the encounters that rearranged us.
 
 It's about [ONE SENTENCE DESCRIPTION].
 
 Link in bio to read the full piece (free).
 
-#voxmosaic #personalessay #transformation #writing</pre>
+#wingmarks #personalessay #encounters #writing</pre>
             </div>
             <button class="copy-btn">Copy</button>
           </div>
@@ -199,7 +199,7 @@ Link in bio to read the full piece (free).
             <div class="template-content">
               <pre>wrote an essay about [TOPIC] and it's finally out in the world
 
-it's part of @voxmosaic — 20 personal essays on transformation, all free to read
+it's part of @wingmarks — 20 essays on the encounters that rearranged us, all free to read
 
 [YOUR LINK]</pre>
             </div>
@@ -214,7 +214,7 @@ it's part of @voxmosaic — 20 personal essays on transformation, all free to re
             <div class="template-content">
               <pre>I'm excited to share that my essay "[YOUR ESSAY TITLE]" is now published!
 
-It's part of Vox Mosaic Edition One — a collection of twenty personal essays exploring transformation. The whole thing is free to read online.
+It's part of Wingmarks Edition One — twenty essays on the encounters that rearranged us. The whole collection is free to read online.
 
 If you've ever [RELATE TO YOUR ESSAY'S THEME], I think this might resonate.
 
@@ -226,7 +226,7 @@ If you've ever [RELATE TO YOUR ESSAY'S THEME], I think this might resonate.
       </div>
 
       <!-- During the Week Templates -->
-      <div class="template-tab" id="tab-week">
+      <div class="template-tab" id="tab-week" role="tabpanel" aria-labelledby="tab-btn-week">
         <p class="tab-intro">Keep momentum going. Use these for days 2-7 after launch.</p>
 
         <div class="template-grid">
@@ -236,7 +236,7 @@ If you've ever [RELATE TO YOUR ESSAY'S THEME], I think this might resonate.
               <span class="template-length">Quote share</span>
             </div>
             <div class="template-content">
-              <pre>From my essay in @VoxMosaic:
+              <pre>From my essay in @Wingmarks:
 
 "[YOUR FAVORITE 1-2 SENTENCES FROM YOUR ESSAY]"
 
@@ -251,7 +251,7 @@ Read the full piece: [YOUR LINK]</pre>
               <span class="template-length">Cross-promo</span>
             </div>
             <div class="template-content">
-              <pre>One of my favorites from @VoxMosaic Edition One:
+              <pre>One of my favorites from @Wingmarks Edition One:
 
 "[THEIR ESSAY TITLE]" by @[THEIR HANDLE]
 
@@ -268,7 +268,7 @@ Read the full piece: [YOUR LINK]</pre>
               <span class="template-length">Thread starter</span>
             </div>
             <div class="template-content">
-              <pre>I wrote about [TOPIC] for @VoxMosaic. Here's the story behind the essay:
+              <pre>I wrote about [TOPIC] for @Wingmarks. Here's the story behind the essay:
 
 [THREAD CONTINUES WITH 2-4 TWEETS ABOUT YOUR PROCESS, INSPIRATION, OR KEY INSIGHTS]
 
@@ -298,9 +298,9 @@ full essay in bio</pre>
               <span class="template-length">End of week</span>
             </div>
             <div class="template-content">
-              <pre>If you missed it this week — my essay "[YOUR ESSAY TITLE]" is live in @VoxMosaic's first edition.
+              <pre>If you missed it this week — my essay "[YOUR ESSAY TITLE]" is live in @Wingmarks's first edition.
 
-Twenty essays on transformation. All free.
+Twenty essays. The marks left by contact. All free.
 
 [YOUR LINK]</pre>
             </div>
@@ -325,7 +325,7 @@ If you haven't read it yet: [YOUR LINK]</pre>
       </div>
 
       <!-- Newsletter Templates -->
-      <div class="template-tab" id="tab-newsletter">
+      <div class="template-tab" id="tab-newsletter" role="tabpanel" aria-labelledby="tab-btn-newsletter">
         <p class="tab-intro">For your email list. Personal recommendations convert best.</p>
 
         <div class="template-grid single-column">
@@ -341,7 +341,7 @@ Hi [NAME],
 
 Quick note to share that my essay "[YOUR ESSAY TITLE]" is now live.
 
-It's part of Vox Mosaic Edition One—a collection of twenty personal essays exploring transformation. Immigration, identity, divorce, reinvention, family... the moments that change us.
+It's part of Wingmarks Edition One—twenty essays on the encounters that rearranged us. The people, animals, and living systems that left lasting impressions.
 
 The whole edition is free to read online (and as a PDF).
 
@@ -370,7 +370,7 @@ Thanks for reading,
 
 I have a new essay out. It's called "[YOUR ESSAY TITLE]" and it's about [ONE SENTENCE].
 
-It's part of a collection called Vox Mosaic — 20 writers on transformation. Free to read.
+It's part of a collection called Wingmarks — 20 writers on the encounters that rearranged us. Free to read.
 
 Here's the link: [YOUR LINK]
 
@@ -385,7 +385,7 @@ Here's the link: [YOUR LINK]
               <span class="template-length">P.S. addition</span>
             </div>
             <div class="template-content">
-              <pre>P.S. My essay "[YOUR ESSAY TITLE]" just came out in Vox Mosaic — a collection of 20 personal essays on transformation. It's free to read here: [YOUR LINK]</pre>
+              <pre>P.S. My essay "[YOUR ESSAY TITLE]" just came out in Wingmarks — a collection of 20 essays on the encounters that rearranged us. It's free to read here: [YOUR LINK]</pre>
             </div>
             <button class="copy-btn">Copy</button>
           </div>
@@ -393,7 +393,7 @@ Here's the link: [YOUR LINK]
       </div>
 
       <!-- Ongoing Templates -->
-      <div class="template-tab" id="tab-ongoing">
+      <div class="template-tab" id="tab-ongoing" role="tabpanel" aria-labelledby="tab-btn-ongoing">
         <p class="tab-intro">For your bio, future mentions, and reshares down the road.</p>
 
         <div class="template-grid">
@@ -403,7 +403,7 @@ Here's the link: [YOUR LINK]
               <span class="template-length">One line</span>
             </div>
             <div class="template-content">
-              <pre>Latest: "[YOUR ESSAY TITLE]" in Vox Mosaic → [YOUR LINK]</pre>
+              <pre>Latest: "[YOUR ESSAY TITLE]" in Wingmarks → [YOUR LINK]</pre>
             </div>
             <button class="copy-btn">Copy</button>
           </div>
@@ -414,7 +414,7 @@ Here's the link: [YOUR LINK]
               <span class="template-length">Mention</span>
             </div>
             <div class="template-content">
-              <pre>I recently wrote about [TOPIC] in an essay for Vox Mosaic. It's called "[YOUR ESSAY TITLE]" — you can read it free at voxmosaic.com.</pre>
+              <pre>I recently wrote about [TOPIC] in an essay for Wingmarks. It's called "[YOUR ESSAY TITLE]" — you can read it free at voxmosaic.com.</pre>
             </div>
             <button class="copy-btn">Copy</button>
           </div>
@@ -425,7 +425,7 @@ Here's the link: [YOUR LINK]
               <span class="template-length">1 month later</span>
             </div>
             <div class="template-content">
-              <pre>A month ago, my essay "[YOUR ESSAY TITLE]" came out in @VoxMosaic.
+              <pre>A month ago, my essay "[YOUR ESSAY TITLE]" came out in @Wingmarks.
 
 If you missed it — or want to revisit — it's still free: [YOUR LINK]
 
@@ -455,7 +455,7 @@ Thank you to everyone who read and shared. It meant a lot.</pre>
               <span class="template-length">Publication credit</span>
             </div>
             <div class="template-content">
-              <pre>"[YOUR ESSAY TITLE]" — Vox Mosaic, Edition One (2026)
+              <pre>"[YOUR ESSAY TITLE]" — Wingmarks, Edition One (2026)
 [YOUR LINK]</pre>
             </div>
             <button class="copy-btn">Copy</button>
@@ -467,7 +467,7 @@ Thank you to everyone who read and shared. It meant a lot.</pre>
               <span class="template-length">One line</span>
             </div>
             <div class="template-content">
-              <pre>Their essay "[YOUR ESSAY TITLE]" appeared in Vox Mosaic's debut edition on transformation.</pre>
+              <pre>Their essay "[YOUR ESSAY TITLE]" appeared in Wingmarks's debut edition — the encounters that rearranged us.</pre>
             </div>
             <button class="copy-btn">Copy</button>
           </div>
@@ -489,7 +489,7 @@ Thank you to everyone who read and shared. It meant a lot.</pre>
           <div class="timeline-day">Launch Day</div>
           <div class="timeline-action">
             <strong>Share your launch announcement</strong>
-            <p>Post to your primary platforms. Tag @VoxMosaic and other contributors you'd like to highlight.</p>
+            <p>Post to your primary platforms. Tag @Wingmarks and other contributors you'd like to highlight.</p>
           </div>
         </div>
         <div class="timeline-item">
@@ -614,7 +614,7 @@ Thank you to everyone who read and shared. It meant a lot.</pre>
         Questions about assets, sharing, or anything else? We're here.
       </p>
       <div class="page-cta-buttons">
-        <a href="mailto:contributors@voxmosaic.com" class="btn-primary">Email Us</a>
+        <a href="mailto:contributors@wingmarks.com" class="btn-primary">Email Us</a>
         <a href="/" class="btn-secondary">View Edition</a>
       </div>
     </div>
@@ -628,15 +628,15 @@ Thank you to everyone who read and shared. It meant a lot.</pre>
   }
 
   .contributor-welcome h2 {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--ff-display);
     font-size: 1.75rem;
-    font-weight: 600;
+    font-weight: 500;
     color: var(--black);
     margin-bottom: 1.25rem;
   }
 
   .contributor-welcome p {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--ff-body);
     font-size: 1rem;
     line-height: 1.8;
     color: var(--gray-700);
@@ -649,15 +649,15 @@ Thank you to everyone who read and shared. It meant a lot.</pre>
 
   /* Section titles */
   .section-title {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--ff-display);
     font-size: 1.25rem;
-    font-weight: 600;
+    font-weight: 500;
     color: var(--black);
     margin-bottom: 1rem;
   }
 
   .section-intro {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--ff-ui);
     font-size: 0.95rem;
     line-height: 1.7;
     color: var(--gray-600);
@@ -695,7 +695,7 @@ Thank you to everyone who read and shared. It meant a lot.</pre>
   }
 
   .quick-link-label {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--ff-ui);
     font-size: 0.9rem;
     font-weight: 600;
     color: var(--black);
@@ -703,7 +703,7 @@ Thank you to everyone who read and shared. It meant a lot.</pre>
   }
 
   .quick-link-desc {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--ff-ui);
     font-size: 0.85rem;
     color: var(--gray-600);
     line-height: 1.4;
@@ -719,7 +719,7 @@ Thank you to everyone who read and shared. It meant a lot.</pre>
   }
 
   .asset-category h3 {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--ff-ui);
     font-size: 1.1rem;
     font-weight: 600;
     color: var(--black);
@@ -727,7 +727,7 @@ Thank you to everyone who read and shared. It meant a lot.</pre>
   }
 
   .asset-note {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--ff-ui);
     font-size: 0.9rem;
     line-height: 1.6;
     color: var(--gray-600);
@@ -767,7 +767,7 @@ Thank you to everyone who read and shared. It meant a lot.</pre>
   }
 
   .asset-placeholder {
-    font-family: 'Inter', monospace;
+    font-family: var(--ff-ui);
     font-size: 0.85rem;
     color: var(--gray-400);
   }
@@ -781,14 +781,14 @@ Thank you to everyone who read and shared. It meant a lot.</pre>
   }
 
   .asset-name {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--ff-ui);
     font-size: 0.9rem;
     font-weight: 500;
     color: var(--black);
   }
 
   .asset-download {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--ff-ui);
     font-size: 0.85rem;
     font-weight: 500;
     color: var(--gray-600);
@@ -812,7 +812,7 @@ Thank you to everyone who read and shared. It meant a lot.</pre>
   }
 
   .asset-coming-soon p {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--ff-ui);
     font-size: 0.9rem;
     color: var(--gray-600);
     margin: 0;
@@ -831,7 +831,7 @@ Thank you to everyone who read and shared. It meant a lot.</pre>
     background: var(--white);
     border: 1px solid var(--gray-200);
     border-radius: 8px;
-    font-family: 'Inter', sans-serif;
+    font-family: var(--ff-ui);
     font-size: 0.85rem;
     font-weight: 500;
     color: var(--gray-600);
@@ -865,7 +865,7 @@ Thank you to everyone who read and shared. It meant a lot.</pre>
   }
 
   .tab-intro {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--ff-ui);
     font-size: 0.95rem;
     line-height: 1.6;
     color: var(--gray-600);
@@ -910,14 +910,14 @@ Thank you to everyone who read and shared. It meant a lot.</pre>
   }
 
   .template-platform {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--ff-ui);
     font-size: 0.8rem;
     font-weight: 600;
     color: var(--black);
   }
 
   .template-length {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--ff-ui);
     font-size: 0.7rem;
     font-weight: 500;
     letter-spacing: 0.03em;
@@ -935,7 +935,7 @@ Thank you to everyone who read and shared. It meant a lot.</pre>
   }
 
   .template-content pre {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--ff-ui);
     font-size: 0.85rem;
     line-height: 1.65;
     white-space: pre-wrap;
@@ -951,7 +951,7 @@ Thank you to everyone who read and shared. It meant a lot.</pre>
     background: var(--gray-100);
     border: none;
     border-top: 1px solid var(--gray-200);
-    font-family: 'Inter', sans-serif;
+    font-family: var(--ff-ui);
     font-size: 0.75rem;
     font-weight: 600;
     letter-spacing: 0.05em;
@@ -999,7 +999,7 @@ Thank you to everyone who read and shared. It meant a lot.</pre>
   }
 
   .timeline-day {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--ff-ui);
     font-size: 0.8rem;
     font-weight: 600;
     letter-spacing: 0.02em;
@@ -1008,7 +1008,7 @@ Thank you to everyone who read and shared. It meant a lot.</pre>
   }
 
   .timeline-action strong {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--ff-ui);
     font-size: 0.95rem;
     font-weight: 600;
     color: var(--black);
@@ -1017,7 +1017,7 @@ Thank you to everyone who read and shared. It meant a lot.</pre>
   }
 
   .timeline-action p {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--ff-ui);
     font-size: 0.9rem;
     line-height: 1.6;
     color: var(--gray-600);
@@ -1054,7 +1054,7 @@ Thank you to everyone who read and shared. It meant a lot.</pre>
   }
 
   .contributor-number {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--ff-ui);
     font-size: 0.7rem;
     font-weight: 600;
     letter-spacing: 0.05em;
@@ -1063,7 +1063,7 @@ Thank you to everyone who read and shared. It meant a lot.</pre>
   }
 
   .contributor-name {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--ff-ui);
     font-size: 0.95rem;
     font-weight: 600;
     color: var(--black);
@@ -1071,7 +1071,7 @@ Thank you to everyone who read and shared. It meant a lot.</pre>
   }
 
   .contributor-essay {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--ff-ui);
     font-size: 0.85rem;
     line-height: 1.4;
     color: var(--gray-600);
@@ -1088,7 +1088,7 @@ Thank you to everyone who read and shared. It meant a lot.</pre>
   }
 
   .faq-question {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--ff-ui);
     font-size: 1rem;
     font-weight: 600;
     color: var(--black);
@@ -1096,7 +1096,7 @@ Thank you to everyone who read and shared. It meant a lot.</pre>
   }
 
   .faq-answer {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--ff-ui);
     font-size: 0.95rem;
     line-height: 1.7;
     color: var(--gray-600);
@@ -1171,29 +1171,61 @@ Thank you to everyone who read and shared. It meant a lot.</pre>
 </style>
 
 <script>
-  // Tab navigation functionality
-  const tabButtons = document.querySelectorAll('.template-nav-btn');
+  // Tab navigation functionality with ARIA support
+  const tabButtons = document.querySelectorAll<HTMLButtonElement>('.template-nav-btn');
   const tabPanels = document.querySelectorAll('.template-tab');
+  const tabList = Array.from(tabButtons);
+
+  function activateTab(btn: HTMLButtonElement) {
+    const targetTab = btn.dataset.tab;
+
+    // Update button states and ARIA
+    tabButtons.forEach(b => {
+      b.classList.remove('active');
+      b.setAttribute('aria-selected', 'false');
+      b.setAttribute('tabindex', '-1');
+    });
+    btn.classList.add('active');
+    btn.setAttribute('aria-selected', 'true');
+    btn.removeAttribute('tabindex');
+
+    // Update panel visibility
+    tabPanels.forEach(panel => {
+      panel.classList.remove('active');
+      if (panel.id === `tab-${targetTab}`) {
+        panel.classList.add('active');
+      }
+    });
+  }
 
   tabButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const targetTab = btn.dataset.tab;
+    btn.addEventListener('click', () => activateTab(btn));
 
-      // Update button states
-      tabButtons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+    // Arrow key navigation between tabs
+    btn.addEventListener('keydown', (e) => {
+      const index = tabList.indexOf(btn);
+      let newIndex: number | null = null;
 
-      // Update panel visibility
-      tabPanels.forEach(panel => {
-        panel.classList.remove('active');
-        if (panel.id === `tab-${targetTab}`) {
-          panel.classList.add('active');
-        }
-      });
+      if (e.key === 'ArrowRight') {
+        newIndex = (index + 1) % tabList.length;
+      } else if (e.key === 'ArrowLeft') {
+        newIndex = (index - 1 + tabList.length) % tabList.length;
+      } else if (e.key === 'Home') {
+        newIndex = 0;
+      } else if (e.key === 'End') {
+        newIndex = tabList.length - 1;
+      }
+
+      if (newIndex !== null) {
+        e.preventDefault();
+        const newTab = tabList[newIndex];
+        activateTab(newTab);
+        newTab.focus();
+      }
     });
   });
 
-  // Copy button functionality
+  // Copy button functionality with live region feedback
   document.querySelectorAll('.copy-btn').forEach(btn => {
     btn.addEventListener('click', async () => {
       const card = btn.closest('.template-card');
@@ -1204,14 +1236,18 @@ Thank you to everyone who read and shared. It meant a lot.</pre>
         await navigator.clipboard.writeText(pre.textContent || '');
         btn.textContent = 'Copied!';
         btn.classList.add('copied');
+        btn.setAttribute('aria-live', 'polite');
         setTimeout(() => {
           btn.textContent = 'Copy';
           btn.classList.remove('copied');
+          btn.removeAttribute('aria-live');
         }, 2000);
       } catch (err) {
         btn.textContent = 'Failed';
+        btn.setAttribute('aria-live', 'polite');
         setTimeout(() => {
           btn.textContent = 'Copy';
+          btn.removeAttribute('aria-live');
         }, 2000);
       }
     });

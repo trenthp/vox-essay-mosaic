@@ -2,6 +2,8 @@
 import Base from '@/layouts/Base.astro';
 import MosaicTile from '@/components/ui/MosaicTile.astro';
 import EmailForm from '@/components/ui/EmailForm.astro';
+import Flourish from '@/components/ui/Flourish.astro';
+import SkeletonKey from '@/components/ui/SkeletonKey.astro';
 import { getCollection } from 'astro:content';
 
 const authors = await getCollection('authors', ({ data }) => data.published);
@@ -10,23 +12,27 @@ const sortedAuthors = authors.sort((a, b) =>
 );
 ---
 
-<Base title="Vox Essay Mosaic" currentPage="home">
+<Base title="Wingmarks" currentPage="home">
   <!-- Hero -->
   <section class="hero hero--mesh">
+    <canvas id="rain-canvas" class="rain-canvas" aria-hidden="true"></canvas>
+    <img
+      src="/img/wingspan.svg"
+      alt=""
+      aria-hidden="true"
+      class="hero-wingspan"
+    />
     <div class="hero-inner">
       <div class="title-container">
         <div class="title-line">
-          <h1 class="title title-1">Vox</h1>
-        </div>
-        <div class="title-line">
-          <h1 class="title title-2">Mosaic</h1>
+          <h1 class="title title-1">Wingmarks</h1>
         </div>
       </div>
 
       <div class="tagline-container">
         <p class="tagline">
-          Twenty voices. One mosaic. Essays on the moments that
-          <strong>break us open</strong> and remake us whole.
+          Twenty essays on the encounters that
+          <strong>rearranged us</strong> — the people, animals, and living systems that left lasting impressions.
         </p>
       </div>
 
@@ -36,11 +42,20 @@ const sortedAuthors = authors.sort((a, b) =>
     </div>
   </section>
 
+  <script>
+    import { initRain } from '@/lib/rain/rain-init';
+    const canvas = document.getElementById('rain-canvas');
+    initRain(canvas);
+  </script>
+
   <!-- Mosaic Grid -->
   <section class="mosaic-section" id="authors">
     <div class="mosaic-header">
       <p class="mosaic-label">The Voices</p>
-      <h2 class="mosaic-title">Twenty stories.<br><em>One becoming.</em></h2>
+      <h2 class="mosaic-title">Twenty voices.<br><em>One mark left behind.</em></h2>
+      <div class="mosaic-divider" aria-hidden="true">
+        <Flourish variant="divider" />
+      </div>
     </div>
 
     <div class="mosaic-grid">
@@ -68,7 +83,7 @@ const sortedAuthors = authors.sort((a, b) =>
   </section>
 
   <!-- Quote -->
-  <section class="quote-section">
+  <section class="quote-section" aria-label="Featured quote">
     <div class="quote-content">
       <div class="quote-mark">"</div>
       <p class="quote-text">
@@ -82,6 +97,11 @@ const sortedAuthors = authors.sort((a, b) =>
       </div>
     </div>
   </section>
+
+  <!-- Section break -->
+  <div class="section-break" aria-hidden="true">
+    <SkeletonKey size="medium" />
+  </div>
 
   <!-- Signup -->
   <section class="signup-section" id="signup">
