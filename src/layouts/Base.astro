@@ -14,12 +14,12 @@ interface Props {
 
 const {
   title,
-  description = "Twenty essays on the encounters that rearranged us — the people, animals, and living systems that left lasting impressions. A Luminous Estates publication.",
+  description = "Twenty essays on the encounters that rearranged us. The people, animals, and living systems that left lasting impressions. A Luminous Estate publication.",
   ogImage = "/og-image.jpg",
   currentPage = ""
 } = Astro.props;
 
-const siteTitle = title === "Wingmarks" ? title : `${title} — Wingmarks`;
+const siteTitle = title === "Wingmarks" ? title : `${title} | Wingmarks`;
 ---
 
 <!DOCTYPE html>
@@ -56,9 +56,6 @@ const siteTitle = title === "Wingmarks" ? title : `${title} — Wingmarks`;
 <body>
   <a href="#main" class="skip-to-content">Skip to content</a>
 
-  <!-- Decorative elements (hidden from screen readers) -->
-  <div class="cursor-dot" id="cursor" aria-hidden="true"></div>
-
   <div class="page">
     <Nav currentPage={currentPage} />
 
@@ -71,41 +68,6 @@ const siteTitle = title === "Wingmarks" ? title : `${title} — Wingmarks`;
 
   <script>
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    // ========================================
-    // Custom cursor tracking
-    // ========================================
-    if (!prefersReducedMotion && window.innerWidth > 768 && window.matchMedia('(pointer: fine)').matches) {
-      const cursor = document.getElementById('cursor');
-      if (cursor) {
-        let mouseX = 0, mouseY = 0;
-        let cursorX = 0, cursorY = 0;
-
-        document.addEventListener('mousemove', (e) => {
-          mouseX = e.clientX;
-          mouseY = e.clientY;
-          if (!cursor.classList.contains('visible')) {
-            cursor.classList.add('visible');
-          }
-        });
-
-        function animateCursor() {
-          cursorX += (mouseX - cursorX) * 0.15;
-          cursorY += (mouseY - cursorY) * 0.15;
-          cursor.style.left = cursorX + 'px';
-          cursor.style.top = cursorY + 'px';
-          requestAnimationFrame(animateCursor);
-        }
-        requestAnimationFrame(animateCursor);
-
-        // Expand cursor on interactive elements
-        const interactives = document.querySelectorAll('a, button, .mosaic-tile');
-        interactives.forEach((el) => {
-          el.addEventListener('mouseenter', () => cursor.classList.add('expanded'));
-          el.addEventListener('mouseleave', () => cursor.classList.remove('expanded'));
-        });
-      }
-    }
 
     // ========================================
     // Intersection observer for tile animations

@@ -109,43 +109,6 @@ a.nav-logo {
   text-decoration: none;
 }
 
-/* Custom cursor */
-@media (pointer: fine) {
-  .cursor-dot {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 8px;
-    height: 8px;
-    background: var(--wm-rust);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 10000;
-    mix-blend-mode: multiply;
-    transition: width 0.3s var(--ease-trace), height 0.3s var(--ease-trace),
-                background 0.3s var(--ease-trace), opacity 0.3s var(--ease-trace);
-    transform: translate(-50%, -50%);
-    opacity: 0;
-  }
-
-  .cursor-dot.visible {
-    opacity: 1;
-  }
-
-  .cursor-dot.expanded {
-    width: 24px;
-    height: 24px;
-    background: transparent;
-    border: 1.5px solid var(--wm-rust);
-  }
-}
-
-/* Hide custom cursor on touch devices */
-@media (pointer: coarse), (max-width: 768px) {
-  .cursor-dot {
-    display: none !important;
-  }
-}
 
 /* ========================================
    TRACE REVEAL ANIMATIONS
@@ -208,10 +171,6 @@ a.nav-logo {
 
   .title-1::after {
     width: 60px !important;
-  }
-
-  .cursor-dot {
-    display: none !important;
   }
 
   body::after {

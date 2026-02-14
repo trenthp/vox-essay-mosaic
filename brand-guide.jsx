@@ -104,7 +104,7 @@ export default function BrandGuide() {
 
   const tabs = [
     { id:"overview", label:"Overview" },
-    { id:"parent",   label:"Luminous Estates" },
+    { id:"parent",   label:"Luminous Estate" },
     { id:"product",  label:"Wingmarks" },
     { id:"ui",       label:"UI System" },
     { id:"guidelines", label:"Guidelines" },
@@ -126,7 +126,7 @@ export default function BrandGuide() {
             <span style={{ fontSize:10, textTransform:"uppercase", letterSpacing:"0.28em", color:"#7A8B6F", fontWeight:600 }}>Brand System · 2026</span>
           </div>
           <h1 style={{ fontFamily:'"Cormorant Garamond",serif', fontSize:46, fontWeight:300, color:"#F6F1E7", margin:"6px 0 2px", lineHeight:1, letterSpacing:"0.02em" }}>
-            Luminous Estates
+            Luminous Estate
           </h1>
           <p style={{ fontFamily:'"Cormorant Garamond",serif', fontSize:20, color:"#A67C5B", margin:0, fontWeight:300, fontStyle:"italic" }}>
             + Wingmarks — Visual Identity & Design System
@@ -163,9 +163,9 @@ export default function BrandGuide() {
               {/* Parent */}
               <div style={{ background:"#2C2C2A", borderRadius:12, padding:36, color:"#F0EBE1" }}>
                 <div style={{ fontSize:10, textTransform:"uppercase", letterSpacing:"0.22em", color:"#8B9A7E", marginBottom:16, fontWeight:600 }}>Parent Publisher</div>
-                <div style={{ fontFamily:'"Cormorant Garamond",serif', fontSize:34, fontWeight:300, lineHeight:1.1, marginBottom:16, letterSpacing:"0.03em" }}>Luminous Estates</div>
+                <div style={{ fontFamily:'"Cormorant Garamond",serif', fontSize:34, fontWeight:300, lineHeight:1.1, marginBottom:16, letterSpacing:"0.03em" }}>Luminous Estate</div>
                 <p style={{ fontSize:13, lineHeight:1.7, color:"#C4B9A8", margin:0 }}>
-                  The prestige house. Timeless, authoritative, literary. Luminous Estates is the institutional voice — the estate, the archive, the curator. It conveys permanence and literary weight. The container that gives shape to what lives inside.
+                  The prestige house. Timeless, authoritative, literary. Luminous Estate is the institutional voice — the estate, the archive, the curator. It conveys permanence and literary weight. The container that gives shape to what lives inside.
                 </p>
                 <div style={{ marginTop:20, display:"flex", gap:8 }}>
                   {["#2C2C2A","#F0EBE1","#8B9A7E","#B8A88A","#3D4F3D"].map(c =>
@@ -222,7 +222,7 @@ export default function BrandGuide() {
               {[
                 { label:"Audience", title:"The Combined Following", desc:"Each essayist brings their own community. The aggregate audience is literary-curious, digitally native, and values psychological depth over surface spectacle." },
                 { label:"Differentiator", title:"Creator-Led Publishing", desc:"Not traditional publishing. Not self-publishing. A curated collective where social media voices become literary voices — with the credibility of a prestige house behind them." },
-                { label:"Tone", title:"Contemplative Warmth", desc:"Luminous Estates speaks with quiet confidence. Wingmarks speaks with reflective intimacy. Together: gravitas without pretension, depth without exclusion. A book left open on a table." },
+                { label:"Tone", title:"Contemplative Warmth", desc:"Luminous Estate speaks with quiet confidence. Wingmarks speaks with reflective intimacy. Together: gravitas without pretension, depth without exclusion. A book left open on a table." },
               ].map((item,i) => (
                 <div key={i} style={{ padding:24, background:"#fff", borderRadius:10, border:"1px solid #E8E0D0" }}>
                   <div style={{ fontSize:10, textTransform:"uppercase", letterSpacing:"0.2em", color:"#8B9A7E", marginBottom:10, fontWeight:600 }}>{item.label}</div>
@@ -273,7 +273,7 @@ export default function BrandGuide() {
 
         {/* ══════════ LUMINOUS ESTATES ══════════ */}
         {activeTab === "parent" && (<>
-          <Section title="Color Palette" subtitle="Luminous Estates">
+          <Section title="Color Palette" subtitle="Luminous Estate">
             <div style={{ display:"flex", gap:14, flexWrap:"wrap", marginBottom:28 }}>
               {Object.values(COLORS.parent).map((c,i) => <ColorSwatch key={i} color={c} />)}
             </div>
@@ -296,13 +296,13 @@ export default function BrandGuide() {
             </div>
           </Section>
 
-          <Section title="Typography" subtitle="Luminous Estates">
-            <TypeSample entry={TYPOGRAPHY.parent.display} sampleText="Luminous Estates" fontSize={42} />
+          <Section title="Typography" subtitle="Luminous Estate">
+            <TypeSample entry={TYPOGRAPHY.parent.display} sampleText="Luminous Estate" fontSize={42} />
             <TypeSample entry={TYPOGRAPHY.parent.body} sampleText="Stories illuminate the corridors of experience, casting light on what we thought we knew." fontSize={21} />
             <TypeSample entry={TYPOGRAPHY.parent.utility} sampleText="NAVIGATION · METADATA · LABELS · 2026" fontSize={17} />
           </Section>
 
-          <Section title="Wordmark" subtitle="Luminous Estates">
+          <Section title="Wordmark" subtitle="Luminous Estate">
             <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:24 }}>
               <div style={{ background:"#2C2C2A", borderRadius:12, padding:48, display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", minHeight:200 }}>
                 <div style={{ fontFamily:'"Cormorant Garamond",serif', fontSize:38, fontWeight:300, color:"#F0EBE1", letterSpacing:"0.1em", textAlign:"center", lineHeight:1 }}>LUMINOUS</div>
@@ -345,7 +345,7 @@ export default function BrandGuide() {
             <div style={{ padding:20, background:"#fff", borderRadius:8, border:"1px solid #E8E0D0", marginTop:8 }}>
               <div style={{ fontSize:10, textTransform:"uppercase", letterSpacing:"0.2em", color:"#A67C5B", marginBottom:10, fontWeight:600 }}>Typography Note</div>
               <p style={{ fontSize:13, color:"#777", lineHeight:1.65, margin:0 }}>
-                Wingmarks uses Cormorant Garamond at lighter weights than the parent brand. Where Luminous Estates uses it for prestige, Wingmarks uses it for intimacy — the same family, rendered more delicately. The italic weight is the typographic wingmark: a trace, a leaning-toward, the shape of being changed by contact.
+                Wingmarks uses Cormorant Garamond at lighter weights than the parent brand. Where Luminous Estate uses it for prestige, Wingmarks uses it for intimacy — the same family, rendered more delicately. The italic weight is the typographic wingmark: a trace, a leaning-toward, the shape of being changed by contact.
               </p>
             </div>
           </Section>
@@ -370,7 +370,7 @@ export default function BrandGuide() {
               {/* Inline */}
               <div style={{ background:"#2C2C2A", borderRadius:12, padding:40, display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center", minHeight:240 }}>
                 <div style={{ fontFamily:'"Cormorant Garamond",serif', fontSize:28, fontWeight:300, color:"#F6F1E7", lineHeight:1, letterSpacing:"0.05em" }}>Wingmarks</div>
-                <div style={{ fontFamily:"DM Sans,sans-serif", fontSize:9, color:"#666", letterSpacing:"0.3em", textTransform:"uppercase", marginTop:10 }}>By Luminous Estates</div>
+                <div style={{ fontFamily:"DM Sans,sans-serif", fontSize:9, color:"#666", letterSpacing:"0.3em", textTransform:"uppercase", marginTop:10 }}>By Luminous Estate</div>
               </div>
             </div>
             <p style={{ fontSize:13, color:"#888", marginTop:16, lineHeight:1.6, fontStyle:"italic" }}>
@@ -519,7 +519,7 @@ export default function BrandGuide() {
                 </div>
               </div>
               <div style={{ borderTop:"1px solid rgba(122,139,111,0.15)", paddingTop:16, display:"flex", justifyContent:"space-between", alignItems:"center" }}>
-                <div style={{ fontSize:11, color:"#6B7B68" }}>© 2026 Luminous Estates LLC</div>
+                <div style={{ fontSize:11, color:"#6B7B68" }}>© 2026 Luminous Estate LLC</div>
                 <div style={{ display:"flex", gap:16 }}>
                   {["Privacy","Terms"].map(l =>
                     <span key={l} style={{ fontSize:11, color:"#6B7B68", cursor:"pointer" }}>{l}</span>
@@ -577,7 +577,7 @@ export default function BrandGuide() {
           <Section title="Voice & Tone" subtitle="Copy Guidelines">
             <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:20 }}>
               <div style={{ padding:24, background:"#fff", borderRadius:10, border:"1px solid #E8E0D0" }}>
-                <div style={{ fontSize:10, textTransform:"uppercase", letterSpacing:"0.2em", color:"#3D4F3D", marginBottom:12, fontWeight:600 }}>Luminous Estates Voice</div>
+                <div style={{ fontSize:10, textTransform:"uppercase", letterSpacing:"0.2em", color:"#3D4F3D", marginBottom:12, fontWeight:600 }}>Luminous Estate Voice</div>
                 <p style={{ fontSize:13, lineHeight:1.7, color:"#666", margin:"0 0 12px" }}>Institutional warmth. A curator opening the doors to a private library. Quiet confidence, never shouting.</p>
                 <div style={{ fontSize:12, color:"#2C2C2A", marginBottom:4 }}><strong>Do:</strong> "We publish the stories that illuminate."</div>
                 <div style={{ fontSize:12, color:"#999" }}><strong>Don't:</strong> "Check out our amazing new book!"</div>
@@ -600,12 +600,12 @@ export default function BrandGuide() {
           <Section title="Brand Relationship" subtitle="Usage Rules">
             <div style={{ padding:24, background:"#fff", borderRadius:10, border:"1px solid #E8E0D0" }}>
               <p style={{ fontSize:13, lineHeight:1.7, color:"#666", margin:"0 0 16px" }}>
-                Luminous Estates appears in footer, legal, and "About" contexts — the quiet institutional backing. Wingmarks leads the consumer experience. Think: Penguin Random House sits behind individual imprints. Present but not competing for attention.
+                Luminous Estate appears in footer, legal, and "About" contexts — the quiet institutional backing. Wingmarks leads the consumer experience. Think: Penguin Random House sits behind individual imprints. Present but not competing for attention.
               </p>
               <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr 1fr", gap:14 }}>
                 {[
                   { context:"Website Header", show:"Wingmarks only" },
-                  { context:"Website Footer", show:"© 2026 Luminous Estates LLC" },
+                  { context:"Website Footer", show:"© 2026 Luminous Estate LLC" },
                   { context:"Social Media", show:"Wingmarks primary, LE in bio" },
                   { context:"Book Cover", show:"LE small logo on spine" },
                   { context:"Press / Media", show:"Both, LE first" },

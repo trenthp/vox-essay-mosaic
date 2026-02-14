@@ -3,75 +3,6 @@ import RainRenderer from "./rain-renderer";
 import ImageLoader from "./image-loader";
 import createCanvas from "./create-canvas";
 
-// Foggy dew palette for texture generation
-const COLORS = {
-  fog: "#E4E8E6",
-  mist: "#D5DCDA",
-  dew: "#C0CAC6",
-  ink: "#1E2823",
-};
-
-// Generate a solid-color canvas texture
-function generateTexture(width, height, color) {
-  let canvas = createCanvas(width, height);
-  let ctx = canvas.getContext("2d");
-  ctx.fillStyle = color;
-  ctx.fillRect(0, 0, width, height);
-  return canvas;
-}
-
-// Generate foreground texture (what refracts through the drops)
-function generateFgTexture(width, height) {
-  let canvas = createCanvas(width, height);
-  let ctx = canvas.getContext("2d");
-
-  // Cool fog base
-  ctx.fillStyle = COLORS.fog;
-  ctx.fillRect(0, 0, width, height);
-
-  // Subtle cool gradient for depth through refraction
-  let grad = ctx.createRadialGradient(
-    width * 0.3, height * 0.4, 0,
-    width * 0.3, height * 0.4, width * 0.7
-  );
-  grad.addColorStop(0, "rgba(192,202,198,0.12)");
-  grad.addColorStop(1, "transparent");
-  ctx.fillStyle = grad;
-  ctx.fillRect(0, 0, width, height);
-
-  return canvas;
-}
-
-// Generate background texture (seen behind the glass)
-function generateBgTexture(width, height) {
-  let canvas = createCanvas(width, height);
-  let ctx = canvas.getContext("2d");
-
-  // Mistier, slightly darker fog
-  ctx.fillStyle = COLORS.mist;
-  ctx.fillRect(0, 0, width, height);
-
-  // Soft cloudy patches
-  let grad1 = ctx.createRadialGradient(
-    width * 0.2, height * 0.3, 0,
-    width * 0.2, height * 0.3, width * 0.5
-  );
-  grad1.addColorStop(0, "rgba(192,202,198,0.3)");
-  grad1.addColorStop(1, "transparent");
-  ctx.fillStyle = grad1;
-  ctx.fillRect(0, 0, width, height);
-
-  let grad2 = ctx.createRadialGradient(
-    width * 0.7, height * 0.6, 0,
-    width * 0.7, height * 0.6, width * 0.4
-  );
-  grad2.addColorStop(0, "rgba(213,220,218,0.25)");
-  grad2.addColorStop(1, "transparent");
-  ctx.fillStyle = grad2;
-  ctx.fillRect(0, 0, width, height);
-
-  return canvas;
-}
 
 export function initRain(canvasEl) {
   if (!canvasEl) return;
@@ -98,22 +29,30 @@ export function initRain(canvasEl) {
   canvasEl.style.width = rect.width + "px";
   canvasEl.style.height = rect.height + "px";
 
-  // Load drop textures
+  // Load drop textures + background photo
   ImageLoader(
     [
       { name: "dropAlpha", src: "/img/rain/drop-alpha.png" },
       { name: "dropColor", src: "/img/rain/drop-color.png" },
+      { name: "sceneBg", src: "/img/outside.jpg" },
     ]
   ).then((images) => {
     const dropAlpha = images.dropAlpha.img;
     const dropColor = images.dropColor.img;
+    const sceneBgImg = images.sceneBg.img;
 
-    // Generate brand-colored scene textures
-    const textureFgSize = { width: 96, height: 64 };
+    // Draw the photo into a canvas for the background texture
     const textureBgSize = { width: 384, height: 256 };
+    const textureBg = createCanvas(textureBgSize.width, textureBgSize.height);
+    const bgCtx = textureBg.getContext("2d");
+    bgCtx.drawImage(sceneBgImg, 0, 0, textureBgSize.width, textureBgSize.height);
 
-    const textureFg = generateFgTexture(textureFgSize.width, textureFgSize.height);
-    const textureBg = generateBgTexture(textureBgSize.width, textureBgSize.height);
+    // Foreground texture: same image but blurred (seen through droplet refraction)
+    const textureFgSize = { width: 96, height: 64 };
+    const textureFg = createCanvas(textureFgSize.width, textureFgSize.height);
+    const fgCtx = textureFg.getContext("2d");
+    fgCtx.filter = "blur(2px)";
+    fgCtx.drawImage(sceneBgImg, 0, 0, textureFgSize.width, textureFgSize.height);
 
     // Create raindrops simulation — "light misting" settings
     const raindrops = new Raindrops(
