@@ -9,7 +9,7 @@ interface Props {
 }
 
 const { number, name, essayTitle, theme, href, isPlaceholder = false } = Astro.props;
-const Tag = href && !isPlaceholder ? 'a' : 'div';
+const Tag = href ? 'a' : 'div';
 
 // Color rotation palette (5 combos from brand guide)
 const palettes = [

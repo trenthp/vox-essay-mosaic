@@ -35,6 +35,19 @@ const essays = defineCollection({
   }),
 });
 
+const blog = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/blog" }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    publishedAt: z.coerce.date(),
+    author: z.string().default('Wingmarks Editorial'),
+    tags: z.array(z.string()).default([]),
+    published: z.boolean().default(true),
+    image: z.string().optional(),
+  }),
+});
+
 const editions = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/editions" }),
   schema: z.object({
@@ -47,4 +60,4 @@ const editions = defineCollection({
   }),
 });
 
-export const collections = { authors, essays, editions };
+export const collections = { authors, essays, editions, blog };

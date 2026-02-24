@@ -1,0 +1,104 @@
+---
+import Base from './Base.astro';
+import '@/styles/pages.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  publishedAt: Date;
+  author: string;
+}
+
+const { title, description, publishedAt, author } = Astro.props;
+
+const formattedDate = publishedAt.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<Base title={title} description={description} currentPage="blog">
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <p class="page-label">Blog</p>
+      <h1 class="page-title">{title}</h1>
+      <div class="blog-meta">
+        <time datetime={publishedAt.toISOString().slice(0, 10)}>{formattedDate}</time>
+        <span class="blog-meta-sep">&middot;</span>
+        <span>{author}</span>
+      </div>
+    </div>
+  </section>
+
+  <article class="content-section">
+    <div class="content-inner blog-content">
+      <slot />
+    </div>
+  </article>
+
+  <section class="page-cta">
+    <div class="page-cta-inner">
+      <a href="/blog" class="btn-secondary">Back to Blog</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .blog-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    font-family: var(--ff-ui);
+    font-size: 0.9rem;
+    color: var(--gray-500);
+  }
+
+  .blog-meta-sep {
+    color: var(--gray-400);
+  }
+
+  .blog-content :global(h2) {
+    font-family: var(--ff-display);
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--wm-ink);
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .blog-content :global(h3) {
+    font-family: var(--ff-display);
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--wm-ink);
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .blog-content :global(ul),
+  .blog-content :global(ol) {
+    margin-bottom: 1.25rem;
+    padding-left: 1.5rem;
+  }
+
+  .blog-content :global(li) {
+    font-family: var(--ff-body);
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--gray-700);
+    margin-bottom: 0.5rem;
+  }
+
+  .blog-content :global(strong) {
+    color: var(--wm-ink);
+  }
+
+  .blog-content :global(hr) {
+    border: none;
+    height: 1px;
+    background: var(--gray-200);
+    margin: 2.5rem 0;
+  }
+</style>

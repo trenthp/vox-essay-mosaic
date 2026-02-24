@@ -227,6 +227,21 @@ body {
   gap: 1.5rem;
 }
 
+.nav-link {
+  font-family: var(--ff-ui);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--wm-dust);
+  transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+  color: var(--wm-moth);
+}
+
 .nav-status {
   display: flex;
   align-items: center;
@@ -457,7 +472,7 @@ body {
 .tagline {
   max-width: 560px;
   font-family: var(--ff-body);
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   font-weight: 400;
   line-height: 1.8;
   color: var(--wm-ink);
@@ -567,10 +582,50 @@ body {
   color: var(--wm-compass);
 }
 
+.mosaic-description {
+  font-family: var(--ff-body);
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: var(--gray-700);
+  max-width: 600px;
+  margin: 1rem auto 0;
+}
+
 .mosaic-divider {
   display: flex;
   justify-content: center;
   margin-top: 1.5rem;
+}
+
+.mosaic-cta-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.mosaic-cta-group .mosaic-tile {
+  flex: 1;
+}
+
+.mosaic-learn-more {
+  display: block;
+  padding: 1rem 1.5rem;
+  text-align: center;
+  font-family: var(--ff-ui);
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--gray-700);
+  text-decoration: none;
+  background: var(--wm-vellum);
+  border-radius: var(--radius);
+  box-shadow: var(--neu-stamp);
+  transition: color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mosaic-learn-more:hover {
+  color: var(--wm-ink);
+  box-shadow: var(--neu-well);
 }
 
 .mosaic-grid {

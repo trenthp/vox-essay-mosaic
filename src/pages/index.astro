@@ -52,34 +52,44 @@ const sortedAuthors = authors.sort((a, b) =>
   <!-- Mosaic Grid -->
   <section class="mosaic-section" id="authors">
     <div class="mosaic-header">
-      <p class="mosaic-label">The Voices</p>
-      <h2 class="mosaic-title">Twenty voices.<br><em>One mark left behind.</em></h2>
+      <p class="mosaic-label">Open Call</p>
+      <h2 class="mosaic-title">Your voice could be<br><em>one of twenty.</em></h2>
+      <p class="mosaic-description">
+        Wingmarks brings together twenty essayists in a collaborative collection. Each contributor
+        receives a 50/50 revenue split, cross-promotion from nineteen fellow writers, and a
+        premium showcase for their work.
+      </p>
       <div class="mosaic-divider" aria-hidden="true">
         <Flourish variant="divider" />
       </div>
     </div>
 
     <div class="mosaic-grid">
-      {sortedAuthors.map((author) => (
+      {/* Sample author tile — shows how contributors are showcased */}
+      {sortedAuthors.filter(a => a.data.theme === "Sample Profile").map((author) => (
         <MosaicTile
           number={author.data.number}
           name={author.data.name}
           essayTitle={author.data.essayTitle}
-          theme={author.data.theme}
+          theme="See How We Showcase Authors"
           href={`/authors/${author.id}`}
         />
       ))}
 
-      {/* Placeholder for remaining spots */}
-      {sortedAuthors.length < 20 && (
+      {/* CTA column — submit tile + learn more */}
+      <div class="mosaic-cta-group">
         <MosaicTile
-          number={String(sortedAuthors.length + 1).padStart(2, '0')}
-          name={`+ ${20 - sortedAuthors.length} more`}
-          essayTitle="voices yet to be revealed"
-          theme="Coming Soon"
+          number="02–20"
+          name="19 spots remaining"
+          essayTitle="yours could be next"
+          theme="Submissions Open March 2"
+          href="/submit"
           isPlaceholder={true}
         />
-      )}
+        <a href="/about" class="mosaic-learn-more">
+          Learn more about Wingmarks &rarr;
+        </a>
+      </div>
     </div>
   </section>
 
@@ -88,12 +98,12 @@ const sortedAuthors = authors.sort((a, b) =>
     <div class="quote-content">
       <div class="quote-mark">"</div>
       <p class="quote-text">
-        I left everything I knew at thirty-two. Not because I was brave,
-        but because staying had become more terrifying than the unknown.
+        We're not looking for polished perfection. We're looking for the
+        encounters that rearranged you &mdash; told with honesty and craft.
       </p>
       <div class="quote-author">
         <div class="quote-author-line"></div>
-        <span class="quote-author-name">Elena Ruiz, from "The Weight of Suitcases"</span>
+        <span class="quote-author-name">The Wingmarks Editorial Team</span>
         <div class="quote-author-line"></div>
       </div>
     </div>

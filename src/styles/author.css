@@ -3,6 +3,59 @@
    Neumorphic minimal design
    ======================================== */
 
+/* Sample Profile Banner */
+.sample-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  background: var(--wm-moth);
+  border-bottom: 1px solid var(--wm-dust);
+}
+
+.sample-banner-text {
+  font-family: var(--ff-ui);
+  font-size: 0.95rem;
+  color: var(--gray-700);
+  margin: 0;
+}
+
+.sample-banner-text strong {
+  color: var(--wm-ink);
+}
+
+.sample-banner-cta {
+  flex-shrink: 0;
+  display: inline-block;
+  padding: 0.6rem 1.25rem;
+  font-family: var(--ff-ui);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: var(--wm-ink);
+  color: var(--wm-moth);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--neu-outset);
+  transition: all 0.3s ease;
+}
+
+.sample-banner-cta:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--neu-emboss);
+}
+
+@media (max-width: 600px) {
+  .sample-banner {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
 /* Author Hero */
 .author-hero {
   min-height: 70vh;

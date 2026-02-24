@@ -15,6 +15,7 @@ interface Props {
 }
 
 const { name, number, essayTitle, theme, bio, excerpt, teaser, image } = Astro.props;
+const isSample = theme === "Sample Profile";
 ---
 
 <Base title={name} description={`${name}'s essay "${essayTitle}" in Wingmarks Edition One`}>
@@ -25,6 +26,15 @@ const { name, number, essayTitle, theme, bio, excerpt, teaser, image } = Astro.p
     </svg>
     Back to Authors
   </a>
+
+  {isSample && (
+    <div class="sample-banner">
+      <p class="sample-banner-text">
+        <strong>This is a sample profile.</strong> Your profile could look like this.
+      </p>
+      <a href="/submit" class="sample-banner-cta">Submit Your Essay</a>
+    </div>
+  )}
 
   <!-- Author Hero -->
   <section class="author-hero">

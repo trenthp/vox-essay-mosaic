@@ -9,6 +9,7 @@ const { currentPage = "" } = Astro.props;
 <nav class="top-nav" aria-label="Main navigation">
   <a href="/" class="nav-logo" aria-current={currentPage === "home" ? "page" : undefined}>Wingmarks</a>
   <div class="nav-cta">
+    <a href="/blog" class="nav-link" aria-current={currentPage === "blog" ? "page" : undefined}>Blog</a>
     <div class="nav-status">
       <!--<span class="pulse-dot"></span>-->
       First Edition 2026
